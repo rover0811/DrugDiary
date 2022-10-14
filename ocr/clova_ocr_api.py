@@ -2,6 +2,7 @@ import requests
 import uuid
 import time
 import json
+import pandas as pd
 
 # APIGW Invoke URL
 api_url = 'https://8vhb9to58j.apigw.ntruss.com/custom/v1/18483/a614b583ca0ed9d541b5609697d1de6cc3229dc2f7001e17ed228e6453e39dff/general'
@@ -10,7 +11,7 @@ secret_key = 'WllGYkRRb1VPTkN0Y3FhYkVLTVlMVlFFQXRXWWdjQWM='
 # CLOVA OCR Invoke URL
 # http://clovaocr-api-kr.ncloud.com/external/v1/18483/a614b583ca0ed9d541b5609697d1de6cc3229dc2f7001e17ed228e6453e39dff
 
-image_file = 'images/pill.jpg'
+image_file = '제목 없음.png'
 
 request_json = {
     'images': [
@@ -34,5 +35,14 @@ headers = {
 
 response = requests.request("POST", api_url, headers=headers, data = payload, files = files)
 
-print(response.text)
+ocr_json = json.loads(response.text)
 
+fields = ocr_json["images"][0]['fields']
+
+df = pd.DataFrame(fields)
+
+pill_df = pd.read_csv('pill.csv')
+
+for text in df['inferText'].values:
+    if text in pill_df['itemName'].values:
+        print(pill_df[pill_df['itemName']==text])
