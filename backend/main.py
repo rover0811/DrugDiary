@@ -13,5 +13,6 @@ app = FastAPI() # API 생성
 @app.get('/')
 async def do_ocr():
     return ocr.main('../memo.png', '../ocr/pill.csv')
+
 # 터미널에 다음 코드 실행
 # $ uvicorn main:app --reload
