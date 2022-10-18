@@ -45,14 +45,14 @@ def parse_json(json_file): # ocr 결과를 필요한 정보만 파싱
   infer_dict = {'inferText': text_list, 'inferConfidence': confidence_list}
   return infer_dict
 
-# def check_pill_db(ocr_dict, pill_db): # ocr 결과가 약 DB에 있는지 확인
-#   pill_df = pd.read_csv(pill_db)
-#   pill_name_list = pill_df['itemName'].values 
-#   text_list = ocr_dict['inferText']
-#   confidence_list = ocr_dict['inferConfidence']
-#   for text, confidence in zip(text_list, confidence_list):
-#     if (confidence > 0.5) and (text in pill_name_list): # confidence가 0.5보다 높고 pill_db에 존재하는 text만 사용자 db에 저장한다. 
-#       print(pill_df[pill_df['itemName']==text]) # 추후에 DB에 저장하는 코드로 수정해야 함.
+def check_pill_db(ocr_dict, pill_db): # ocr 결과가 약 DB에 있는지 확인
+  pill_df = pd.read_csv(pill_db)
+  pill_name_list = pill_df['itemName'].values 
+  text_list = ocr_dict['inferText']
+  confidence_list = ocr_dict['inferConfidence']
+  for text, confidence in zip(text_list, confidence_list):
+    if (confidence > 0.5) and (text in pill_name_list): # confidence가 0.5보다 높고 pill_db에 존재하는 text만 사용자 db에 저장한다. 
+      print(pill_df[pill_df['itemName']==text]) # 추후에 DB에 저장하는 코드로 수정해야 함.
     
     
 # import pill_api
@@ -69,5 +69,3 @@ def main(image_file, pill_db):
   json_file = call_ocr_api(image_file)
   infer_dict = parse_json(json_file)
   check_pill_db(infer_dict, pill_db)
-  
-main('../memo.png', 'pill.csv')
