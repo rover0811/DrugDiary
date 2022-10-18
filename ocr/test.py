@@ -1,3 +1,7 @@
-import clova_ocr_api as ocr
+import pandas as pd
 
-ocr.main('../memo.png', 'pill.csv')
+df = pd.read_csv('pill.csv')
+
+a = df['itemName']
+
+print(type(a))

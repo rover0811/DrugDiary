@@ -5,8 +5,8 @@ import pandas as pd
 url = 'http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList'
 params ={'serviceKey' : 'PvrIUvAktOxd6AOTm2RPSs8ovw0vx517mITghrvn8+qD/IHJZQd4j+mjnD9nrT4/arMuTl44EGSvLLym15eBRQ==', 'pageNo' : '1', 'numOfRows' : '100', 'type' : 'json' }
 
-def call_pill_api(): # 공공데이터포털 api 호출
-    response = requests.get(url, params=params)
+def call_pill_api(pill_params): # 공공데이터포털 api 호출
+    response = requests.get(url, params=pill_params)
     return response.text # json file
 
 def preprocess(json_file): # json파일 전처리
@@ -20,6 +20,6 @@ def save_csv(df): # csv파일로 저장
     df.to_csv("pill.csv",  index=False)
 
 if __name__ == '__main__': # import 시에는 실행되지 않음
-    pill_json = call_pill_api()
+    pill_json = call_pill_api(params)
     df = preprocess(pill_json)
     save_csv(df)
