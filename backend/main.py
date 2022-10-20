@@ -1,6 +1,7 @@
 from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.responses import FileResponse
 
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
@@ -11,5 +12,6 @@ app = FastAPI() # API 생성
 async def do_ocr():
     return ocr.main('../memo.png', '../ocr/pill.csv')
 
-# 터미널에 다음 코드 실행
-# $ uvicorn main:app --reload
+@app.get('/pill')
+async def write_pill():
+    return FileResponse('result.json')
