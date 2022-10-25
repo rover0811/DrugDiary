@@ -12,11 +12,14 @@ import {
   Image,
   TextInput,
   Keyboard,
+  KeyboardAvoidingView,
 } from "react-native";
 import { LocaleConfig, Calendar, Agenda } from "react-native-calendars";
 import RNPickerSelect from "./StateSelector.js";
-import SleepTimeSelector from "./SleepTimeSelector.js";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import {
+  ScrollView,
+  TouchableWithoutFeedback,
+} from "react-native-gesture-handler";
 
 LocaleConfig.locales["fr"] = {
   monthNames: [
@@ -142,10 +145,10 @@ export function CalendarView() {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <View>
+              <View style={{ flexDirection: "row" }}>
                 <Text style={styles.modalTitle}>하루 기록</Text>
               </View>
-              <View style={styles.modalBackground}>
+              <ScrollView style={styles.modalBackground}>
                 <View style={[styles.modalBox, { marginBottom: 0 }]}>
                   <Text style={styles.modalText}>기분을 선택해줘</Text>
                   <View
@@ -250,7 +253,6 @@ export function CalendarView() {
                 >
                   <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
                     <Text style={styles.modalText}>어제 수면 시간</Text>
-                    <SleepTimeSelector />
                   </View>
                   <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
                     <Text style={[styles.modalText, { marginBottom: 0 }]}>
@@ -268,6 +270,8 @@ export function CalendarView() {
                             borderRadius: 100,
                             overflow: "hidden",
                             margin: 3,
+                            height: 50,
+                            width: 50,
                           }}
                           source={require("../../image/eatyet.png")}
                         />
@@ -327,7 +331,7 @@ export function CalendarView() {
                   </Text>
                   <RNPickerSelect />
                 </View>
-              </View>
+              </ScrollView>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
