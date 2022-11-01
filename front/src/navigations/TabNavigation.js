@@ -13,7 +13,7 @@ import {
   Image,
   Modal,
   Pressable,
-  Button,
+  Button
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Calendar, Agenda } from "react-native-calendars";
