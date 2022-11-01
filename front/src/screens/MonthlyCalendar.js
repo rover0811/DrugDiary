@@ -1,27 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { format } from "date-fns";
-import {
-  Modal,
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-  Switch,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  Keyboard,
-  KeyboardAvoidingView,
-} from "react-native";
-import { LocaleConfig, Calendar, Agenda } from "react-native-calendars";
-import RNPickerSelect from "./StateSelector.js";
-import {
-  ScrollView,
-  TouchableWithoutFeedback,
-} from "react-native-gesture-handler";
+import { StyleSheet, Text, View } from "react-native";
+import { LocaleConfig, Calendar } from "react-native-calendars";
 import DayModal from "./Modal.js";
-// import { storeData, getData } from "../../DB/Store.js";
 
 LocaleConfig.locales["fr"] = {
   monthNames: [
