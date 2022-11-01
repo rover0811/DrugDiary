@@ -58,9 +58,14 @@ def check_pill_db(ocr_dict, pill_db): # ocr 결과가 약 DB에 있는지 확인
   pill_name_list = pill_df['itemName'].values 
   text_list = ocr_dict['inferText']
   confidence_list = ocr_dict['inferConfidence']
+  first = 1
   for text, confidence in tqdm(zip(text_list, confidence_list)):
     if (confidence > 0.5) and (text in pill_name_list):# confidence가 0.5보다 높고 pill_db에 존재하는 text만 사용자 db에 저장한다.
-      df = pd.DataFrame(pill_df[pill_df['itemName']==text])
+      if first:
+        df = pd.DataFrame(pill_df[pill_df['itemName']==text])
+        first = 0
+      else:
+        df = df.append(pill_df[pill_df['itemName']==text])
       df.to_json('DB.json', indent = 4, force_ascii=False)
       Process_onDB()
       print(pill_df[pill_df['itemName']==text]) # 추후에 DB에 저장하는 코드로 수정해야 함.
