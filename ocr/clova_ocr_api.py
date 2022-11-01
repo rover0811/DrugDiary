@@ -1,5 +1,6 @@
 from base64 import encode
 from unittest import result
+from tqdm import tqdm # loading bar
 import requests
 import uuid
 import time
@@ -14,7 +15,8 @@ secret_key = 'WllGYkRRb1VPTkN0Y3FhYkVLTVlMVlFFQXRXWWdjQWM='
 # CLOVA OCR Invoke URL
 # http://clovaocr-api-kr.ncloud.com/external/v1/18483/a614b583ca0ed9d541b5609697d1de6cc3229dc2f7001e17ed228e6453e39dff
 
-def call_ocr_api(image_file): # naver clova api 호출
+def call_ocr_api(image_file):
+  print("OCR start")# naver clova api 호출
   request_json = {
       'images': [
           {
@@ -34,6 +36,10 @@ def call_ocr_api(image_file): # naver clova api 호출
     'X-OCR-SECRET': secret_key
   } 
   response = requests.request("POST", api_url, headers=headers, data = payload, files = files)
+  #with open('ocr_text.txt', 'w') as result:
+  #  for i in response.text:
+  #    result.write(i)
+  print(response.text)
   return response.text # json file
 
 def parse_json(json_file): # ocr 결과를 필요한 정보만 파싱
@@ -52,26 +58,29 @@ def check_pill_db(ocr_dict, pill_db): # ocr 결과가 약 DB에 있는지 확인
   pill_name_list = pill_df['itemName'].values 
   text_list = ocr_dict['inferText']
   confidence_list = ocr_dict['inferConfidence']
-  for text, confidence in zip(text_list, confidence_list):
+  for text, confidence in tqdm(zip(text_list, confidence_list)):
     if (confidence > 0.5) and (text in pill_name_list):# confidence가 0.5보다 높고 pill_db에 존재하는 text만 사용자 db에 저장한다.
       df = pd.DataFrame(pill_df[pill_df['itemName']==text])
       df.to_json('DB.json', indent = 4, force_ascii=False)
       Process_onDB()
       print(pill_df[pill_df['itemName']==text]) # 추후에 DB에 저장하는 코드로 수정해야 함.
       #write_onDB(pill_df[pill_df['itemName']==text])
+
 def Process_onDB():
     with open('DB.json', 'r') as json_file:
       json_data = json.load(json_file)
-      for key, value in json_data.items():
-        if value['0'] != None:
-            value['0'] = value['0'].replace("<", "")
-            value['0'] = value['0'].replace(">", "")
-            value['0'] = value['0'].replace("p", "")
-            value['0'] = value['0'].replace("s", "")
-            value['0'] = value['0'].replace("/", "")
-            value['0'] = value['0'].replace("u", "")
-            value['0'] = value['0'].replace("b", "")
-            print(value['0'])
+      for i in json_data.keys():
+        for k in json_data[i].keys():
+          if type(json_data[i][k]) != int:
+              json_data[i][k] = str(json_data[i][k]).replace("<", "")
+              json_data[i][k] = str(json_data[i][k]).replace("<", "")
+              json_data[i][k] = str(json_data[i][k]).replace(">", "")
+              json_data[i][k] = str(json_data[i][k]).replace("p", "")
+              json_data[i][k] = str(json_data[i][k]).replace("s", "")
+              json_data[i][k] = str(json_data[i][k]).replace("/", "")
+              json_data[i][k] = str(json_data[i][k]).replace("u", "")
+              json_data[i][k] = str(json_data[i][k]).replace("b", "")
+              json_data[i][k] = str(json_data[i][k]).replace("<p>", "")
       with open('result.json', 'w') as result:
           json.dump(json_data, result, indent = 4,  ensure_ascii = False)
     
