@@ -21,6 +21,7 @@ import { NavigationContainer } from "@react-navigation/native";
 const TabIcon = ({ name, size, color }) => {
   return <MaterialCommunityIcons name={name} size={size} color={color} />;
 };
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
@@ -156,35 +157,11 @@ function Home() {
     </View>
   );
 }
-const storeData = async (key, value) => {
-  try {
-    const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem(key, jsonValue);
-    console.log("%s %s", key, value);
-  } catch (e) {
-    // saving error
-  }
-};
-const getData = async (key) => {
-  try {
-    const value = await AsyncStorage.getItem(key);
-    if (value !== null) {
-      // value previously stored
-    }
-    console.log("%s %s", key, value);
-  } catch (e) {
-    // error reading value
-  }
-};
 
 function Account() {
   return (
     <View>
-      <Button
-        title="Press"
-        onPress={() => storeData("testing", "hello")}
-      ></Button>
-      <Button title="Show" onPress={() => getData("testing")}></Button>
+      <Text>Account</Text>
     </View>
   );
 }
