@@ -21,7 +21,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 import DayModal from "./Modal.js";
-import { storeData, getData } from "../DB/Store";
+import { storeData, getData } from "../../DB/Store";
 
 LocaleConfig.locales["fr"] = {
   monthNames: [
