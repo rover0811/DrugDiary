@@ -13,14 +13,15 @@ import {
   Image,
   Modal,
   Pressable,
+  Button
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Calendar, Agenda } from "react-native-calendars";
 import { NavigationContainer } from "@react-navigation/native";
-
 const TabIcon = ({ name, size, color }) => {
   return <MaterialCommunityIcons name={name} size={size} color={color} />;
 };
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
@@ -156,6 +157,7 @@ function Home() {
     </View>
   );
 }
+
 function Account() {
   return (
     <View>

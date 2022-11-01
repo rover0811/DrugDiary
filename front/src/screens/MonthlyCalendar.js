@@ -20,6 +20,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
+import { storeData, getData } from "../DB/Store";
 
 LocaleConfig.locales["fr"] = {
   monthNames: [
