@@ -34,6 +34,7 @@ export function PlusModal({ openPlusModal, closePlusModal }) {
   const [dayModalVisible, setDayModalVisible] = useState(false);
   const closeDayModalVisible = () => {
     setDayModalVisible(false);
+    closePlusModal();
   };
   return (
     <View style={styles.centeredView}>
@@ -62,7 +63,7 @@ export function PlusModal({ openPlusModal, closePlusModal }) {
                 { marginTop: 20, marginBottom: 10 },
               ]}
               onPress={() => {
-                setDayModalVisible(true);
+                setDayModalVisible(!dayModalVisible);
               }}
             >
               <Text style={styles.textStyle}>오늘 하루를 기록해주세요.</Text>
