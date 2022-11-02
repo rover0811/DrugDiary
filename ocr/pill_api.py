@@ -3,11 +3,11 @@ import json
 import pandas as pd
 
 url = 'http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList'
-params ={'serviceKey' : 'PvrIUvAktOxd6AOTm2RPSs8ovw0vx517mITghrvn8+qD/IHJZQd4j+mjnD9nrT4/arMuTl44EGSvLLym15eBRQ==', 'pageNo' : '1', 'numOfRows' : '100', 'type' : 'json' }
+params ={'serviceKey' : 'PvrIUvAktOxd6AOTm2RPSs8ovw0vx517mITghrvn8+qD/IHJZQd4j+mjnD9nrT4/arMuTl44EGSvLLym15eBRQ==', 'pageNo' : '1','numOfRows': '100', 'type' : 'json' }
 
 def call_pill_api(pill_params): # 공공데이터포털 api 호출
     response_list = []
-    for i in range(1, 100):
+    for i in range(1,46):
         pill_params['pageNo'] = i
         response_list.append(requests.get(url, params=pill_params).text)
     return response_list
