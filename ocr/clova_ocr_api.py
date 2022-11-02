@@ -19,7 +19,7 @@ def call_ocr_api(image_file):
   print("OCR start")# naver clova api 호출
   request_json = {
       'images': [
-          {
+          { 
               'format': 'jpg',
               'name': 'demo'
           }
@@ -63,7 +63,6 @@ def check_pill_db(ocr_dict, pill_db): # ocr 결과가 약 DB에 있는지 확인
       df = pd.DataFrame(pill_df[pill_df['itemName']==text])
       df.to_json('DB.json', indent = 4, force_ascii=False)
       Process_onDB()
-      print(pill_df[pill_df['itemName']==text]) # 추후에 DB에 저장하는 코드로 수정해야 함.
       #write_onDB(pill_df[pill_df['itemName']==text])
 
 def Process_onDB():
