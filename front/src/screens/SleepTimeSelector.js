@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 
 export default function SleepTimeSelector() {
