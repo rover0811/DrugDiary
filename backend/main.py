@@ -10,7 +10,7 @@ app = FastAPI() # API 생성
 
 @app.get('/')
 async def do_ocr():
-    return ocr.main('../ocr/pill_yehun.jpg', '../ocr/pill.csv')
+    return ocr.main('../pill_ex.png', '../ocr/pill.csv')
 
 @app.get('/pill')
 async def write_pill():

@@ -49,34 +49,34 @@ LocaleConfig.locales["fr"] = {
 LocaleConfig.defaultLocale = "fr";
 
 export function CalendarView() {
-  const posts = [
-    {
-      id: 1,
-      title: "제목입니다.",
-      contents: "내용입니다.",
-      date: "2022-02-26",
-    },
-    {
-      id: 2,
-      title: "제목입니다.",
-      contents: "내용입니다.",
-      date: "2022-02-27",
-    },
-  ];
-  const markedDates = posts.reduce((acc, current) => {
-    const formattedDate = format(new Date(current.date), "yyyy-MM-dd");
-    acc[formattedDate] = { marked: true };
-    return acc;
-  }, {});
+  // const posts = [
+  //   {
+  //     id: 1,
+  //     title: "제목입니다.",
+  //     contents: "내용입니다.",
+  //     date: "2022-02-26",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "제목입니다.",
+  //     contents: "내용입니다.",
+  //     date: "2022-02-27",
+  //   },
+  // ];
+  // const markedDates = posts.reduce((acc, current) => {
+  //   const formattedDate = format(new Date(current.date), "yyyy-MM-dd");
+  //   acc[formattedDate] = { marked: true };
+  //   return acc;
+  // }, {});
 
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), "yyyy-MM-dd")
   );
   const markedSelectedDates = {
-    ...markedDates,
+    // ...markedDates,
     [selectedDate]: {
       selected: true,
-      marked: markedDates[selectedDate]?.marked,
+      // marked: markedDates[selectedDate]?.marked,
     },
   };
 
