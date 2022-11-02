@@ -1,3 +1,0 @@
-#linux
-pip install tqdm fastapi uvicorn pandas
-
