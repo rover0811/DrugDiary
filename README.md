@@ -33,7 +33,7 @@ AI를 활용한 복약관리 캘린더 앱
 
 - 파이썬 모듈 설치
 $ pip install -r requirements.txt
-- 리액트 모듈 설치
+- 리액트네이티브 모듈 설치
     1. Node.js 설치 
         - https://nodejs.org/ko/download/
         - (Node.js 및 npm 버전 확인) $ node -v $ npm -v
