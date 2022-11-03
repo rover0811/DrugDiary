@@ -5,10 +5,11 @@ import { useNavigation } from "@react-navigation/native";
 import { MonthlyCalendar } from "../screens/MonthlyCalendar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import PlusModal from "../modal/PlusModal";
+
 const TabIcon = ({ name, size, color }) => {
   return <MaterialCommunityIcons name={name} size={size} color={color} />;
 };
-import { PlusModal } from "../screens/Modal";
 
 const Tab = createBottomTabNavigator();
 
