@@ -37,47 +37,45 @@ export function PlusModal({ openPlusModal, closePlusModal }) {
     closePlusModal();
   };
   return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={openPlusModal}
-        onRequestClose={() => {
-          closePlusModal;
-        }}
-      >
-        <View style={styles.centeredView}>
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={openPlusModal}
+      onRequestClose={() => {
+        closePlusModal;
+      }}
+    >
+      <View style={styles.centeredView}>
+        <View style={[styles.modalView, { height: "30%" }]}>
+          <View>
+            <Text style={styles.modalTitle}>등록 방법을 선택해 주세요.</Text>
+          </View>
+
+          <Pressable
+            style={[
+              styles.button,
+              styles.selectButtonInPlus,
+              { marginTop: 20, marginBottom: 10 },
+            ]}
+            onPress={() => {
+              setDayModalVisible(!dayModalVisible);
+            }}
+          >
+            <Text style={styles.textStyle}>오늘 하루를 기록해주세요.</Text>
+          </Pressable>
           <DayModal
             openDayModal={dayModalVisible}
             closeDayModal={closeDayModalVisible}
           />
-          <View style={[styles.modalView, { height: "30%" }]}>
-            <View>
-              <Text style={styles.modalTitle}>등록 방법을 선택해 주세요.</Text>
-            </View>
-
-            <Pressable
-              style={[
-                styles.button,
-                styles.selectButtonInPlus,
-                { marginTop: 20, marginBottom: 10 },
-              ]}
-              onPress={() => {
-                setDayModalVisible(!dayModalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>오늘 하루를 기록해주세요.</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.selectButtonInPlus]}
-              onPress={closePlusModal}
-            >
-              <Text style={styles.textStyle}>복약 정보를 확인해주세요.</Text>
-            </Pressable>
-          </View>
+          <Pressable
+            style={[styles.button, styles.selectButtonInPlus]}
+            onPress={closePlusModal}
+          >
+            <Text style={styles.textStyle}>복약 정보를 확인해주세요.</Text>
+          </Pressable>
         </View>
-      </Modal>
-    </View>
+      </View>
+    </Modal>
   );
 }
 export function DayModal({ openDayModal, closeDayModal }) {
@@ -86,206 +84,203 @@ export function DayModal({ openDayModal, closeDayModal }) {
   // const [dayModalVisible, setDayModalVisible] = useState(props.dayModal);
 
   return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={openDayModal}
-        onRequestClose={() => {
-          setDayModalVisible(!dayModalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={[styles.modalView, { height: "92%" }]}>
-            <View style={{ flexDirection: "row" }}>
-              <Text style={styles.modalTitle}>하루 기록</Text>
-            </View>
-            <ScrollView style={styles.modalBackground}>
-              <View style={[styles.modalBox, { marginBottom: 0 }]}>
-                <Text style={styles.modalText}>기분을 선택해줘</Text>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    margin: 10,
-                  }}
-                >
-                  <View>
-                    <TouchableOpacity>
-                      <Image
-                        style={{
-                          borderRadius: 100,
-                          overflow: "hidden",
-                        }}
-                        source={require("../../image/joy.png")}
-                      />
-                    </TouchableOpacity>
-                    <Text style={{ textAlign: "center", marginTop: 5 }}>
-                      기쁨
-                    </Text>
-                  </View>
-                  <View>
-                    <TouchableOpacity>
-                      <Image
-                        style={{
-                          borderRadius: 100,
-                          overflow: "hidden",
-                        }}
-                        source={require("../../image/calm.png")}
-                      />
-                    </TouchableOpacity>
-                    <Text style={{ textAlign: "center", marginTop: 5 }}>
-                      평온
-                    </Text>
-                  </View>
-                  <View>
-                    <TouchableOpacity>
-                      <Image
-                        style={{
-                          borderRadius: 100,
-                          overflow: "hidden",
-                        }}
-                        source={require("../../image/hard.png")}
-                      />
-                    </TouchableOpacity>
-                    <Text style={{ textAlign: "center", marginTop: 5 }}>
-                      힘듦
-                    </Text>
-                  </View>
-                  <View>
-                    <TouchableOpacity>
-                      <Image
-                        style={{
-                          borderRadius: 100,
-                          overflow: "hidden",
-                        }}
-                        source={require("../../image/sad.png")}
-                      />
-                    </TouchableOpacity>
-                    <Text style={{ textAlign: "center", marginTop: 5 }}>
-                      슬픔
-                    </Text>
-                  </View>
-                  <View>
-                    <TouchableOpacity>
-                      <Image
-                        style={{
-                          borderRadius: 100,
-                          overflow: "hidden",
-                        }}
-                        source={require("../../image/tired.png")}
-                      />
-                    </TouchableOpacity>
-                    <Text style={{ textAlign: "center", marginTop: 5 }}>
-                      피곤
-                    </Text>
-                  </View>
-                  <View>
-                    <TouchableOpacity>
-                      <Image
-                        style={{
-                          borderRadius: 100,
-                          overflow: "hidden",
-                        }}
-                        source={require("../../image/angry.png")}
-                      />
-                    </TouchableOpacity>
-                    <Text style={{ textAlign: "center", marginTop: 5 }}>
-                      화남
-                    </Text>
-                  </View>
-                </View>
-              </View>
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={openDayModal}
+      onRequestClose={() => {
+        setDayModalVisible(!dayModalVisible);
+      }}
+    >
+      <View style={styles.centeredView}>
+        <View style={[styles.modalView, { height: "92%" }]}>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.modalTitle}>하루 기록</Text>
+          </View>
+          <ScrollView style={styles.modalBackground}>
+            <View style={[styles.modalBox, { marginBottom: 0 }]}>
+              <Text style={styles.modalText}>기분을 선택해줘</Text>
               <View
                 style={{
                   flexDirection: "row",
-                  justifyContent: "space-around",
-                  marginBottom: 0,
+                  justifyContent: "space-between",
+                  margin: 10,
                 }}
               >
-                <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
-                  <Text style={styles.modalText}>어제 수면 시간</Text>
-                </View>
-                <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
-                  <Text style={[styles.modalText, { marginBottom: 0 }]}>
-                    약 복용
+                <View>
+                  <TouchableOpacity>
+                    <Image
+                      style={{
+                        borderRadius: 100,
+                        overflow: "hidden",
+                      }}
+                      source={require("../../image/joy.png")}
+                    />
+                  </TouchableOpacity>
+                  <Text style={{ textAlign: "center", marginTop: 5 }}>
+                    기쁨
                   </Text>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "flex-end",
-                    }}
-                  >
-                    <TouchableOpacity>
-                      <Image
-                        style={{
-                          borderRadius: 100,
-                          overflow: "hidden",
-                          margin: 3,
-                          height: 50,
-                          width: 50,
-                        }}
-                        source={require("../../image/eatyet.png")}
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Image
-                        style={{
-                          borderRadius: 100,
-                          overflow: "hidden",
-                          margin: 3,
-                        }}
-                        source={require("../../image/eat.png")}
-                      />
-                    </TouchableOpacity>
-                  </View>
+                </View>
+                <View>
+                  <TouchableOpacity>
+                    <Image
+                      style={{
+                        borderRadius: 100,
+                        overflow: "hidden",
+                      }}
+                      source={require("../../image/calm.png")}
+                    />
+                  </TouchableOpacity>
+                  <Text style={{ textAlign: "center", marginTop: 5 }}>
+                    평온
+                  </Text>
+                </View>
+                <View>
+                  <TouchableOpacity>
+                    <Image
+                      style={{
+                        borderRadius: 100,
+                        overflow: "hidden",
+                      }}
+                      source={require("../../image/hard.png")}
+                    />
+                  </TouchableOpacity>
+                  <Text style={{ textAlign: "center", marginTop: 5 }}>
+                    힘듦
+                  </Text>
+                </View>
+                <View>
+                  <TouchableOpacity>
+                    <Image
+                      style={{
+                        borderRadius: 100,
+                        overflow: "hidden",
+                      }}
+                      source={require("../../image/sad.png")}
+                    />
+                  </TouchableOpacity>
+                  <Text style={{ textAlign: "center", marginTop: 5 }}>
+                    슬픔
+                  </Text>
+                </View>
+                <View>
+                  <TouchableOpacity>
+                    <Image
+                      style={{
+                        borderRadius: 100,
+                        overflow: "hidden",
+                      }}
+                      source={require("../../image/tired.png")}
+                    />
+                  </TouchableOpacity>
+                  <Text style={{ textAlign: "center", marginTop: 5 }}>
+                    피곤
+                  </Text>
+                </View>
+                <View>
+                  <TouchableOpacity>
+                    <Image
+                      style={{
+                        borderRadius: 100,
+                        overflow: "hidden",
+                      }}
+                      source={require("../../image/angry.png")}
+                    />
+                  </TouchableOpacity>
+                  <Text style={{ textAlign: "center", marginTop: 5 }}>
+                    화남
+                  </Text>
                 </View>
               </View>
-              <View
-                style={[
-                  styles.modalBox,
-                  { flexDirection: "row", justifyContent: "space-between" },
-                ]}
-              >
-                <Text style={styles.modalText}>
-                  하루 동안 유의미한 감정 기복이 있었어?
-                </Text>
-                <Switch
-                  trackColor={{ false: "#767577", true: "#1B4B66" }}
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
-                  style={{ margin: 5 }}
-                />
-              </View>
-              <View>
-                <Text style={{ fontSize: 20, fontWeight: "bold", margin: 10 }}>
-                  오늘의 질문
-                </Text>
-                <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
-                  1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘
-                </Text>
-                <InputText />
-                <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
-                  2. 특별한 생활 사건들에 대해 자세히 알려줘
-                </Text>
-                <InputText />
-                <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
-                  3. 오늘 하루를 떠올리고 아래 표에서 어울리는 나의 상태를
-                  골라줘
-                </Text>
-                <RNPickerSelect />
-              </View>
-            </ScrollView>
-            <Pressable
-              style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
-              onPress={closeDayModal}
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-around",
+                marginBottom: 0,
+              }}
             >
-              <Text style={styles.textStyle}>저장</Text>
-            </Pressable>
-          </View>
+              <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
+                <Text style={styles.modalText}>어제 수면 시간</Text>
+              </View>
+              <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
+                <Text style={[styles.modalText, { marginBottom: 0 }]}>
+                  약 복용
+                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <TouchableOpacity>
+                    <Image
+                      style={{
+                        borderRadius: 100,
+                        overflow: "hidden",
+                        margin: 3,
+                        height: 50,
+                        width: 50,
+                      }}
+                      source={require("../../image/eatyet.png")}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Image
+                      style={{
+                        borderRadius: 100,
+                        overflow: "hidden",
+                        margin: 3,
+                      }}
+                      source={require("../../image/eat.png")}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+            <View
+              style={[
+                styles.modalBox,
+                { flexDirection: "row", justifyContent: "space-between" },
+              ]}
+            >
+              <Text style={styles.modalText}>
+                하루 동안 유의미한 감정 기복이 있었어?
+              </Text>
+              <Switch
+                trackColor={{ false: "#767577", true: "#1B4B66" }}
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+                style={{ margin: 5 }}
+              />
+            </View>
+            <View>
+              <Text style={{ fontSize: 20, fontWeight: "bold", margin: 10 }}>
+                오늘의 질문
+              </Text>
+              <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
+                1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘
+              </Text>
+              <InputText />
+              <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
+                2. 특별한 생활 사건들에 대해 자세히 알려줘
+              </Text>
+              <InputText />
+              <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
+                3. 오늘 하루를 떠올리고 아래 표에서 어울리는 나의 상태를 골라줘
+              </Text>
+              <RNPickerSelect />
+            </View>
+          </ScrollView>
+          <Pressable
+            style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
+            onPress={closeDayModal}
+          >
+            <Text style={styles.textStyle}>저장</Text>
+          </Pressable>
         </View>
-      </Modal>
-    </View>
+      </View>
+    </Modal>
   );
 }
 
