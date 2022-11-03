@@ -3,7 +3,7 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { StyleSheet, Text, View } from "react-native";
 import { LocaleConfig, Calendar } from "react-native-calendars";
-import DayModal from "./Modal.js";
+import DayModal from "../modal/DayModal";
 
 LocaleConfig.locales["fr"] = {
   monthNames: [
