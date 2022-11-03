@@ -10,6 +10,18 @@ import EatPill from "../imagebutton/PillButton";
 export default function DayModal({ openDayModal, closeDayModal }) {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [isPressEmotion, setIsPressEmotion] = useState(false);
+  const emotionList = ["joy", "calm", "hard", "sad", "tired", "angry"];
+  const handlePressEmotion = (emotionIdx) => {
+    const newEmotionList = Array(emotionList.length).fill(false);
+    newEmotionList[emotionIdx] = true;
+    setIsPressEmotion(newEmotionList);
+  };
+  const closeModal = () => {
+    closeDayModal();
+    const newEmotionList = Array(emotionList.length).fill(false);
+    setIsPressEmotion(newEmotionList);
+  };
   // const [dayModalVisible, setDayModalVisible] = useState(props.dayModal);
 
   return (
@@ -36,12 +48,42 @@ export default function DayModal({ openDayModal, closeDayModal }) {
                   margin: 10,
                 }}
               >
-                <EmotionButton emotion={"joy"} />
-                <EmotionButton emotion={"calm"} />
-                <EmotionButton emotion={"hard"} />
-                <EmotionButton emotion={"sad"} />
-                <EmotionButton emotion={"tired"} />
-                <EmotionButton emotion={"angry"} />
+                <EmotionButton
+                  emotion={"joy"}
+                  emotionIdx={"0"}
+                  isSelected={isPressEmotion[0]}
+                  handleClick={handlePressEmotion}
+                />
+                <EmotionButton
+                  emotion={"calm"}
+                  emotionIdx={"1"}
+                  isSelected={isPressEmotion[1]}
+                  handleClick={handlePressEmotion}
+                />
+                <EmotionButton
+                  emotion={"hard"}
+                  emotionIdx={"2"}
+                  isSelected={isPressEmotion[2]}
+                  handleClick={handlePressEmotion}
+                />
+                <EmotionButton
+                  emotion={"sad"}
+                  emotionIdx={"3"}
+                  isSelected={isPressEmotion[3]}
+                  handleClick={handlePressEmotion}
+                />
+                <EmotionButton
+                  emotion={"tired"}
+                  emotionIdx={"4"}
+                  isSelected={isPressEmotion[4]}
+                  handleClick={handlePressEmotion}
+                />
+                <EmotionButton
+                  emotion={"angry"}
+                  emotionIdx={"5"}
+                  isSelected={isPressEmotion[5]}
+                  handleClick={handlePressEmotion}
+                />
               </View>
             </View>
             <View
@@ -105,7 +147,7 @@ export default function DayModal({ openDayModal, closeDayModal }) {
           </ScrollView>
           <Pressable
             style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
-            onPress={closeDayModal}
+            onPress={closeModal}
           >
             <Text style={styles.textStyle}>저장</Text>
           </Pressable>

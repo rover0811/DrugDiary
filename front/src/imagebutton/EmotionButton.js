@@ -2,41 +2,54 @@ import React from "react";
 import { useState } from "react";
 import { Text, View, TouchableOpacity, Image } from "react-native";
 
-export default function EmotionButton({ emotion }) {
+export default function EmotionButton({
+  emotion,
+  isSelected,
+  handleClick,
+  emotionIdx,
+}) {
   const [selectImageButton, setSelectImageButton] = useState();
   const EMOTION_DATA = {
     joy: {
-      picturesource: require("../../image/joy.png"),
+      picturesource: isSelected
+        ? require("../../image/joy.png")
+        : require("../../image/joy_gray.png"),
       text: "기쁨",
     },
     calm: {
-      picturesource: require("../../image/calm.png"),
+      picturesource: isSelected
+        ? require("../../image/calm.png")
+        : require("../../image/calm_gray.png"),
       text: "평온",
     },
     hard: {
-      picturesource: require("../../image/hard.png"),
+      picturesource: isSelected
+        ? require("../../image/hard.png")
+        : require("../../image/hard_gray.png"),
       text: "힘듦",
     },
     sad: {
-      picturesource: require("../../image/sad.png"),
+      picturesource: isSelected
+        ? require("../../image/sad.png")
+        : require("../../image/sad_gray.png"),
       text: "슬픔",
     },
     tired: {
-      picturesource: require("../../image/tired.png"),
+      picturesource: isSelected
+        ? require("../../image/tired.png")
+        : require("../../image/tired_gray.png"),
       text: "피곤",
     },
     angry: {
-      picturesource: require("../../image/angry.png"),
+      picturesource: isSelected
+        ? require("../../image/angry.png")
+        : require("../../image/angry_gray.png"),
       text: "화남",
     },
   };
   return (
     <View>
-      <TouchableOpacity
-        onPress={() => {
-          setSelectImageButton(emotion);
-        }}
-      >
+      <TouchableOpacity onPress={() => handleClick(emotionIdx)}>
         <Image
           style={{
             borderRadius: 100,
