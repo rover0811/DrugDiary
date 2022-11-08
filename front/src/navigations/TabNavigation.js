@@ -3,31 +3,22 @@ import { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { MonthlyCalendar } from "../screens/MonthlyCalendar";
-// import { Home } from "../screens/Home";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Image,
-  Modal,
-  Pressable,
-  Button
-} from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import { Calendar, Agenda } from "react-native-calendars";
-import { NavigationContainer } from "@react-navigation/native";
+import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import PlusModal from "../modal/PlusModal";
+
 const TabIcon = ({ name, size, color }) => {
   return <MaterialCommunityIcons name={name} size={size} color={color} />;
 };
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
+
 const TabNavigation = () => {
-  const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(false);
+  const closeModalVisible = () => {
+    setModalVisible(false);
+  };
+  const navigation = useNavigation();
 
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
@@ -55,7 +46,7 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+              <TouchableOpacity onPress={() => setModalVisible(true)}>
                 <View
                   style={{
                     width: 55,
@@ -78,47 +69,10 @@ const TabNavigation = () => {
                   ></Image>
                 </View>
               </TouchableOpacity>
-              <View style={styles.centeredView}>
-                <Modal
-                  animationType="slide"
-                  transparent={true}
-                  visible={modalVisible}
-                  onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                  }}
-                >
-                  <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                      <View>
-                        <Text style={styles.modalTitle}>
-                          등록 방법을 선택해 주세요.
-                        </Text>
-                      </View>
-
-                      <Pressable
-                        style={[
-                          styles.button,
-                          styles.buttonClose,
-                          { marginTop: 20, marginBottom: 10 },
-                        ]}
-                        onPress={() => setModalVisible(!modalVisible)}
-                      >
-                        <Text style={styles.textStyle}>
-                          오늘 하루를 기록해주세요.
-                        </Text>
-                      </Pressable>
-                      <Pressable
-                        style={[styles.button, styles.buttonClose]}
-                        onPress={() => setModalVisible(!modalVisible)}
-                      >
-                        <Text style={styles.textStyle}>
-                          복약 정보를 확인해주세요.
-                        </Text>
-                      </Pressable>
-                    </View>
-                  </View>
-                </Modal>
-              </View>
+              <PlusModal
+                openPlusModal={modalVisible}
+                closePlusModal={closeModalVisible}
+              />
             </View>
           ),
         }}
