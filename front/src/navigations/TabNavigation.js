@@ -100,7 +100,9 @@ const TabNavigation = () => {
 
 function Pill(){
   return(
-    <Pills/>
+    <View>
+      <Pills/>
+    </View>
   )
 }
 

@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {View} from "react-native";
+import {View, Text} from "react-native";
 export default function Pills(){
-    const [result, setResult] = useState(null);
+    const [result, setResult] = useState(String);
 
     const message = async ()=>{
         try{
-            let res = await axios.get('http://127.0.0.1:8000/pill');
+            let res = await axios.get('http://203.253.13.46:8000/pill');
             let result = res.data;
             setResult(result)
+            console.log(result)
         } catch(e){
             console.log(e)
         }
@@ -18,9 +19,9 @@ export default function Pills(){
         message()
     }, [])
 
+    const pilldata = result.map((i))
+
     return(
-        <View>
-            {result}
-        </View>
-    )
+            <Text>{result.ITEM_NAME}</Text>
+        )
 }
