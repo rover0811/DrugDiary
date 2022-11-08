@@ -6,6 +6,7 @@ import { MonthlyCalendar } from "../screens/MonthlyCalendar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import PlusModal from "../modal/PlusModal";
+import Pills from "../screens/PillInformation";
 
 const TabIcon = ({ name, size, color }) => {
   return <MaterialCommunityIcons name={name} size={size} color={color} />;
@@ -79,7 +80,7 @@ const TabNavigation = () => {
       ></Tab.Screen>
       <Tab.Screen
         name="Add"
-        component={EmptyScreen}
+        component={Pill}
         options={{
           tabBarIcon: (props) => TabIcon({ ...props, name: "pill" }),
           tabBarActiveTintColor: "#1B4B66",
@@ -96,6 +97,12 @@ const TabNavigation = () => {
     </Tab.Navigator>
   );
 };
+
+function Pill(){
+  return(
+    <Pills/>
+  )
+}
 
 function EmptyScreen() {
   return (
