@@ -13,10 +13,10 @@ export const getData = async (key) => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
-      // value previously stored
+      console.log("value previously stored");
     }
     console.log("%s %s", key, value);
   } catch (e) {
-    // error reading value
+    console.log("getData() error");
   }
 };

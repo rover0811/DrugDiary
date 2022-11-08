@@ -6,8 +6,14 @@ import { ScrollView } from "react-native-gesture-handler";
 import InputText from "../input/InputText.js";
 import EmotionButton from "../imagebutton/EmotionButton";
 import EatPill from "../imagebutton/PillButton";
+import { storeData, getData } from "../../DB/Store";
+import { setDate } from "date-fns";
 
-export default function DayModal({ openDayModal, closeDayModal }) {
+export default function DayModal({
+  openDayModal,
+  closeDayModal,
+  selectedDate,
+}) {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const [isPressEmotion, setIsPressEmotion] = useState(false);
@@ -21,8 +27,33 @@ export default function DayModal({ openDayModal, closeDayModal }) {
     closeDayModal();
     const newEmotionList = Array(emotionList.length).fill(false);
     setIsPressEmotion(newEmotionList);
+    storeData(
+      selectedDate,
+      new DateObj(selectedDate, "happy", "많이", "널뜀", true, "Q1", "Q2", "Q3")
+    );
+    getData(selectedDate);
   };
   // const [dayModalVisible, setDayModalVisible] = useState(props.dayModal);
+  // getData(selectedDate);
+  let DateObj = function (
+    selectedDate,
+    iconFeeling,
+    sleepTime,
+    didFeelingChange,
+    didTakeMedicine,
+    firstQuestion,
+    secondQuestion,
+    thirdQuestion
+  ) {
+    this.createdDate = selectedDate;
+    this.iconFeeling = iconFeeling;
+    this.sleepTime = sleepTime;
+    this.didFeelingChange = didFeelingChange;
+    this.didTakeMedicine = didTakeMedicine;
+    this.firstQuestion = firstQuestion;
+    this.secondQuestion = secondQuestion;
+    this.thirdQuestion = thirdQuestion;
+  };
 
   return (
     <Modal
