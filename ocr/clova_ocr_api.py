@@ -39,7 +39,6 @@ def call_ocr_api(image_file):
   #with open('ocr_text.txt', 'w') as result:
   #  for i in response.text:
   #    result.write(i)
-  print(response.text)
   return response.text # json file
 
 def parse_json(json_file): # ocr 결과를 필요한 정보만 파싱
@@ -62,13 +61,13 @@ def check_pill_db(ocr_dict, pill_db): # ocr 결과가 약 DB에 있는지 확인
   for text, confidence in tqdm(zip(text_list, confidence_list)):
     if (confidence > 0.5) and (text in pill_name_list):# confidence가 0.5보다 높고 pill_db에 존재하는 text만 사용자 db에 저장한다.
       if first:
-        df = pd.DataFrame(pill_df[pill_df['ITEM_NAME']==text])
+        df = pd.DataFrame(pill_df[pill_df['ITEM_NAME'] == text])
         first = 0
       else:
-        df.append(pill_df[pill_df['ITEM_NAME']==text])
+        df = df.append(pill_df[pill_df['ITEM_NAME'] == text])
       df.to_json('DB.json', indent = 4, force_ascii=False)
       Process_onDB()
-      #write_onDB(pill_df[pill_df['itemName']==text])
+  #write_onDB(pill_df[pill_df['itemName']==text])
 
 def Process_onDB():
     with open('DB.json', 'r') as json_file:

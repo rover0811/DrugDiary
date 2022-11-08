@@ -1,20 +1,34 @@
-import React from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, TextInput, View, Text } from "react-native";
 
-export default function InputText() {
-  const [number, onChangeNumber] = React.useState(null);
+export default function InputText({ isChanged, questionIdx }) {
+  const questionText = [
+    "1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘",
+    "2. 특별한 생활 사건들에 대해 자세히 알려줘",
+  ];
+  const [changeText, setChangeText] = useState("");
+  useEffect(() => {
+    isChanged(changeText);
+  });
+  // console.log(changeText);
 
   return (
-    <View style={{ alignContent: "center" }}>
-      <TextInput
-        multiline
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        editable
-      />
-    </View>
+    <>
+      <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
+        {questionText[questionIdx]}
+      </Text>
+      <View style={{ alignContent: "center" }}>
+        <TextInput
+          multiline
+          style={styles.input}
+          onChangeText={(text) => setChangeText(text)}
+          editablex
+        />
+      </View>
+    </>
   );
 }
+
 const styles = StyleSheet.create({
   input: {
     backgroundColor: "#D9D9D9",
