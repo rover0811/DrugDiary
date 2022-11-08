@@ -55,17 +55,17 @@ def parse_json(json_file): # ocr 결과를 필요한 정보만 파싱
 
 def check_pill_db(ocr_dict, pill_db): # ocr 결과가 약 DB에 있는지 확인
   pill_df = pd.read_csv(pill_db)
-  pill_name_list = pill_df['itemName'].values 
+  pill_name_list = pill_df['ITEM_NAME'].values 
   text_list = ocr_dict['inferText']
   confidence_list = ocr_dict['inferConfidence']
   first = 1
   for text, confidence in tqdm(zip(text_list, confidence_list)):
     if (confidence > 0.5) and (text in pill_name_list):# confidence가 0.5보다 높고 pill_db에 존재하는 text만 사용자 db에 저장한다.
       if first:
-        df = pd.DataFrame(pill_df[pill_df['itemName']==text])
+        df = pd.DataFrame(pill_df[pill_df['ITEM_NAME']==text])
         first = 0
       else:
-        df = df.append(pill_df[pill_df['itemName']==text])
+        df.append(pill_df[pill_df['ITEM_NAME']==text])
       df.to_json('DB.json', indent = 4, force_ascii=False)
       Process_onDB()
       #write_onDB(pill_df[pill_df['itemName']==text])
@@ -88,16 +88,6 @@ def Process_onDB():
       with open('result.json', 'w') as result:
           json.dump(json_data, result, indent = 4,  ensure_ascii = False)
     
-        
-# import pill_api
-# pill_params = {'serviceKey' : 'PvrIUvAktOxd6AOTm2RPSs8ovw0vx517mITghrvn8+qD/IHJZQd4j+mjnD9nrT4/arMuTl44EGSvLLym15eBRQ==', '', 'type' : 'json' }
-# def check_pill_db(ocr_dict): # ocr 결과를 pill_api에 인자로 전달
-#   text_list = ocr_dict['inferText']
-#   confidence_list = ocr_dict['inferConfidence']
-#   for text, confidence in zip(text_list, confidence_list):
-#     if (confidence > 0.5):
-      
-      
   
 def main(image_file, pill_db):
   json_file = call_ocr_api(image_file)
