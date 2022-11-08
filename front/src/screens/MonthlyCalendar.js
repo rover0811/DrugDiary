@@ -49,39 +49,17 @@ LocaleConfig.locales["fr"] = {
 LocaleConfig.defaultLocale = "fr";
 
 export function CalendarView() {
-  const posts = [
-    {
-      id: 1,
-      title: "제목입니다.",
-      contents: "내용입니다.",
-      date: "2022-02-26",
-    },
-    {
-      id: 2,
-      title: "제목입니다.",
-      contents: "내용입니다.",
-      date: "2022-02-27",
-    },
-  ];
-  const markedDates = posts.reduce((acc, current) => {
-    const formattedDate = format(new Date(current.date), "yyyy-MM-dd");
-    acc[formattedDate] = { marked: true };
-    return acc;
-  }, {});
-
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), "yyyy-MM-dd")
   );
   const markedSelectedDates = {
-    ...markedDates,
     [selectedDate]: {
       selected: true,
-      marked: markedDates[selectedDate]?.marked,
     },
   };
 
   const [modalVisible, setModalVisible] = useState(false);
-  const closeModalVisible = () => {
+  const closeDayModal = () => {
     setModalVisible(false);
   };
 
@@ -102,14 +80,16 @@ export function CalendarView() {
         }}
         enableSwipeMonths={true}
       />
-      <DayModal openDayModal={modalVisible} closeDayModal={closeModalVisible} />
+      <DayModal
+        openDayModal={modalVisible}
+        closeDayModal={closeDayModal}
+        selectedDate={selectedDate}
+      />
     </View>
   );
 }
 
 export const MonthlyCalendar = () => {
-  // const [modalVisible, setModalVisible] = useState(false);
-
   return (
     <View style={{ marginTop: 50 }}>
       <View style={{ backgroundColor: "white", padding: 18 }}>
