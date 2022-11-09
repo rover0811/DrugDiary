@@ -4,8 +4,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { MonthlyCalendar } from "../screens/MonthlyCalendar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+  Button,
+} from "react-native";
 import PlusModal from "../modal/PlusModal";
+import { TextInput } from "react-native-gesture-handler";
 
 const TabIcon = ({ name, size, color }) => {
   return <MaterialCommunityIcons name={name} size={size} color={color} />;
@@ -79,7 +87,7 @@ const TabNavigation = () => {
       ></Tab.Screen>
       <Tab.Screen
         name="Add"
-        component={EmptyScreen}
+        component={Add}
         options={{
           tabBarIcon: (props) => TabIcon({ ...props, name: "pill" }),
           tabBarActiveTintColor: "#1B4B66",
@@ -101,6 +109,46 @@ function EmptyScreen() {
   return (
     <View>
       <Text>Hello</Text>
+    </View>
+  );
+}
+function Add() {
+  return (
+    <View style={{ height: "100%", backgroundColor: "white", padding: 18 }}>
+      <Text style={{ fontSize: 20, fontWeight: "bold" }}>최지우님,</Text>
+      <Text style={{ fontSize: 20 }}>복용하고 있는 약을 추가해주세요</Text>
+      <View
+        style={{
+          marginTop: 20,
+          flexDirection: "row",
+          backgroundColor: "#F1F1F1",
+          borderRadius: 10,
+        }}
+      >
+        <TextInput
+          placeholder="약의 정확한 이름을 입력해주세요"
+          style={{ marginLeft: 20 }}
+        />
+        <TouchableOpacity
+          style={{ marginTop: 10, marginLeft: 100, marginBottom: 5 }}
+        >
+          <MaterialCommunityIcons name={"magnify"} size={20} />
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          height: 300,
+        }}
+      ></View>
+      <View style={{ marginTop: 50 }}>
+        <Button
+          title="사진 촬영하기"
+          color={"#1B4B66"}
+          style={{ margin: 20 }}
+        ></Button>
+        <Button title="약 추가" color={"#1B4B66"}></Button>
+        <Button title="약 바구니로 가기" color={"#1B4B66"}></Button>
+      </View>
     </View>
   );
 }
