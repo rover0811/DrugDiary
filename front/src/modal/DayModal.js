@@ -37,8 +37,8 @@ export default function DayModal({
   }
 
   // switch 부분 state
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [isChangeMood, setIsChangeMood] = useState(false);
+  const toggleSwitch = () => setIsChangeMood((previousState) => !previousState);
 
   // emotion 버튼 부분 state
   const [isPressEmotion, setIsPressEmotion] = useState(false);
@@ -63,8 +63,14 @@ export default function DayModal({
   };
 
   const [thirdChangeText, setThirdChangeText] = useState();
-  const isThirdChanged = (text) => {
-    setThirdChangeText(text);
+  const isThirdChanged = (number) => {
+    setThirdChangeText(number);
+  };
+
+  // 약 복용 state
+  const [isPill, setIsPill] = useState(false);
+  const isClickPill = (isClick) => {
+    setIsPill(isClick);
   };
 
   // 저장 버튼 클릭 시
@@ -80,8 +86,8 @@ export default function DayModal({
         selectedDate,
         todayEmotion,
         "안녕",
-        "널뜀",
-        true,
+        isChangeMood,
+        isPill,
         firstChangeText,
         secondChangeText,
         thirdChangeText
@@ -174,8 +180,8 @@ export default function DayModal({
                     justifyContent: "flex-end",
                   }}
                 >
-                  <EatPill eat={"eatyet"} />
-                  <EatPill eat={"eatalready"} />
+                  <EatPill eat={"eatyet"} handleClick={isClickPill} />
+                  <EatPill eat={"eatalready"} handleClick={isClickPill} />
                 </View>
               </View>
             </View>
@@ -191,7 +197,7 @@ export default function DayModal({
               <Switch
                 trackColor={{ false: "#767577", true: "#1B4B66" }}
                 onValueChange={toggleSwitch}
-                value={isEnabled}
+                value={isChangeMood}
                 style={{ margin: 5 }}
               />
             </View>

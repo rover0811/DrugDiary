@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity, Image } from "react-native";
 
-export default function EatPill({ eat }) {
+export default function EatPill({ eat, handleClick }) {
   const IsPill = {
     eatalready: {
       picturesource: require("../../image/eat.png"),
@@ -10,8 +10,13 @@ export default function EatPill({ eat }) {
       picturesource: require("../../image/eatyet.png"),
     },
   };
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() =>
+        eat === "eatalready" ? handleClick(true) : handleClick(false)
+      }
+    >
       <Image
         style={{
           borderRadius: 100,
