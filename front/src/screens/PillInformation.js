@@ -19,9 +19,11 @@ export default function Pills(){
         message()
     }, [])
 
-    const pilldata = result.map((i))
+    //const pilldata = result.map((i))
+
+    let pillinfos = JSON.stringify(result);
 
     return(
-            <Text>{result.ITEM_NAME}</Text>
+            <Text>{pillinfos}</Text>
         )
 }
