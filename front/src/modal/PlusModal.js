@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import DayModal from "../modal/DayModal";
+import { format } from "date-fns";
 
 export default function PlusModal({ openPlusModal, closePlusModal }) {
   const [dayModalVisible, setDayModalVisible] = useState(false);
@@ -9,6 +10,7 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
     setDayModalVisible(false);
     closePlusModal();
   };
+
   return (
     <Modal
       animationType="slide"
@@ -40,6 +42,7 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
           <DayModal
             openDayModal={dayModalVisible}
             closeDayModal={closeDayModalVisible}
+            selectedDate={format(new Date(), "yyyy-MM-dd")}
           />
           <Pressable
             style={[styles.button, styles.selectButtonInPlus]}
