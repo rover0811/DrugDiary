@@ -1,6 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import { Modal, StyleSheet, Text, Pressable, View, Switch } from "react-native";
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Switch,
+} from "react-native";
 import StateSelector from "../selector/StateSelector";
 import { ScrollView } from "react-native-gesture-handler";
 import InputText from "../input/InputText.js";
@@ -210,12 +217,12 @@ export default function DayModal({
               <StateSelector isChanged={isThirdChanged} />
             </View>
           </ScrollView>
-          <Pressable
+          <TouchableOpacity
             style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
             onPress={storeAndCloseModal}
           >
             <Text style={styles.textStyle}>저장</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
