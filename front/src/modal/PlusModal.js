@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { Modal, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import DayModal from "../modal/DayModal";
 import { format } from "date-fns";
 
@@ -25,7 +25,7 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
           <View>
             <Text style={styles.modalTitle}>등록 방법을 선택해 주세요.</Text>
           </View>
-          <Pressable
+          <TouchableOpacity
             style={[
               styles.button,
               styles.selectButtonInPlus,
@@ -38,20 +38,20 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
             <Text style={styles.textStyleInPlus}>
               오늘 하루를 기록해주세요.
             </Text>
-          </Pressable>
+          </TouchableOpacity>
           <DayModal
             openDayModal={dayModalVisible}
             closeDayModal={closeDayModalVisible}
             selectedDate={format(new Date(), "yyyy-MM-dd")}
           />
-          <Pressable
+          <TouchableOpacity
             style={[styles.button, styles.selectButtonInPlus]}
             onPress={closePlusModal}
           >
             <Text style={styles.textStyleInPlus}>
               복약 정보를 확인해주세요.
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
