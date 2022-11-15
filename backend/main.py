@@ -12,7 +12,7 @@ app = FastAPI() # API 생성
 origins = [
     "http://localhost:3000",
     "localhost:3000"
-    "http://203.253.13.46:8000"
+    "http://203.253.13.49:8000"
 ]
 
 
