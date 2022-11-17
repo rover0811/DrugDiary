@@ -13,8 +13,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import InputText from "../input/InputText.js";
 import EmotionButton from "../imagebutton/EmotionButton";
 import EatPill from "../imagebutton/PillButton";
-import { storeData, getData } from "../../DB/Store";
-import { setDate } from "date-fns";
+import { storeData } from "../../DB/Store";
 
 export default function DayModal({
   openDayModal,
@@ -100,7 +99,6 @@ export default function DayModal({
         thirdChangeText
       )
     );
-    getData(selectedDate);
   };
   // const [dayModalVisible, setDayModalVisible] = useState(props.dayModal);
   // getData(selectedDate);
