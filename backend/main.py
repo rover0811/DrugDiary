@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.get('/')
+@app.get('/image')
 async def do_ocr():
     return ocr.main('../pill_ex.png', '../ocr/pill.csv')
 
