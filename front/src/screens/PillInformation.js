@@ -6,7 +6,7 @@ export default function Pills(){
 
     const message = async ()=>{
         try{
-            let res = await axios.get('http://203.253.13.46:8000/pill');
+            let res = await axios.get('http://203.253.13.49:8000/pill');
             let result = res.data;
             setResult(result)
             console.log(result)
