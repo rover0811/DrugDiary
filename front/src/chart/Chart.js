@@ -6,7 +6,7 @@ import { getData } from "../../DB/Store";
 
 export default function Chart() {
   const now = new Date();
-  const day1 = new Date(now.setDate(now.getDate() - 5));
+  const day1 = new Date(now.setDate(now.getDate() - 6));
   const day2 = new Date(now.setDate(now.getDate() + 1));
   const day3 = new Date(now.setDate(now.getDate() + 1));
   const day4 = new Date(now.setDate(now.getDate() + 1));
@@ -57,12 +57,12 @@ export default function Chart() {
           datasets: [
             {
               data: [
-                day1Data,
-                day2Data,
-                day3Data,
-                day4Data,
-                day5Data,
-                day6Data,
+                day1Data ? day1Data : 0,
+                day2Data ? day2Data : 0,
+                day3Data ? day3Data : 0,
+                day4Data ? day4Data : 0,
+                day5Data ? day5Data : 0,
+                day6Data ? day6Data : 0,
               ],
             },
           ],
