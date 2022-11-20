@@ -11,13 +11,18 @@ from ocr import clova_ocr_api as ocr
 from ocr import pill_api as pill
 app = FastAPI() # API 생성
 
-@app.get('/input_name')
+@app.get('/pill/input_name')
 async def input_name(name: str):
-    response = {}
-    response["items"] = pill.call_api(name)
-    return response
+    pill_list = pill.call_api(name)
+    result = {}
+    result["items"] = pill_list
+    result = json.dumps(result, indent=4, ensure_ascii=False)
 
-@app.post('/input_image')
+    with open('result.json', 'w') as f:
+        f.write(result)
+    return FileResponse("result.json")
+
+@app.post('/pill/input_image')
 async def input_image(image: UploadFile):
     UPLOAD_DIR = "./images"
     content = await image.read()
@@ -34,6 +39,11 @@ async def input_image(image: UploadFile):
         pill_list = pill.call_api(text)
         if pill_list:
             items += pill_list
-    response = {}
-    response['items'] = items
-    return response
+            
+    result = {}
+    result['items'] = items
+    result = json.dumps(result, indent=4, ensure_ascii=False)
+
+    with open('result.json', 'w') as f:
+        f.write(result)
+    return FileResponse("result.json")
