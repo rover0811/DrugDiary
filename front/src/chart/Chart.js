@@ -6,12 +6,13 @@ import { getData } from "../../DB/Store";
 
 export default function Chart() {
   const now = new Date();
-  const day1 = new Date(now.setDate(now.getDate() - 6));
-  const day2 = new Date(now.setDate(now.getDate() + 1));
-  const day3 = new Date(now.setDate(now.getDate() + 1));
-  const day4 = new Date(now.setDate(now.getDate() + 1));
-  const day5 = new Date(now.setDate(now.getDate() + 1));
-  const day6 = new Date(now.setDate(now.getDate() + 1));
+  const day1 = now.setDate(now.getDate() - 6);
+  const day2 = now.setDate(now.getDate() + 1);
+  const day3 = now.setDate(now.getDate() + 1);
+  const day4 = now.setDate(now.getDate() + 1);
+  const day5 = now.setDate(now.getDate() + 1);
+  const day6 = now.setDate(now.getDate() + 1);
+  const day7 = now.setDate(now.getDate() + 1);
 
   const [day1Data, setday1Data] = useState(0);
   const [day2Data, setday2Data] = useState(0);
@@ -21,29 +22,29 @@ export default function Chart() {
   const [day6Data, setday6Data] = useState(0);
   const [todayData, setTodayData] = useState(0);
 
-  useEffect(() => {
-    getData(format(day1, "yyyy-MM-dd")).then((res) => {
-      setday1Data(res?.thirdQuestion);
-    });
-    getData(format(day2, "yyyy-MM-dd")).then((res) => {
-      setday2Data(res?.thirdQuestion);
-    });
-    getData(format(day3, "yyyy-MM-dd")).then((res) => {
-      setday3Data(res?.thirdQuestion);
-    });
-    getData(format(day4, "yyyy-MM-dd")).then((res) => {
-      setday4Data(res?.thirdQuestion);
-    });
-    getData(format(day5, "yyyy-MM-dd")).then((res) => {
-      setday5Data(res?.thirdQuestion);
-    });
-    getData(format(day6, "yyyy-MM-dd")).then((res) => {
-      setday6Data(res?.thirdQuestion);
-    });
-    getData(format(now, "yyyy-MM-dd")).then((res) => {
-      setTodayData(res?.thirdQuestion);
-    });
-  }, [now]);
+  // useEffect(() => {
+  getData(format(day1, "yyyy-MM-dd")).then((res) => {
+    res.thirdQuestion ? setday1Data(res.thirdQuestion) : {};
+  });
+  getData(format(day2, "yyyy-MM-dd")).then((res) => {
+    res.thirdQuestion ? setday2Data(res.thirdQuestion) : {};
+  });
+  getData(format(day3, "yyyy-MM-dd")).then((res) => {
+    res.thirdQuestion ? setday3Data(res.thirdQuestion) : {};
+  });
+  getData(format(day4, "yyyy-MM-dd")).then((res) => {
+    res.thirdQuestion ? setday4Data(res.thirdQuestion) : {};
+  });
+  getData(format(day5, "yyyy-MM-dd")).then((res) => {
+    res.thirdQuestion ? setday5Data(res.thirdQuestion) : {};
+  });
+  getData(format(day6, "yyyy-MM-dd")).then((res) => {
+    res.thirdQuestion ? setday6Data(res.thirdQuestion) : {};
+  });
+  getData(format(now, "yyyy-MM-dd")).then((res) => {
+    res.thirdQuestion ? setTodayData(res.thirdQuestion) : {};
+  });
+  // });
 
   return (
     <View>
@@ -62,13 +63,13 @@ export default function Chart() {
           datasets: [
             {
               data: [
-                day1Data ? day1Data : 0,
-                day2Data ? day2Data : 0,
-                day3Data ? day3Data : 0,
-                day4Data ? day4Data : 0,
-                day5Data ? day5Data : 0,
-                day6Data ? day6Data : 0,
-                todayData ? todayData : 0,
+                day1Data !== "Q3" ? day1Data : 0,
+                day2Data !== "Q3" ? day2Data : 0,
+                day4Data !== "Q3" ? day4Data : 0,
+                day3Data !== "Q3" ? day3Data : 0,
+                day5Data !== "Q3" ? day5Data : 0,
+                day6Data !== "Q3" ? day6Data : 0,
+                todayData !== "Q3" ? todayData : 0,
               ],
             },
           ],
