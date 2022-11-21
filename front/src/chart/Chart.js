@@ -1,75 +1,70 @@
 import { View, Text, Dimensions } from "react-native";
 import { LineChart } from "react-native-chart-kit";
-import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { getData } from "../../DB/Store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Chart() {
-  const now = new Date();
-  const day1 = now.setDate(now.getDate() - 6);
-  const day2 = now.setDate(now.getDate() + 1);
-  const day3 = now.setDate(now.getDate() + 1);
-  const day4 = now.setDate(now.getDate() + 1);
-  const day5 = now.setDate(now.getDate() + 1);
-  const day6 = now.setDate(now.getDate() + 1);
-  const day7 = now.setDate(now.getDate() + 1);
+  const [day, setDay] = useState([]);
+  const [dayDataList, setDayDataList] = useState([]);
 
-  const [day1Data, setday1Data] = useState(0);
-  const [day2Data, setday2Data] = useState(0);
-  const [day3Data, setday3Data] = useState(0);
-  const [day4Data, setday4Data] = useState(0);
-  const [day5Data, setday5Data] = useState(0);
-  const [day6Data, setday6Data] = useState(0);
-  const [todayData, setTodayData] = useState(0);
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const keys = await AsyncStorage.getAllKeys();
+        keys.sort();
+        const weekKeys = keys.slice(-7);
+        const result = await Promise.all(
+          weekKeys.map((day) =>
+            getData(day).then((value) => {
+              setDayDataList((dayDataList) => [
+                ...dayDataList,
+                Number(value.thirdQuestion),
+              ]);
+            })
+          )
+        );
 
-  // useEffect(() => {
-  getData(format(day1, "yyyy-MM-dd")).then((res) => {
-    res.thirdQuestion ? setday1Data(res.thirdQuestion) : {};
+        // console.log(result);
+        [...Array(7)].map((value, index) => {
+          setDay((day) => [...day, weekKeys[index].slice(-5)]);
+        });
+        // weekKeys.map((value, index) => {
+        //   setDayDataList((dayDataList) => [
+        //     ...dayDataList,
+        //     Number(result[index].thirdQuestion),
+        //   ]);
+        // });
+      } catch (e) {
+        console.log("error");
+      }
+    };
+    init();
+  }, []);
+
+  useEffect(() => {
+    // console.log(day);
+    console.log(dayDataList);
   });
-  getData(format(day2, "yyyy-MM-dd")).then((res) => {
-    res.thirdQuestion ? setday2Data(res.thirdQuestion) : {};
-  });
-  getData(format(day3, "yyyy-MM-dd")).then((res) => {
-    res.thirdQuestion ? setday3Data(res.thirdQuestion) : {};
-  });
-  getData(format(day4, "yyyy-MM-dd")).then((res) => {
-    res.thirdQuestion ? setday4Data(res.thirdQuestion) : {};
-  });
-  getData(format(day5, "yyyy-MM-dd")).then((res) => {
-    res.thirdQuestion ? setday5Data(res.thirdQuestion) : {};
-  });
-  getData(format(day6, "yyyy-MM-dd")).then((res) => {
-    res.thirdQuestion ? setday6Data(res.thirdQuestion) : {};
-  });
-  getData(format(now, "yyyy-MM-dd")).then((res) => {
-    res.thirdQuestion ? setTodayData(res.thirdQuestion) : {};
-  });
-  // });
 
   return (
     <View>
       <Text>최지우님의 기분변화 그래프</Text>
       <LineChart
         data={{
-          labels: [
-            format(day1, "MM/dd"),
-            format(day2, "MM/dd"),
-            format(day3, "MM/dd"),
-            format(day4, "MM/dd"),
-            format(day5, "MM/dd"),
-            format(day6, "MM/dd"),
-            format(now, "MM/dd"),
-          ],
+          labels: [day[0], day[1], day[2], day[3], day[4], day[5], day[6]],
           datasets: [
             {
               data: [
-                day1Data !== "Q3" ? day1Data : 0,
-                day2Data !== "Q3" ? day2Data : 0,
-                day4Data !== "Q3" ? day4Data : 0,
-                day3Data !== "Q3" ? day3Data : 0,
-                day5Data !== "Q3" ? day5Data : 0,
-                day6Data !== "Q3" ? day6Data : 0,
-                todayData !== "Q3" ? todayData : 0,
+                // 0, 0, 0, 0, 0, 0, 0,
+                // console.log(dayDataList),
+                dayDataList[0],
+                dayDataList[1],
+                dayDataList[2],
+                dayDataList[3],
+                dayDataList[4],
+                dayDataList[5],
+                dayDataList[6],
               ],
             },
           ],
