@@ -1,29 +1,64 @@
 {
-    "Unnamed: 0.1":{
-        "60":60
-    },
-    "Unnamed: 0":{
-        "60":60
-    },
-    "ITEM_NAME":{
-        "60":"베스타제정"
-    },
-    "ENTP_NAME":{
-        "60":"동아제약(주)"
-    },
-    "ETC_OTC_CODE":{
-        "60":"일반의약품"
-    },
-    "STORAGE_METHOD":{
-        "60":"밀폐용기, 실온(1~30℃)보관"
-    },
-    "EE_DOC_DATA":{
-        "60":"[]"
-    },
-    "UD_DOC_DATA":{
-        "60":"['성인 : 1회 2정', '소아 : 1회 11-14세 1-2정, 8-10세 1정', '1일 3회 식후에 복용한다.']"
-    },
-    "NB_DOC_DATA":{
-        "60":"{'1. 다음 환자에는 투여하지 말 것': '이 약은 유당을 함유하고 있으므로, 갈락토오스 불내성(galactose intolerance), Lapp 유당분해효소 결핍증(Lapp lactase deficiency) 또는 포도당-갈락토오스 흡수장애(glucose-galactose malabsorption) 등의 유전적인 문제가 있는 환자에게는 투여하면 안 된다.', '2. 다음 환자에는 신중히 투여할 것.': '4) 이 약은 황색5호(선셋옐로우 FCF, Sunset Yellow FCF)를 함유하고 있으므로 이 성분에 과민하거나 알레르기 병력이 있는 환자에는 신중히 투여한다.', '3. 부작용': '한다 (1일 최대배합량이 글리시리진산으로 40mg 이상 또는 감초로서 1g 이상을 함 유하는 제제).', '4. 일반적 주의': '또는 1개월).', '5. 상호작용': '위장진통·진경제와 병용투여하지 않는다 (스코폴리아엑스를 함유하는 제제).', '6. 소아에 대한 투여': '2) 이 약은 3개월 미만의 영아에게는 투여하지 않는다. 또 3개월 이상이라도 1세 미만 의 영아에게는 부득이한 경우를 제외하고는 투여하지 않는다 (캅셀제, 정제 및 환제 이외의 제제).', '7. 저장상의 주의사항': '3) 오용을 막고 품질의 보존을 위하여 다른 용기에 바꾸어 넣지 않는다.'}"
-    }
+    "items": [
+        {
+            "entpName": "동아제약주",
+            "itemName": "베스타제정",
+            "itemSeq": "196600011",
+            "efcyQesitm": "이 약은 소화불량 식욕감퇴식욕부진 과식 식체위체 소화촉진 소화불량으로 인한 위부팽만감에 사용합니다",
+            "useMethodQesitm": "성인은 1회 2정 1114세는 1회 12정 810세는 1회 1정을 1일 3회 식후에 복용합니다",
+            "atpnWarnQesitm": null,
+            "atpnQesitm": "7세 미만의 영유아 갈락토오스 불내성 Lapp 유당분해효소 결핍증 또는 포도당갈락토오스 흡수장애 등의 유전적인 문제가 있는 환자는 이 약을 복용하지 마십시오황색5호에 과민증 환자 또는 경험자는 의사 또는 약사와 상의하십시오정해진 용법과 용량을 잘 지키십시오어린이에게 투여할 경우 보호자의 지도 감독하에 투여하십시오",
+            "intrcQesitm": null,
+            "seQesitm": null,
+            "depositMethodQesitm": "습기와 빛을 피해 실온에서 보관하십시오어린이의 손이 닿지 않는 곳에 보관하십시오",
+            "openDe": "20210129 000000",
+            "updateDe": "2021January29th",
+            "itemImage": "HTTPSNEDRUGMFDSGOKRPBPCMNITEMIMAGEDOWNLOAD147427311457100131"
+        },
+        {
+            "entpName": "주종근당",
+            "itemName": "제스판골드정",
+            "itemSeq": "200709913",
+            "efcyQesitm": "이 약은 소화불량 식욕감퇴식욕부진 과식 체함 소화촉진 소화불량으로 인한 위부팽만감 구역 구토에 사용합니다",
+            "useMethodQesitm": "성인은 1회 1정 1일 3회 복용합니다",
+            "atpnWarnQesitm": null,
+            "atpnQesitm": "7세 이하의 어린이는 이 약을 복용하지 마십시오이 약을 복용하기 전에 이 약에 과민증 환자 알레르기 체질인 사람은 의사 또는 약사와 상의하십시오정해진 용법과 용량을 잘 지키십시오",
+            "intrcQesitm": null,
+            "seQesitm": null,
+            "depositMethodQesitm": "습기와 빛을 피해 실온에서 보관하십시오어린이의 손이 닿지 않는 곳에 보관하십시오",
+            "openDe": "20201224 000000",
+            "updateDe": "2021January29th",
+            "itemImage": "HTTPSNEDRUGMFDSGOKRPBPCMNITEMIMAGEDOWNLOAD1O3VwdlngvE"
+        },
+        {
+            "entpName": "주바스칸바이오제약",
+            "itemName": "베로타정",
+            "itemSeq": "200904579",
+            "efcyQesitm": "이 약은 소화불량 식욕감퇴식욕부진 과식 체함 소화촉진 소화불량으로 인한 위부팽만감에 사용합니다",
+            "useMethodQesitm": "성인은 1회 12정 1일 3회 식후에 복용합니다",
+            "atpnWarnQesitm": null,
+            "atpnQesitm": "이 약에 과민증 환자 황색4호타르트라진에 과민증 환자 만 7세 이하의 영유아에게는 투여하지 않습니다정해진 용법과 용량을 잘 지키십시오",
+            "intrcQesitm": null,
+            "seQesitm": null,
+            "depositMethodQesitm": "습기와 빛을 피해 실온에서 보관하십시오어린이의 손이 닿지 않는 곳에 보관하십시오",
+            "openDe": "20210129 000000",
+            "updateDe": "2021January29th",
+            "itemImage": "HTTPSNEDRUGMFDSGOKRPBPCMNITEMIMAGEDOWNLOAD1NjzNPWEkNV"
+        },
+        {
+            "entpName": "알리코제약주",
+            "itemName": "다이제틴정",
+            "itemSeq": "200904689",
+            "efcyQesitm": "이 약은 소화불량 식욕감퇴식욕부진 과식 체함 소화촉진 소화불량으로 인한 위부팽만감에 사용합니다",
+            "useMethodQesitm": "성인은 1회 12정 1일 3회 식후에 복용합니다",
+            "atpnWarnQesitm": null,
+            "atpnQesitm": "이 약에 과민증 환자 황색4호타르트라진에 과민증 환자 만 7세 이하의 영유아에게는 투여하지 않습니다정해진 용법과 용량을 잘 지키십시오",
+            "intrcQesitm": null,
+            "seQesitm": null,
+            "depositMethodQesitm": "습기와 빛을 피해 실온에서 보관하십시오어린이의 손이 닿지 않는 곳에 보관하십시오",
+            "openDe": "20201224 000000",
+            "updateDe": "2021January29th",
+            "itemImage": "HTTPSNEDRUGMFDSGOKRPBPCMNITEMIMAGEDOWNLOAD1NZLyogvTjP"
+        }
+    ]
 }

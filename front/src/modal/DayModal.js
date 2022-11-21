@@ -1,28 +1,107 @@
 import React from "react";
 import { useState } from "react";
-import { Modal, StyleSheet, Text, Pressable, View, Switch } from "react-native";
-import RNPickerSelect from "../selector/StateSelector";
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Switch,
+} from "react-native";
+import StateSelector from "../selector/StateSelector";
 import { ScrollView } from "react-native-gesture-handler";
 import InputText from "../input/InputText.js";
 import EmotionButton from "../imagebutton/EmotionButton";
 import EatPill from "../imagebutton/PillButton";
+import { storeData } from "../../DB/Store";
 
-export default function DayModal({ openDayModal, closeDayModal }) {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+export default function DayModal({
+  openDayModal,
+  closeDayModal,
+  selectedDate,
+}) {
+  class DateObj {
+    constructor(
+      selectedDate,
+      iconFeeling,
+      sleepTime,
+      didFeelingChange,
+      didTakeMedicine,
+      firstQuestion,
+      secondQuestion,
+      thirdQuestion
+    ) {
+      this.createdDate = selectedDate;
+      this.iconFeeling = iconFeeling;
+      this.sleepTime = sleepTime;
+      this.didFeelingChange = didFeelingChange;
+      this.didTakeMedicine = didTakeMedicine;
+      this.firstQuestion = firstQuestion;
+      this.secondQuestion = secondQuestion;
+      this.thirdQuestion = thirdQuestion;
+    }
+  }
+
+  // switch 부분 state
+  const [isChangeMood, setIsChangeMood] = useState(false);
+  const toggleSwitch = () => setIsChangeMood((previousState) => !previousState);
+
+  // emotion 버튼 부분 state
   const [isPressEmotion, setIsPressEmotion] = useState(false);
+  const [todayEmotion, setTodayEmotion] = useState("");
   const emotionList = ["joy", "calm", "hard", "sad", "tired", "angry"];
   const handlePressEmotion = (emotionIdx) => {
     const newEmotionList = Array(emotionList.length).fill(false);
     newEmotionList[emotionIdx] = true;
     setIsPressEmotion(newEmotionList);
+    setTodayEmotion(emotionList[emotionIdx]);
   };
-  const closeModal = () => {
+
+  // input부분 state
+  const [firstChangeText, setFirstChangeText] = useState("");
+  const isFirstChanged = (text) => {
+    setFirstChangeText(text);
+  };
+
+  const [secondChangeText, setSecondChangeText] = useState("");
+  const isSecondChanged = (text) => {
+    setSecondChangeText(text);
+  };
+
+  const [thirdChangeText, setThirdChangeText] = useState();
+  const isThirdChanged = (number) => {
+    setThirdChangeText(number);
+  };
+
+  // 약 복용 state
+  const [isPill, setIsPill] = useState(false);
+  const isClickPill = (isClick) => {
+    setIsPill(isClick);
+  };
+
+  // 저장 버튼 클릭 시
+  const storeAndCloseModal = () => {
     closeDayModal();
     const newEmotionList = Array(emotionList.length).fill(false);
     setIsPressEmotion(newEmotionList);
+
+    // modal에서 받아온 값 저장
+    storeData(
+      selectedDate,
+      new DateObj(
+        selectedDate,
+        todayEmotion,
+        "안녕",
+        isChangeMood,
+        isPill,
+        firstChangeText,
+        secondChangeText,
+        thirdChangeText
+      )
+    );
   };
   // const [dayModalVisible, setDayModalVisible] = useState(props.dayModal);
+  // getData(selectedDate);
 
   return (
     <Modal
@@ -106,8 +185,8 @@ export default function DayModal({ openDayModal, closeDayModal }) {
                     justifyContent: "flex-end",
                   }}
                 >
-                  <EatPill eat={"eatyet"} />
-                  <EatPill eat={"eatalready"} />
+                  <EatPill eat={"eatyet"} handleClick={isClickPill} />
+                  <EatPill eat={"eatalready"} handleClick={isClickPill} />
                 </View>
               </View>
             </View>
@@ -123,7 +202,7 @@ export default function DayModal({ openDayModal, closeDayModal }) {
               <Switch
                 trackColor={{ false: "#767577", true: "#1B4B66" }}
                 onValueChange={toggleSwitch}
-                value={isEnabled}
+                value={isChangeMood}
                 style={{ margin: 5 }}
               />
             </View>
@@ -131,26 +210,17 @@ export default function DayModal({ openDayModal, closeDayModal }) {
               <Text style={{ fontSize: 20, fontWeight: "bold", margin: 10 }}>
                 오늘의 질문
               </Text>
-              <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
-                1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘
-              </Text>
-              <InputText />
-              <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
-                2. 특별한 생활 사건들에 대해 자세히 알려줘
-              </Text>
-              <InputText />
-              <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
-                3. 오늘 하루를 떠올리고 아래 표에서 어울리는 나의 상태를 골라줘
-              </Text>
-              <RNPickerSelect />
+              <InputText isChanged={isFirstChanged} questionIdx={"0"} />
+              <InputText isChanged={isSecondChanged} questionIdx={"1"} />
+              <StateSelector isChanged={isThirdChanged} />
             </View>
           </ScrollView>
-          <Pressable
+          <TouchableOpacity
             style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
-            onPress={closeModal}
+            onPress={storeAndCloseModal}
           >
             <Text style={styles.textStyle}>저장</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
