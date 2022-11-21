@@ -2,27 +2,22 @@ from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import FileResponse
-<<<<<<< HEAD
 from fastapi.middleware.cors import CORSMiddleware #다른 protocol, ip adress, domain name, port에서 접근 가능하게 해주는 모듈
 
-=======
 from fastapi import UploadFile, File # image upload
 import uuid
 import json
->>>>>>> 9d7a62338972bacc0e505fc61e4c99944583707d
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from ocr import clova_ocr_api as ocr
 from ocr import pill_api as pill
 app = FastAPI() # API 생성
 
-<<<<<<< HEAD
 origins = [
     "http://localhost:3000",
     "localhost:3000"
     "http://203.253.13.49:8000"
 ]
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,18 +27,6 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.get('/image')
-async def do_ocr():
-    return ocr.main('../pill_ex.png', '../ocr/pill.csv')
-
-@app.get('/pill')
-async def write_pill():
-    return FileResponse('result.json')
-
-@app.post('/pillpost')
-async def dis_ocr():
-    return FileResponse('result.json')
-=======
 @app.get('/pill/input_name')
 async def input_name(name: str):
     pill_list = pill.call_api(name)
@@ -80,4 +63,3 @@ async def input_image(image: UploadFile):
     with open('result.json', 'w') as f:
         f.write(result)
     return FileResponse("result.json")
->>>>>>> 9d7a62338972bacc0e505fc61e4c99944583707d
