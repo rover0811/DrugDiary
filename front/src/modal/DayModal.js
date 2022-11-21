@@ -68,7 +68,7 @@ export default function DayModal({
     setSecondChangeText(text);
   };
 
-  const [thirdChangeText, setThirdChangeText] = useState();
+  const [thirdChangeText, setThirdChangeText] = useState(0);
   const isThirdChanged = (number) => {
     setThirdChangeText(number);
   };
