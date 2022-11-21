@@ -14,14 +14,18 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 app = FastAPI()  # API 생성
 
 
-@app.get('/input_name')
+@app.get('/pill/input_name')
 async def input_name(name: str):
-    response = {}
-    response["items"] = pill.call_api(name)
-    return response
+    pill_list = pill.call_api(name)
+    result = {}
+    result["items"] = pill_list
+    result = json.dumps(result, indent=4, ensure_ascii=False)
 
+    with open('result.json', 'w') as f:
+        f.write(result)
+    return FileResponse("result.json")
 
-@app.post('/input_image')
+@app.post('/pill/input_image')
 async def input_image(image: UploadFile):
     UPLOAD_DIR = "./images"
     content = await image.read()
@@ -38,6 +42,11 @@ async def input_image(image: UploadFile):
         pill_list = pill.call_api(text)
         if pill_list:
             items += pill_list
-    response = {}
-    response['items'] = items
-    return response
+            
+    result = {}
+    result['items'] = items
+    result = json.dumps(result, indent=4, ensure_ascii=False)
+
+    with open('result.json', 'w') as f:
+        f.write(result)
+    return FileResponse("result.json")

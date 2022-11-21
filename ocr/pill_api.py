@@ -30,6 +30,7 @@ def call_api(name): # 공공데이터포털 api 호출
             pill_list.append(item)
     except:
         return
+        
     return pill_list
 
 # if __name__ == '__main__':
