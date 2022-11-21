@@ -11,7 +11,7 @@ export default function Chart() {
   const day3 = new Date(now.setDate(now.getDate() + 1));
   const day4 = new Date(now.setDate(now.getDate() + 1));
   const day5 = new Date(now.setDate(now.getDate() + 1));
-  const day6 = new Date();
+  const day6 = new Date(now.setDate(now.getDate() + 1));
 
   const [day1Data, setday1Data] = useState(0);
   const [day2Data, setday2Data] = useState(0);
@@ -19,25 +19,29 @@ export default function Chart() {
   const [day4Data, setday4Data] = useState(0);
   const [day5Data, setday5Data] = useState(0);
   const [day6Data, setday6Data] = useState(0);
+  const [todayData, setTodayData] = useState(0);
 
   useEffect(() => {
     getData(format(day1, "yyyy-MM-dd")).then((res) => {
-      setday1Data(res.thirdQuestion);
+      setday1Data(res?.thirdQuestion);
     });
     getData(format(day2, "yyyy-MM-dd")).then((res) => {
-      setday2Data(res.thirdQuestion);
+      setday2Data(res?.thirdQuestion);
     });
     getData(format(day3, "yyyy-MM-dd")).then((res) => {
-      setday3Data(res.thirdQuestion);
+      setday3Data(res?.thirdQuestion);
     });
     getData(format(day4, "yyyy-MM-dd")).then((res) => {
-      setday4Data(res.thirdQuestion);
+      setday4Data(res?.thirdQuestion);
     });
     getData(format(day5, "yyyy-MM-dd")).then((res) => {
-      setday5Data(res.thirdQuestion);
+      setday5Data(res?.thirdQuestion);
     });
     getData(format(day6, "yyyy-MM-dd")).then((res) => {
-      setday6Data(res.thirdQuestion);
+      setday6Data(res?.thirdQuestion);
+    });
+    getData(format(now, "yyyy-MM-dd")).then((res) => {
+      setTodayData(res?.thirdQuestion);
     });
   }, [now]);
 
@@ -53,6 +57,7 @@ export default function Chart() {
             format(day4, "MM/dd"),
             format(day5, "MM/dd"),
             format(day6, "MM/dd"),
+            format(now, "MM/dd"),
           ],
           datasets: [
             {
@@ -63,6 +68,7 @@ export default function Chart() {
                 day4Data ? day4Data : 0,
                 day5Data ? day5Data : 0,
                 day6Data ? day6Data : 0,
+                todayData ? todayData : 0,
               ],
             },
           ],
