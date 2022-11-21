@@ -2,6 +2,8 @@ from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware #다른 protocol, ip adress, domain name, port에서 접근 가능하게 해주는 모듈
+
 from fastapi import UploadFile, File # image upload
 import uuid
 import json
@@ -11,13 +13,32 @@ from ocr import clova_ocr_api as ocr
 from ocr import pill_api as pill
 app = FastAPI() # API 생성
 
-@app.get('/input_name')
-async def input_name(name: str):
-    response = {}
-    response["items"] = pill.call_api(name)
-    return response
+origins = [
+    "http://localhost:3000",
+    "localhost:3000"
+    "http://203.253.13.49:8000"
+]
 
-@app.post('/input_image')
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+@app.get('/pill/input_name')
+async def input_name(name: str):
+    pill_list = pill.call_api(name)
+    result = {}
+    result["items"] = pill_list
+    result = json.dumps(result, indent=4, ensure_ascii=False)
+
+    with open('result.json', 'w') as f:
+        f.write(result)
+    return FileResponse("result.json")
+
+@app.post('/pill/input_image')
 async def input_image(image: UploadFile):
     UPLOAD_DIR = "./images"
     content = await image.read()
@@ -34,6 +55,11 @@ async def input_image(image: UploadFile):
         pill_list = pill.call_api(text)
         if pill_list:
             items += pill_list
-    response = {}
-    response['items'] = items
-    return response
+            
+    result = {}
+    result['items'] = items
+    result = json.dumps(result, indent=4, ensure_ascii=False)
+
+    with open('result.json', 'w') as f:
+        f.write(result)
+    return FileResponse("result.json")

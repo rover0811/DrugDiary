@@ -6,12 +6,16 @@ import { MonthlyCalendar } from "../screens/MonthlyCalendar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import PlusModal from "../modal/PlusModal";
+<<<<<<< HEAD
+import Pills from "../screens/PillInformation";
+=======
 import AddView from "../addview/AddView";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import Chart from "../chart/Chart";
 
 const screenWidth = Dimensions.get("window").width;
+>>>>>>> 9d7a62338972bacc0e505fc61e4c99944583707d
 
 const TabIcon = ({ name, size, color }) => {
   return <MaterialCommunityIcons name={name} size={size} color={color} />;
@@ -85,7 +89,11 @@ const TabNavigation = () => {
       ></Tab.Screen>
       <Tab.Screen
         name="Add"
+<<<<<<< HEAD
+        component={Pill}
+=======
         component={Add}
+>>>>>>> 9d7a62338972bacc0e505fc61e4c99944583707d
         options={{
           tabBarIcon: (props) => TabIcon({ ...props, name: "pill" }),
           tabBarActiveTintColor: "#1B4B66",
@@ -102,6 +110,14 @@ const TabNavigation = () => {
     </Tab.Navigator>
   );
 };
+
+function Pill(){
+  return(
+    <View>
+      <Pills/>
+    </View>
+  )
+}
 
 function EmptyScreen() {
   return (

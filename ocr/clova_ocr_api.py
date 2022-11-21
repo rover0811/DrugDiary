@@ -7,6 +7,7 @@ import time
 import json
 import pandas as pd
 
+
 # APIGW Invoke URL (yehun)
 # api_url = 'https://8vhb9to58j.apigw.ntruss.com/custom/v1/18483/a614b583ca0ed9d541b5609697d1de6cc3229dc2f7001e17ed228e6453e39dff/general'
 # Secret Key
@@ -16,6 +17,7 @@ import pandas as pd
 api_url = 'https://htacxyxwab.apigw.ntruss.com/custom/v1/19265/3afa64b3fd5507804c03d8feb7f9cdd58d892e02857b9d55f392552c8e63c090/general' # haun
 # Secret Key
 secret_key = 'a0VwQWt2SHNGV0F6SmFreFpjcG9UWmNuWWRVS3RPank='
+
 
 # CLOVA OCR Invoke URL
 # http://clovaocr-api-kr.ncloud.com/external/v1/18483/a614b583ca0ed9d541b5609697d1de6cc3229dc2f7001e17ed228e6453e39dff
