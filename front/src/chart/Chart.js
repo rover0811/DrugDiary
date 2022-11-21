@@ -42,6 +42,28 @@ export default function Chart() {
     init();
   }, []);
 
+  const [dayDataList, setDayDataList] = useState(
+    // [...Array(7)].map(
+    //   (value, index) => new Date(now.getFullYear(), now.getMonth(), now.getDate() - (6 - index))
+    //   )
+    []
+  );
+
+  const list = [
+    {
+      title: "기존 기록 보기",
+      icon: "av-timer",
+    },
+    {
+      title: "약 목록 보기",
+      icon: "pill",
+    },
+  ];
+
+  // uri;
+  // const response = await fetch(uri);
+  // const blob  = await response.blob();// 이미지 올리는 부분
+
   useEffect(() => {
     // console.log(day);
     console.log(dayDataList);
@@ -49,7 +71,7 @@ export default function Chart() {
 
   return (
     <View>
-      <Text>최지우님의 기분변화 그래프</Text>
+      <Text>기분변화 그래프</Text>
       <LineChart
         data={{
           labels: [day[0], day[1], day[2], day[3], day[4], day[5], day[6]],
@@ -94,6 +116,37 @@ export default function Chart() {
           borderRadius: 16,
         }}
       />
+      <View>
+        <Text style={{ fontSize: 40 }}>약 목록</Text>
+        <ListItem
+          bottomDivider
+          onPress={async () => {
+            let keys = [];
+            try {
+              keys = await AsyncStorage.getAllKeys();
+            } catch (e) {
+              // read key error
+            }
+
+            console.log(keys);
+            // example console.log result:
+            // ['@MyApp_user', '@MyApp_key']
+          }}
+        >
+          <MaterialCommunityIcons name="history" size={20} />
+          <ListItem.Content>
+            <ListItem.Title>최근 기록들 보기</ListItem.Title>
+          </ListItem.Content>
+          <ListItem.Chevron />
+        </ListItem>
+        <ListItem bottomDivider onPress={() => alert("hello")}>
+          <MaterialCommunityIcons name="pill" size={20} />
+          <ListItem.Content>
+            <ListItem.Title>복용하고 있는 약 보기</ListItem.Title>
+          </ListItem.Content>
+          <ListItem.Chevron />
+        </ListItem>
+      </View>
     </View>
   );
 }

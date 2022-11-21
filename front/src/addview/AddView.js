@@ -29,7 +29,7 @@ export default function AddView() {
   };
   return (
     <View style={{ height: "100%", backgroundColor: "white", padding: 18 }}>
-      <Text style={{ fontSize: 20, fontWeight: "bold" }}>최지우님,</Text>
+      {/* <Text style={{ fontSize: 20, fontWeight: "bold" }}>최지우님,</Text> */}
       <Text style={{ fontSize: 20 }}>복용하고 있는 약을 추가해주세요</Text>
       <View
         style={{
