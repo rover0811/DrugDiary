@@ -25,6 +25,8 @@ async def input_name(name: str):
 @app.post('/pill/input_image')
 async def input_image(image: UploadFile):
     UPLOAD_DIR = "./images"
+    if not os.path.exists(UPLOAD_DIR):
+        os.makedirs(UPLOAD_DIR)
     content = await image.read()
     filename = f"{str(uuid.uuid4())}.jpg"
     with open(os.path.join(UPLOAD_DIR, filename), "wb") as fp:
