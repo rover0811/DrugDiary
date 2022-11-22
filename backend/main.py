@@ -1,5 +1,4 @@
-from ocr import pill_api as pill
-from ocr import clova_ocr_api as ocr
+
 from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -11,8 +10,10 @@ import json
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-app = FastAPI()  # API 생성
+from ocr import pill_api as pill
+from ocr import clova_ocr_api as ocr
 
+app = FastAPI()
 
 @app.get('/pill/input_name')
 async def input_name(name: str):
