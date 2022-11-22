@@ -1,0 +1,119 @@
+[33m7401284[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m server
+[33mbecea31[m Merge pull request #26 from rover0811/modal
+[33m5994e3f[m [resource] change tired.png
+[33mdd316fb[m Merge pull request #25 from rover0811/modal
+[33mfd71373[m [feat] click emotion button event
+[33mbb7b434[m Merge pull request #23 from rover0811/modal
+[33me0b0b80[m [refactor] componentization
+[33mc1d2bf5[m [resource] add gray emotion
+[33me36c290[m Merge pull request #22 from rover0811/calendar
+[33m449a1c1[m [fix] fix calendar view
+[33mc209d61[m Merge pull request #19 from rover0811/modal
+[33m681b4a7[m [fix] remove View in modal
+[33m503ea5d[m Merge branch 'main' of https://github.com/rover0811/DrugDiary
+[33m725a4a7[m null
+[33m176e017[m Update packager-info.json
+[33mb0a4910[m Merge pull request #15 from rover0811/modal
+[33md55714f[m X
+[33mda9265c[m [remove] remove pill_ex.png
+[33m4ac29c3[m Merge branch 'modal' of https://github.com/rover0811/DrugDiary into modal
+[33m2f1ca0d[m [conflict] resolve conflict
+[33mbf8021f[m Merge pull request #18 from rover0811/main
+[33m5a9b73c[m [conflict] resolve conflict
+[33m10d1e0b[m [feat] close + modal when click save
+[33m1bb0cf1[m Delete requirement.txt
+[33m19aac01[m Update README.md
+[33m0db2418[m update
+[33m0726fc8[m update
+[33m343fd62[m update
+[33m0aa2cfd[m update
+[33me3e4fb4[m Merge branch 'gnsdp99' into main
+[33mccfa71b[m [fix]ocr update
+[33m23f2e92[m [fix] backend
+[33m01458e9[m Update README.md
+[33m15159eb[m feat
+[33m1d41601[m [refactor] remove unnecessary import
+[33mb099c59[m Merge branch 'main' into modal
+[33m237dde4[m [conflict] resolve conflict
+[33m8323529[m [refactor] Create Modal Component
+[33m3469e85[m Merge branch 'main' of https://github.com/rover0811/DrugDiary into main
+[33me14065b[m [fix]ocr preprocess
+[33m815e3ab[m [fix]ocr preprocess
+[33m612c1af[m Merge pull request #13 from rover0811/DBFILE
+[33mb7b6753[m [move] move DB File
+[33ma4ddfbf[m Merge pull request #12 from rover0811/DBFILE
+[33m647d733[m [move] move DB file
+[33m2d906ea[m Merge pull request #10 from rover0811/DB
+[33mc13ac9a[m Merge branch 'main' into DB
+[33mae88a07[m Merge pull request #11 from rover0811/plusmodal
+[33m12226a1[m [feat] DB component
+[33m8d4834d[m [feat] DB component
+[33me91d497[m Add Asyncstorage
+[33mf10eead[m Merge branch 'main' of https://github.com/rover0811/DrugDiary
+[33m0aa8001[m[33m ([m[1;31morigin/plusmodal[m[33m)[m [feat] +button modal
+[33m2c5c275[m update backend
+[33m7a706c6[m Merge branch 'main' of https://github.com/rover0811/DrugDiary into main
+[33m54a0156[m data preprocess
+[33mccc3978[m Add files via upload
+[33m1a44af6[m Add files via upload
+[33m06845d5[m Delete pill_paper.jpg
+[33m48226c3[m Delete memo.png
+[33md3df546[m[33m ([m[1;31morigin/haun[m[33m)[m append pill_db
+[33mcb1817a[m append pill_db
+[33m9847c23[m apply .gitignore
+[33m736c246[m Merge pull request #6 from rover0811/front
+[33ma4b3b24[m[33m ([m[1;31morigin/front[m[33m)[m [feat] lock file
+[33mabe19b4[m [docs] gitignore파일
+[33me1bbfa3[m X
+[33m89938eb[m [docs] readme
+[33m982eef9[m X
+[33m26f57f7[m [feat] add scrollview
+[33mb1e9d2f[m [feat] navbar
+[33m0060f0b[m Update README.md
+[33mda2e8f0[m [feat] tabnavigation
+[33m6e4e78b[m [resource] add pull request template
+[33m7954967[m [resource] add + image
+[33m7b3fa51[m [제거] frontend 파일 제거
+[33m2d586a9[m Merge branch 'main' of https://github.com/rover0811/DrugDiary into front
+[33m832a835[m Update README.md
+[33m1607485[m Update README.md
+[33mfb6fd6f[m Update README.md
+[33m63b7b50[m Create README.md
+[33m6fa9206[m Create README.md
+[33m882818b[m Merge pull request #3 from rover0811/haun
+[33m77a9a43[m 데이터전처리
+[33m83726ca[m Merge branch 'main' of https://github.com/rover0811/DrugDiary
+[33m4019d73[m image
+[33m60e61c7[m Merge branch 'main' of https://github.com/rover0811/DrugDiary
+[33m0d3b18b[m 0
+[33m3e2e34c[m Merge branch 'main' of https://github.com/rover0811/DrugDiary
+[33m3bde292[m 0
+[33m192e29b[m Merge branch 'main' of https://github.com/rover0811/DrugDiary
+[33m9fdf4d0[m jo
+[33m8d924cf[m _
+[33m716e0c4[m 0
+[33m6c525c3[m front
+[33m8254acc[m Fix submodules
+[33mfd4f77b[m Fix
+[33m892dd52[m Add frontend Workout since 10/18
+[33m41304a1[m -
+[33m2850edd[m jo
+[33mcfc6398[m comiit
+[33m9df1089[m 22.10.18
+[33m3605b3b[m -
+[33mf51ad16[m 22.10.17
+[33m169efc0[m 10/14
+[33m65a2412[m pill_api
+[33m9551f09[m[33m ([m[1;31morigin/gnsdp99[m[33m)[m Merge branch 'main' of https://github.com/rover0811/DrugDiary into gnsdp99
+[33mbf8acaa[m Merge pull request #2 from rover0811/gnsdp99
+[33m6098312[m ocr_api
+[33mbc11878[m gnsdp99
+[33m30eea13[m add id
+[33m431cc95[m Merge pull request #1 from rover0811/haunJo
+[33m111e213[m add id
+[33m892cc9d[m Merge branch 'main' of https://github.com/rover0811/DrugDiary
+[33m4c795f6[m Add CONTRIBUTING.md
+[33m515c18c[m Update README.md
+[33ma89edd0[m Update README.md
+[33me6647f2[m Update README.md
+[33mdae7681[m Initial commit
