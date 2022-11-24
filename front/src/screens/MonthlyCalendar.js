@@ -1,9 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { StyleSheet, Text, View } from "react-native";
 import { LocaleConfig, Calendar } from "react-native-calendars";
 import DayModal from "../modal/DayModal";
+import Chart from "../chart/Chart";
+import { ScrollView } from "react-native-gesture-handler";
 
 LocaleConfig.locales["fr"] = {
   monthNames: [
@@ -64,7 +66,7 @@ export function CalendarView() {
   };
 
   return (
-    <View>
+    <ScrollView style={{ height: "100%" }}>
       <Calendar
         style={styles.calendar}
         markedDates={markedSelectedDates}
@@ -85,7 +87,8 @@ export function CalendarView() {
         closeDayModal={closeDayModal}
         selectedDate={selectedDate}
       />
-    </View>
+      <Chart selectedDate={modalVisible} />
+    </ScrollView>
   );
 }
 
@@ -105,7 +108,7 @@ export const MonthlyCalendar = () => {
 
 const styles = StyleSheet.create({
   calendar: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: "#e0e0e0",
   },
 });

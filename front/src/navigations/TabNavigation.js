@@ -38,14 +38,14 @@ const TabNavigation = () => {
           tabBarActiveTintColor: "#1B4B66",
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="History"
         component={Chart}
         options={{
           tabBarIcon: (props) => TabIcon({ ...props, name: "history" }),
           tabBarActiveTintColor: "#1B4B66",
         }}
-      />
+      /> */}
       <Tab.Screen
         name={" "}
         component={EmptyScreen}
@@ -91,14 +91,14 @@ const TabNavigation = () => {
           tabBarActiveTintColor: "#1B4B66",
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Account"
         component={Account}
         options={{
           tabBarIcon: (props) => TabIcon({ ...props, name: "calendar-check" }),
           tabBarActiveTintColor: "#1B4B66",
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

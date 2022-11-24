@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Modal,
   StyleSheet,
@@ -13,7 +12,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import InputText from "../input/InputText.js";
 import EmotionButton from "../imagebutton/EmotionButton";
 import EatPill from "../imagebutton/PillButton";
-import { storeData } from "../../DB/Store";
+import { getData, storeData } from "../../DB/Store";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function DayModal({
   openDayModal,
@@ -55,6 +55,21 @@ export default function DayModal({
     newEmotionList[emotionIdx] = true;
     setIsPressEmotion(newEmotionList);
     setTodayEmotion(emotionList[emotionIdx]);
+  };
+
+  const [todayFirstQuestion, setTodayFirstQuestion] = useState();
+  const handleSetFirstQuestion = (res) => {
+    setTodayFirstQuestion(res);
+  };
+
+  const [todaySecondQuestion, setTodaySecondQuestion] = useState();
+  const handleSetSecondQuestion = (res) => {
+    setTodaySecondQuestion(res);
+  };
+
+  const [todayThirdQuestion, setTodayThirdQuestion] = useState();
+  const handleSetThirdQuestion = (res) => {
+    setTodayThirdQuestion(res);
   };
 
   // input부분 state
@@ -100,8 +115,28 @@ export default function DayModal({
       )
     );
   };
+
+  const closeModal = () => {
+    closeDayModal();
+  };
   // const [dayModalVisible, setDayModalVisible] = useState(props.dayModal);
   // getData(selectedDate);
+
+  useEffect(() => {
+    const init = () => {
+      try {
+        getData(selectedDate).then((res) => {
+          handlePressEmotion(emotionList.indexOf(res.iconFeeling));
+          handleSetFirstQuestion(res.firstQuestion);
+          handleSetSecondQuestion(res.secondQuestion);
+          handleSetThirdQuestion(res.thirdQuestion);
+        });
+      } catch (e) {
+        console.log("error");
+      }
+    };
+    init();
+  }, [openDayModal]);
 
   return (
     <Modal
@@ -115,6 +150,9 @@ export default function DayModal({
       <View style={styles.centeredView}>
         <View style={[styles.modalView, { height: "92%" }]}>
           <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity onPress={closeModal} style={{}}>
+              <MaterialCommunityIcons name="chevron-left" size={30} />
+            </TouchableOpacity>
             <Text style={styles.modalTitle}>하루 기록</Text>
           </View>
           <ScrollView style={styles.modalBackground}>
@@ -210,9 +248,20 @@ export default function DayModal({
               <Text style={{ fontSize: 20, fontWeight: "bold", margin: 10 }}>
                 오늘의 질문
               </Text>
-              <InputText isChanged={isFirstChanged} questionIdx={"0"} />
-              <InputText isChanged={isSecondChanged} questionIdx={"1"} />
-              <StateSelector isChanged={isThirdChanged} />
+              <InputText
+                isChanged={isFirstChanged}
+                questionIdx={"0"}
+                data={todayFirstQuestion}
+              />
+              <InputText
+                isChanged={isSecondChanged}
+                questionIdx={"1"}
+                data={todaySecondQuestion}
+              />
+              <StateSelector
+                isChanged={isThirdChanged}
+                data={todayThirdQuestion}
+              />
             </View>
           </ScrollView>
           <TouchableOpacity
