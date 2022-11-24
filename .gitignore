@@ -2,3 +2,5 @@ front/node_modules
 front/.expo
 front/.expo-shared
 
+first_micro/__pycache__/pill_api.cpython-39.pyc
+first_micro/__pycache__/clova_ocr_api.cpython-39.pyc
