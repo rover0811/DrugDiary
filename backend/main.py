@@ -27,6 +27,9 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+
+
+
 @app.get('/pill/input_name')
 async def input_name(name: str):
     pill_list = pill.call_api(name)
