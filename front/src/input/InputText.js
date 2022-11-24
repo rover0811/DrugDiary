@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
 
-export default function InputText({ isChanged, questionIdx }) {
+export default function InputText({ isChanged, questionIdx, data }) {
   const questionText = [
     "1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘",
     "2. 특별한 생활 사건들에 대해 자세히 알려줘",
   ];
-  const [changeText, setChangeText] = useState("");
+  const [changeText, setChangeText] = useState();
   useEffect(() => {
     isChanged(changeText);
+    // console.log(changeText);
   });
-  // console.log(changeText);
 
   return (
     <>
@@ -18,12 +18,23 @@ export default function InputText({ isChanged, questionIdx }) {
         {questionText[questionIdx]}
       </Text>
       <View style={{ alignContent: "center" }}>
-        <TextInput
-          multiline
-          style={styles.input}
-          onChangeText={(text) => setChangeText(text)}
-          editablex
-        />
+        {data === null ? (
+          <TextInput
+            multiline
+            style={styles.input}
+            onChangeText={(text) => setChangeText(text)}
+            editablex
+          />
+        ) : (
+          <TextInput
+            multiline
+            style={styles.input}
+            onChangeText={(text) => setChangeText(text)}
+            editablex
+            // value={changeText}
+            placeholder={data}
+          />
+        )}
       </View>
     </>
   );
@@ -38,5 +49,6 @@ const styles = StyleSheet.create({
     margin: "5%",
     marginTop: 0,
     marginBottom: 0,
+    padding: 10,
   },
 });
