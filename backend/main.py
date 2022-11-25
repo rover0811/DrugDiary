@@ -25,19 +25,18 @@ async def input_name(name: str):
     return result
 
 
-async def save_file(file: IO):
+async def temp_file(file: IO):
     with NamedTemporaryFile("wb", delete=False) as tempfile:
         tempfile.write(file.read())
         return tempfile.name
     
 @app.post('/pill/input_image')
 async def input_image(image: UploadFile):
-    path = await save_file(image.file)
+    path = await temp_file(image.file)
     ocr_response = ocr.call_api(path)
-    
     text_list = ocr.get_texts(ocr_response)
-
     items = []
+    
     for text in text_list:
         pill_list = pill.call_api(text)
         if pill_list:
