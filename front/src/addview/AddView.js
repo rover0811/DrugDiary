@@ -3,10 +3,15 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
+import { SpeedDial } from '@rneui/themed';
+
+
 
 export default function AddView() {
   const [status, requestPermission] = ImagePicker.useCameraPermissions();
   const [imageUrl, setImageUrl] = useState("");
+  const [open, setOpen] = useState(false);
+
 
   const uploadImage = async () => {
     if (!status?.granted) {
@@ -49,7 +54,25 @@ export default function AddView() {
           <MaterialCommunityIcons name={"magnify"} size={20} />
         </TouchableOpacity>
       </View>
-      <View style={styles.buttonView}>
+      <SpeedDial
+        isOpen={open}
+        icon={{ name: "pill", color: "#fff", iconStyle:'material-community'}}
+        openIcon={{ name: "pill", color: "#fff" , iconStyle:'material-community'}}
+        onOpen={() => setOpen(!open)}
+        onClose={() => setOpen(!open)}
+      >
+        <SpeedDial.Action
+          icon={{ name: "camera", color: "#fff" }}
+          title="사진을 찍어서 약 추가하기"
+          onPress={() => console.log("Add Something")}
+        />
+        <SpeedDial.Action
+          icon={{ name: "search", color: "#fff" }}
+          title="검색해서 약 추가하기"
+          onPress={() => console.log("Delete Something")}
+        />
+      </SpeedDial>
+      {/* <View style={styles.buttonView}>
         <TouchableOpacity
           style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
           onPress={uploadImage}
@@ -68,7 +91,7 @@ export default function AddView() {
         >
           <Text style={styles.textStyle}>약 바구니로 가기</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 }

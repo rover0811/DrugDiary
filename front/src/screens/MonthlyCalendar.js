@@ -94,7 +94,7 @@ export function CalendarView() {
 
 export const MonthlyCalendar = () => {
   return (
-    <View style={{ marginTop: 50 }}>
+    <ScrollView style={{ marginTop: 50 }}>
       <View style={{ backgroundColor: "white", padding: 18 }}>
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>최지우님,</Text>
         <Text style={{ fontSize: 20 }}>
@@ -102,7 +102,7 @@ export const MonthlyCalendar = () => {
         </Text>
       </View>
       <CalendarView></CalendarView>
-    </View>
+    </ScrollView>
   );
 };
 
