@@ -46,12 +46,23 @@ def call_api(image_file):
 def get_texts(response): # ocr 결과를 필요한 정보만 파싱
   response_json = json.loads(response)
   fields = response_json.get('images')[0].get('fields')
-
   text_list = []
   for element in fields:
     text = element.get('inferText')
     if text.find(" ") == -1:
       text_list.append(text)
-  return text_list
+  itemList = pd.read_csv("/home/gnsdp/DrugDiary/ocr/itemName.csv")
+  itemList = list(itertools.chain(*itemList.values))
+  result = []
+  for text in text_list:
+    idx = text.find('[')
+    if idx != -1:
+      text = text[:idx]
+    for item in itemList:
+      if (text == item):
+        result.append(text)
+        break
+  result = list(set(result))
+  return result
 
 # if __name__ == "__main__":
