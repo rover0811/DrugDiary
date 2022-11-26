@@ -10,6 +10,8 @@ import AddView from "../addview/AddView";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import Chart from "../chart/Chart";
+import HomeScreen from "./Homescreen";
+
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -91,14 +93,14 @@ const TabNavigation = () => {
           tabBarActiveTintColor: "#1B4B66",
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Account"
         component={Account}
         options={{
           tabBarIcon: (props) => TabIcon({ ...props, name: "calendar-check" }),
           tabBarActiveTintColor: "#1B4B66",
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };
@@ -123,9 +125,7 @@ function Home() {
 
 function Account() {
   return (
-    <View>
-      <Text>Account</Text>
-    </View>
+    <HomeScreen></HomeScreen>
   );
 }
 
