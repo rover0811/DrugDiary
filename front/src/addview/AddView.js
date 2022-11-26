@@ -44,7 +44,7 @@ export default function AddView() {
           borderRadius: 10,
         }}
       >
-        <TextInput
+        {/* <TextInput
           placeholder="약의 정확한 이름을 입력해주세요"
           style={{ marginLeft: 20 }}
         />
@@ -52,23 +52,27 @@ export default function AddView() {
           style={{ marginTop: 10, marginLeft: 100, marginBottom: 5 }}
         >
           <MaterialCommunityIcons name={"magnify"} size={20} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <SpeedDial
         isOpen={open}
-        icon={{ name: "pill", color: "#fff", iconStyle:'material-community'}}
-        openIcon={{ name: "pill", color: "#fff" , iconStyle:'material-community'}}
+        icon={<MaterialCommunityIcons name={'pill'} size={20} color={'white'}/>}
+        openIcon={<MaterialCommunityIcons name={'pill'} size={20} color={'white'}/>}
         onOpen={() => setOpen(!open)}
         onClose={() => setOpen(!open)}
+        color="#1B4B66"
       >
         <SpeedDial.Action
           icon={{ name: "camera", color: "#fff" }}
           title="사진을 찍어서 약 추가하기"
-          onPress={() => console.log("Add Something")}
+          onPress={uploadImage}
+          color="#1B4B66"
+
         />
         <SpeedDial.Action
           icon={{ name: "search", color: "#fff" }}
           title="검색해서 약 추가하기"
+          color="#1B4B66"
           onPress={() => console.log("Delete Something")}
         />
       </SpeedDial>
