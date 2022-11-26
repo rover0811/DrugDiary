@@ -6,6 +6,7 @@ import { LocaleConfig, Calendar } from "react-native-calendars";
 import DayModal from "../modal/DayModal";
 import Chart from "../chart/Chart";
 import { ScrollView } from "react-native-gesture-handler";
+import { getData } from "../../DB/Store";
 
 LocaleConfig.locales["fr"] = {
   monthNames: [
@@ -61,6 +62,7 @@ export function CalendarView() {
   };
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [dayData,setdayData]=useState();
   const closeDayModal = () => {
     setModalVisible(false);
   };
@@ -78,7 +80,15 @@ export function CalendarView() {
         }}
         onDayPress={(day) => {
           setSelectedDate(day.dateString);
-          setModalVisible(true);
+          try {
+            getData(day.dateString).then((res) => {
+              setdayData(res);
+              setModalVisible(true);
+            })
+            console.log(dayData);
+          } catch (error) {
+            console.log(error)
+          }
         }}
         enableSwipeMonths={true}
       />
@@ -86,6 +96,7 @@ export function CalendarView() {
         openDayModal={modalVisible}
         closeDayModal={closeDayModal}
         selectedDate={selectedDate}
+        dayData={dayData}
       />
       <Chart selectedDate={modalVisible} />
     </ScrollView>

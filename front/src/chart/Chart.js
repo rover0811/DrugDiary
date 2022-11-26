@@ -72,22 +72,22 @@ export default function Chart({ selectedDate }) {
     // };
     // init();
     getData(format(day1, "yyyy-MM-dd")).then((res) => {
-      setday1Data(res.thirdQuestion);
+      setday1Data(res?.thirdQuestion);
     });
     getData(format(day2, "yyyy-MM-dd")).then((res) => {
-      setday2Data(res.thirdQuestion);
+      setday2Data(res?.thirdQuestion);
     });
     getData(format(day3, "yyyy-MM-dd")).then((res) => {
-      setday3Data(res.thirdQuestion);
+      setday3Data(res?.thirdQuestion);
     });
     getData(format(day4, "yyyy-MM-dd")).then((res) => {
-      setday4Data(res.thirdQuestion);
+      setday4Data(res?.thirdQuestion);
     });
     getData(format(day5, "yyyy-MM-dd")).then((res) => {
-      setday5Data(res.thirdQuestion);
+      setday5Data(res?.thirdQuestion);
     });
     getData(format(day6, "yyyy-MM-dd")).then((res) => {
-      setday6Data(res.thirdQuestion);
+      setday6Data(res?.thirdQuestion);
     });
   }, [selectedDate]);
 

@@ -19,6 +19,7 @@ export default function DayModal({
   openDayModal,
   closeDayModal,
   selectedDate,
+  dayData,
 }) {
   class DateObj {
     constructor(
@@ -125,12 +126,13 @@ export default function DayModal({
   useEffect(() => {
     const init = () => {
       try {
-        getData(selectedDate).then((res) => {
-          handlePressEmotion(emotionList.indexOf(res.iconFeeling));
-          handleSetFirstQuestion(res.firstQuestion);
-          handleSetSecondQuestion(res.secondQuestion);
-          handleSetThirdQuestion(res.thirdQuestion);
-        });
+        // getData(selectedDate).then((res) => {
+          console.log(dayData)
+          handlePressEmotion(emotionList.indexOf(dayData?.iconFeeling));
+          handleSetFirstQuestion(dayData?.firstQuestion);
+          handleSetSecondQuestion(dayData?.secondQuestion);
+          handleSetThirdQuestion(dayData?.thidQuestion);
+        // });
       } catch (e) {
         console.log("error");
       }
