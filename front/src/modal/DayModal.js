@@ -74,17 +74,17 @@ export default function DayModal({
 
   // input부분 state
   const [firstChangeText, setFirstChangeText] = useState("");
-  const isFirstChanged = (text) => {
+  const handleFirstChanged = (text) => {
     setFirstChangeText(text);
   };
 
   const [secondChangeText, setSecondChangeText] = useState("");
-  const isSecondChanged = (text) => {
+  const handleSecondChanged = (text) => {
     setSecondChangeText(text);
   };
 
   const [thirdChangeText, setThirdChangeText] = useState(0);
-  const isThirdChanged = (number) => {
+  const handleThirdChanged = (number) => {
     setThirdChangeText(number);
   };
 
@@ -125,18 +125,22 @@ export default function DayModal({
   useEffect(() => {
     const init = () => {
       try {
-        getData(selectedDate).then((res) => {
-          handlePressEmotion(emotionList.indexOf(res.iconFeeling));
-          handleSetFirstQuestion(res.firstQuestion);
-          handleSetSecondQuestion(res.secondQuestion);
-          handleSetThirdQuestion(res.thirdQuestion);
-        });
+        getData(selectedDate)
+          .then((res) => {
+            handlePressEmotion(emotionList.indexOf(res?.iconFeeling));
+            handleSetFirstQuestion(res?.firstQuestion);
+            handleSetSecondQuestion(res?.secondQuestion);
+            handleSetThirdQuestion(res?.thirdQuestion);
+          })
+          .catch((e) => {
+            console.log("errrr");
+          });
       } catch (e) {
         console.log("error");
       }
     };
     init();
-  }, [openDayModal]);
+  }, [selectedDate]);
 
   return (
     <Modal
@@ -249,17 +253,19 @@ export default function DayModal({
                 오늘의 질문
               </Text>
               <InputText
-                isChanged={isFirstChanged}
-                questionIdx={"0"}
                 data={todayFirstQuestion}
+                onChanged={handleFirstChanged}
+                value={firstChangeText}
+                questionIdx={"0"}
               />
               <InputText
-                isChanged={isSecondChanged}
-                questionIdx={"1"}
                 data={todaySecondQuestion}
+                onChanged={handleSecondChanged}
+                value={secondChangeText}
+                questionIdx={"1"}
               />
               <StateSelector
-                isChanged={isThirdChanged}
+                isChanged={handleThirdChanged}
                 data={todayThirdQuestion}
               />
             </View>
