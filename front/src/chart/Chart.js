@@ -58,6 +58,7 @@ export default function Chart({ selectedDate }) {
   const [day4Data, setday4Data] = useState(0);
   const [day5Data, setday5Data] = useState(0);
   const [day6Data, setday6Data] = useState(0);
+  const [nowData, setNowData] = useState(0);
 
   useEffect(() => {
     // const init = async () => {
@@ -88,6 +89,9 @@ export default function Chart({ selectedDate }) {
     });
     getData(format(day6, "yyyy-MM-dd")).then((res) => {
       setday6Data(res?.thirdQuestion);
+    });
+    getData(format(now, "yyyy-MM-dd")).then((res) => {
+      setNowData(res?.thirdQuestion);
     });
   }, [selectedDate]);
 
@@ -129,6 +133,7 @@ export default function Chart({ selectedDate }) {
             format(day4, "MM/dd"),
             format(day5, "MM/dd"),
             format(day6, "MM/dd"),
+            format(now, "MM/dd"),
           ],
           datasets: [
             {
@@ -139,6 +144,7 @@ export default function Chart({ selectedDate }) {
                 day4Data ? day4Data : 0,
                 day5Data ? day5Data : 0,
                 day6Data ? day6Data : 0,
+                nowData ? nowData : 0,
               ],
             },
           ],
