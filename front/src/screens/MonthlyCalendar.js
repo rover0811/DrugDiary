@@ -66,7 +66,7 @@ export function CalendarView() {
   };
 
   return (
-    <ScrollView style={{ height: "100%" }}>
+    <>
       <Calendar
         style={styles.calendar}
         markedDates={markedSelectedDates}
@@ -87,8 +87,10 @@ export function CalendarView() {
         closeDayModal={closeDayModal}
         selectedDate={selectedDate}
       />
-      <Chart selectedDate={modalVisible} />
-    </ScrollView>
+      <ScrollView style={{ height: "100%" }}>
+        <Chart selectedDate={modalVisible} />
+      </ScrollView>
+    </>
   );
 }
 
