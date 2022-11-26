@@ -4,8 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
 import { SpeedDial } from '@rneui/themed';
-
-
+import SearchText from "../input/SearchText";
 
 export default function AddView() {
   const [status, requestPermission] = ImagePicker.useCameraPermissions();
@@ -118,9 +117,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonView: {
-    height: "100%",
-    bottom: 100,
+    // height: "100%",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 10,
     alignItems: "center",
-    justifyContent: "flex-end",
   },
 });
