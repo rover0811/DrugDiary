@@ -67,8 +67,10 @@ export function CalendarView() {
     setModalVisible(false);
   };
 
+  const [getDayData, setGetDayData] = useState();
+
   return (
-    <ScrollView style={{ height: "100%" }}>
+    <>
       <Calendar
         style={styles.calendar}
         markedDates={markedSelectedDates}
@@ -80,15 +82,14 @@ export function CalendarView() {
         }}
         onDayPress={(day) => {
           setSelectedDate(day.dateString);
-          try {
-            getData(day.dateString).then((res) => {
-              setdayData(res);
+          getData(day.dateString)
+            .then((res) => {
+              setGetDayData(res);
               setModalVisible(true);
             })
-            console.log(dayData);
-          } catch (error) {
-            console.log(error)
-          }
+            .catch((e) => {
+              console.log(e);
+            });
         }}
         enableSwipeMonths={true}
       />
@@ -96,10 +97,12 @@ export function CalendarView() {
         openDayModal={modalVisible}
         closeDayModal={closeDayModal}
         selectedDate={selectedDate}
-        dayData={dayData}
+        getDayData={getDayData}
       />
-      <Chart selectedDate={modalVisible} />
-    </ScrollView>
+      <ScrollView style={{ height: "100%" }}>
+        <Chart selectedDate={modalVisible} />
+      </ScrollView>
+    </>
   );
 }
 
