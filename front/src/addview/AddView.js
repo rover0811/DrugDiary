@@ -3,11 +3,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
+import { SpeedDial } from '@rneui/themed';
 import SearchText from "../input/SearchText";
 
 export default function AddView() {
   const [status, requestPermission] = ImagePicker.useCameraPermissions();
   const [imageUrl, setImageUrl] = useState("");
+  const [open, setOpen] = useState(false);
+
 
   const uploadImage = async () => {
     if (!status?.granted) {
@@ -30,9 +33,45 @@ export default function AddView() {
   };
   return (
     <View style={{ height: "100%", backgroundColor: "white", padding: 18 }}>
-      <Text style={{ fontSize: 20 }}>최지우님이 현재 복용중인 약입니다</Text>
-      {/* <SearchText />
-      <View style={styles.buttonView}>
+      {/* <Text style={{ fontSize: 20, fontWeight: "bold" }}>최지우님,</Text> */}
+      <Text style={{ fontSize: 20 }}>복용하고 있는 약을 추가해주세요</Text>
+      <View
+        style={{
+          marginTop: 20,
+          flexDirection: "row",
+          backgroundColor: "#F1F1F1",
+          borderRadius: 10,
+        }}
+      >
+        <TextInput
+          placeholder="약의 정확한 이름을 입력해주세요"
+          style={{ marginLeft: 20 }}
+        />
+        <TouchableOpacity
+          style={{ marginTop: 10, marginLeft: 100, marginBottom: 5 }}
+        >
+          <MaterialCommunityIcons name={"magnify"} size={20} />
+        </TouchableOpacity>
+      </View>
+      <SpeedDial
+        isOpen={open}
+        icon={{ name: "pill", color: "#fff", iconStyle:'material-community'}}
+        openIcon={{ name: "pill", color: "#fff" , iconStyle:'material-community'}}
+        onOpen={() => setOpen(!open)}
+        onClose={() => setOpen(!open)}
+      >
+        <SpeedDial.Action
+          icon={{ name: "camera", color: "#fff" }}
+          title="사진을 찍어서 약 추가하기"
+          onPress={() => console.log("Add Something")}
+        />
+        <SpeedDial.Action
+          icon={{ name: "search", color: "#fff" }}
+          title="검색해서 약 추가하기"
+          onPress={() => console.log("Delete Something")}
+        />
+      </SpeedDial>
+      {/* <View style={styles.buttonView}>
         <TouchableOpacity
           style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
           onPress={uploadImage}
@@ -52,7 +91,6 @@ export default function AddView() {
           <Text style={styles.textStyle}>약 바구니로 가기</Text>
         </TouchableOpacity>
       </View> */}
-
     </View>
   );
 }

@@ -126,17 +126,10 @@ export default function DayModal({
   useEffect(() => {
     const init = () => {
       try {
-        // getData(selectedDate)
-        //   .then((res) => {
-        // console.log(getDayData);
         handlePressEmotion(emotionList.indexOf(getDayData?.iconFeeling));
         handleSetFirstQuestion(getDayData?.firstQuestion);
         handleSetSecondQuestion(getDayData?.secondQuestion);
         handleSetThirdQuestion(getDayData?.thirdQuestion);
-        // })
-        // .catch((e) => {
-        //   console.log("errrr");
-        // });
       } catch (e) {
         console.log("error");
       }
