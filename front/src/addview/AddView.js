@@ -3,14 +3,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
-import { SpeedDial } from '@rneui/themed';
+import { SpeedDial } from "@rneui/themed";
 import SearchText from "../input/SearchText";
 
 export default function AddView() {
   const [status, requestPermission] = ImagePicker.useCameraPermissions();
   const [imageUrl, setImageUrl] = useState("");
   const [open, setOpen] = useState(false);
-
 
   const uploadImage = async () => {
     if (!status?.granted) {
@@ -55,8 +54,12 @@ export default function AddView() {
       </View>
       <SpeedDial
         isOpen={open}
-        icon={<MaterialCommunityIcons name={'pill'} size={20} color={'white'}/>}
-        openIcon={<MaterialCommunityIcons name={'pill'} size={20} color={'white'}/>}
+        icon={
+          <MaterialCommunityIcons name={"pill"} size={20} color={"white"} />
+        }
+        openIcon={
+          <MaterialCommunityIcons name={"pill"} size={20} color={"white"} />
+        }
         onOpen={() => setOpen(!open)}
         onClose={() => setOpen(!open)}
         color="#1B4B66"
@@ -66,7 +69,6 @@ export default function AddView() {
           title="사진을 찍어서 약 추가하기"
           onPress={uploadImage}
           color="#1B4B66"
-
         />
         <SpeedDial.Action
           icon={{ name: "search", color: "#fff" }}
