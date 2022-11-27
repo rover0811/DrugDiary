@@ -122,11 +122,7 @@ function Home() {
 }
 
 function Account() {
-  return (
-    <View>
-      <Text>Account</Text>
-    </View>
-  );
+  return <HomeScreen></HomeScreen>;
 }
 
 const styles = StyleSheet.create({
