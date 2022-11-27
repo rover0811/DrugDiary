@@ -1,16 +1,15 @@
-from ocr import pill_api as pill
-from ocr import clova_ocr_api as ocr
 from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import FileResponse
-
 from fastapi import UploadFile, File  # image upload
 import uuid
 import json
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from ocr import pill_api as pill
+from ocr import clova_ocr_api as ocr
 app = FastAPI()  # API 생성
 
 

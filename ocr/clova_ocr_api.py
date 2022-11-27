@@ -12,7 +12,7 @@ import pandas as pd
 # Secret Key
 # secret_key = 'WllGYkRRb1VPTkN0Y3FhYkVLTVlMVlFFQXRXWWdjQWM='
 
-# # APIGW Invoke URL (haun)
+# APIGW Invoke URL (haun)
 api_url = 'https://htacxyxwab.apigw.ntruss.com/custom/v1/19265/3afa64b3fd5507804c03d8feb7f9cdd58d892e02857b9d55f392552c8e63c090/general' # haun
 # Secret Key
 secret_key = 'a0VwQWt2SHNGV0F6SmFreFpjcG9UWmNuWWRVS3RPank='
