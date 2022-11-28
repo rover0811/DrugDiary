@@ -5,7 +5,11 @@ import requests
 import uuid
 import time
 import json
+import itertools
 import pandas as pd
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 # APIGW Invoke URL (yehun)
 # api_url = 'https://8vhb9to58j.apigw.ntruss.com/custom/v1/18483/a614b583ca0ed9d541b5609697d1de6cc3229dc2f7001e17ed228e6453e39dff/general'
@@ -51,7 +55,7 @@ def get_texts(response): # ocr 결과를 필요한 정보만 파싱
     text = element.get('inferText')
     if text.find(" ") == -1:
       text_list.append(text)
-  itemList = pd.read_csv("/home/gnsdp/DrugDiary/ocr/itemName.csv")
+  itemList = pd.read_csv("../ocr/itemName.csv")
   itemList = list(itertools.chain(*itemList.values))
   result = []
   for text in text_list:
