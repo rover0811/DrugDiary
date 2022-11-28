@@ -52,14 +52,14 @@ const PillCard = ({ pills, onPress }) => {
       >
         <Animated.View style={{ ...style.card, transform: [{ scale }] }}>
           <Animated.View style={{ ...style.cardOverLay, opacity }} />
-          <Image source={{ uri: pills.itemImage }} style={style.cardImage} />
+          <Image source={{ uri: pills?.itemImage }} style={style.cardImage} />
           <View style={style.cardDetails}>
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <View>
                 <Text style={{ fontWeight: "bold", fontSize: 17 }}>
-                  {pills.itemName}
+                  {pills?.itemName}
                 </Text>
               </View>
             </View>

@@ -8,6 +8,7 @@ import SearchText from "../input/SearchText";
 import PillCard from "./PillCard";
 import PillDetail from "./PillDetail";
 import axios from "axios";
+// import { ImageManipulator } from "expo-image-manipulator";
 
 const pills = [
   // {
@@ -136,7 +137,49 @@ export default function AddView() {
       return null;
     }
     console.log(result.uri);
-    setImageUrl(result.uri);
+    const imageUri = result.uri;
+    // const response = await fetch(result.uri);
+    // const imageBlob = await response.blob(); // 이미지 올리는 부분
+    const filename = imageUri.split("/").pop();
+    const match = /\.(\w+)$/.exec(filename ?? "");
+    const type = match ? `image/${match[1]}` : `image`;
+    const formData = new FormData();
+    formData.append("image", { uri: imageUri, name: filename, type });
+    // const resizedPhoto = await ImageManipulator.manipulateAsync(
+    //   formData,
+    //   [{ resize: { width: 300 } }], // resize to width of 300 and preserve aspect ratio
+    //   { compress: 0.7, format: "jpeg" }
+    // );
+    try {
+      console.log("trytrytry");
+      // resizedPhoto();
+      await axios({
+        method: "post",
+        url: "http://52.78.57.119/pill/input_image",
+        headers: { "content-type": "multipart/form-data" },
+        data: formData,
+      })
+        .then((res) => {
+          // console.log(res.data.items.itemName);
+          pills.push(res.data.items[0]);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      console.log("fin");
+      // await api
+      //   .post("/pill/input_image", {
+      //     image: formData,
+      //   })
+      //   .then((res) => {
+      //     pills.push(res.data.items[0]);
+      //   })
+      //   .catch((e) => {
+      //     console.log(e);
+      //   });
+    } catch {
+      console.log("errrrr");
+    }
   };
 
   const [clickPill, setClickPill] = useState(0);
