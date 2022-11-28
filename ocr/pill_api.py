@@ -4,13 +4,11 @@ import pandas as pd
 import re
 
 def clean(string):
-  clean = re.compile('<.*?>')
-  cleantext = re.sub(clean, '', string)
-  cleantext = re.sub('[^\w\s]', '', cleantext)
-  cleantext = cleantext.replace("\xa0", " ")
-  cleantext = re.sub('\n\n', ". ", cleantext)
-  cleantext = re.sub('\n', "", cleantext)
-  return cleantext
+    clean = re.compile('<.*?>')
+    cleantext = re.sub(clean, '', string)
+    cleantext = re.sub('\n', "", cleantext)
+    cleantext = re.sub("[.]", ". ", cleantext)
+    return cleantext
 
 def call_api(name): # 공공데이터포털 api 호출
     url = 'http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList'
@@ -24,7 +22,10 @@ def call_api(name): # 공공데이터포털 api 호출
         for item in items:
             for key in item.keys():
                 try:
-                    item[key] = clean(item[key])
+                    if key == "itemImage":
+                        item[key] = item[key].lower()
+                    else:
+                        item[key] = clean(item[key])
                 except:
                     continue
             pill_list.append(item)
