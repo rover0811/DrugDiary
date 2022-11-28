@@ -24,6 +24,8 @@ def call_api(name): # 공공데이터포털 api 호출
                 try:
                     if key == "itemImage":
                         item[key] = item[key].lower()
+                        item[key] = item[key].replace("itemimagedownload", "itemImageDownload")
+                        
                     else:
                         item[key] = clean(item[key])
                 except:
