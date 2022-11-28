@@ -63,7 +63,8 @@ def get_texts(response): # ocr 결과를 필요한 정보만 파싱
     if idx != -1:
       text = text[:idx]
     for item in itemList:
-      if (text == item):
+      matched = item.startswith(text)
+      if matched and (len(text) >= 2):
         result.append(text)
         break
   result = list(set(result))
