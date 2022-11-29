@@ -26,10 +26,6 @@ const PillCard = ({ pills, onPress }) => {
   const [activeCardIndex, setActiveCardIndex] = React.useState(0);
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
-  const PillImage = React.memo((imageUri) => {
-    return <Image source={{ uri: imageUri }} style={style.cardImage} />;
-  });
-
   const Card = ({ pills, index }) => {
     const inputRange = [
       (index - 1) * cardWidth,
@@ -46,9 +42,11 @@ const PillCard = ({ pills, onPress }) => {
     });
     return (
       <TouchableOpacity
-        disabled={activeCardIndex != index}
-        // activeOpacity={1}
-        onPress={() => onPress(index)}
+        // disabled={activeCardIndex != index}
+        // activeOpacity={0.5}
+        onPress={() => {
+          onPress(index);
+        }}
       >
         <Animated.View style={{ ...style.card, transform: [{ scale }] }}>
           <Animated.View style={{ ...style.cardOverLay, opacity }} />
@@ -125,7 +123,7 @@ const style = StyleSheet.create({
   },
 
   cardDetails: {
-    height: 100,
+    height: 80,
     borderRadius: 15,
     backgroundColor: COLORS.white,
     position: "absolute",
