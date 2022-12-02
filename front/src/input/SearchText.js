@@ -1,19 +1,17 @@
 import { View, TextInput, StyleSheet, ActivityIndicator } from "react-native";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import PillCard from "../addview/PillCard";
 import { getAllKeys, getData, setPills } from "../../DB/Store";
 
 export default function SearchText({ pills }) {
-  const searchPillsList = [];
+  const [searchPillsList, setSearchPillsList] = useState([]);
   const [searchPill, setSearchPill] = useState(false);
 
   const getPills = async () => {
-    // console.log("getPills 들어옴");
     try {
-      // console.log("try 들어옴");
       const api = axios.create({ baseURL: "http://52.78.57.119" });
       await api
         .get("/pill/input_name", {
@@ -23,62 +21,51 @@ export default function SearchText({ pills }) {
         })
         .then((res) => {
           if (res.data.items) {
-            // searchPillsList.push(res.data.items);
             res.data.items.map((value, index) => {
-              searchPillsList.push(res.data.items[index]);
-              setSearchPill(false);
-              console.log(searchPillsList);
+              searchPillsList.push(value);
             });
+            setSearchPill(false);
           } else {
             alert("약 정보가 없습니다\n 다시 입력해주세요");
-            // setSearchPill(false);
+            setSearchPill(false);
           }
         })
         .catch((e) => {
-          // alert("조금 더 구체적으로 입력해주세요")
+          console.log(e);
+          setSearchPill(false);
         });
-      // console.log("데이터 잘 불러옴!!");
     } catch (e) {
-      // alert("약 정보가 없습니다\n 다시 입력해주세요");
       setSearchPill(false);
     }
   };
   const [changeText, setChangeText] = useState();
-  useEffect(() => {
-    getPills();
-  }, [searchPill]);
 
-  const [clickPillIndex, setClickPillIndex] = useState();
   const handleClickPillIndex = (pillIndex) => {
-    setClickPillIndex(pillIndex);
-    // pills.push(searchPillsList[pillIndex]);
+    pills.push(searchPillsList[pillIndex]);
     setPills(searchPillsList[pillIndex]);
+    setSearchPillsList();
     setSearchPill(false);
   };
 
-  // getData("pillsList")
-  //   .then((res) => {
-  //     console.log(res);
-  //   })
-  //   .catch((e) => {
-  //     console.log(e);
-  //   });
-
   return (
-    <View style={{ height: "100%" }}>
+    <View>
       <View style={styles.searchBox}>
         <TextInput
           style={styles.search}
           placeholder="약의 정확한 이름을 입력해주세요"
           onChangeText={(text) => {
+            setSearchPillsList([]);
             setChangeText(text);
+            setSearchPill(false);
           }}
+          placeholderTextColor="rgba(0, 0, 0, 0.2)"
           editable
         />
         {!searchPill ? (
           <TouchableOpacity
             style={{ marginRight: 10 }}
             onPress={() => {
+              getPills();
               setSearchPill(!searchPill);
             }}
           >

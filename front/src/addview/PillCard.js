@@ -95,12 +95,6 @@ const PillCard = ({ pills, onPress }) => {
 };
 
 const style = StyleSheet.create({
-  header: {
-    marginTop: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-  },
   card: {
     height: 280,
     width: cardWidth,

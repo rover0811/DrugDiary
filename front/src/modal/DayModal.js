@@ -146,145 +146,151 @@ export default function DayModal({
         setDayModalVisible(!dayModalVisible);
       }}
     >
-      <View style={styles.centeredView}>
-        <View style={[styles.modalView, { height: "92%" }]}>
-          <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity onPress={closeModal} style={{}}>
-              <MaterialCommunityIcons name="chevron-left" size={30} />
-            </TouchableOpacity>
-            <Text style={styles.modalTitle}>하루 기록</Text>
-          </View>
-          <ScrollView style={styles.modalBackground}>
-            <View style={[styles.modalBox, { marginBottom: 0 }]}>
-              <Text style={styles.modalText}>기분을 선택해줘</Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  margin: 10,
-                }}
-              >
-                <EmotionButton
-                  emotion={"joy"}
-                  emotionIdx={"0"}
-                  isSelected={isPressEmotion[0]}
-                  handleClick={handlePressEmotion}
-                />
-                <EmotionButton
-                  emotion={"calm"}
-                  emotionIdx={"1"}
-                  isSelected={isPressEmotion[1]}
-                  handleClick={handlePressEmotion}
-                />
-                <EmotionButton
-                  emotion={"hard"}
-                  emotionIdx={"2"}
-                  isSelected={isPressEmotion[2]}
-                  handleClick={handlePressEmotion}
-                />
-                <EmotionButton
-                  emotion={"sad"}
-                  emotionIdx={"3"}
-                  isSelected={isPressEmotion[3]}
-                  handleClick={handlePressEmotion}
-                />
-                <EmotionButton
-                  emotion={"tired"}
-                  emotionIdx={"4"}
-                  isSelected={isPressEmotion[4]}
-                  handleClick={handlePressEmotion}
-                />
-                <EmotionButton
-                  emotion={"angry"}
-                  emotionIdx={"5"}
-                  isSelected={isPressEmotion[5]}
-                  handleClick={handlePressEmotion}
-                />
-              </View>
-            </View>
+      <TouchableOpacity style={styles.modalOutside} onPress={closeDayModal} />
+      <View style={[styles.modalView, { height: "92%" }]}>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity onPress={closeModal} style={{}}>
+            <MaterialCommunityIcons name="chevron-left" size={30} />
+          </TouchableOpacity>
+          <Text style={styles.modalTitle}>하루 기록</Text>
+        </View>
+        <ScrollView style={styles.modalBackground}>
+          <View style={[styles.modalBox, { marginBottom: 0 }]}>
+            <Text style={styles.modalText}>기분을 선택해줘</Text>
             <View
               style={{
                 flexDirection: "row",
-                justifyContent: "space-around",
-                marginBottom: 0,
+                justifyContent: "space-between",
+                margin: 10,
               }}
             >
-              <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
-                <Text style={styles.modalText}>어제 수면 시간</Text>
-              </View>
-              <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
-                <Text style={[styles.modalText, { marginBottom: 0 }]}>
-                  약 복용
-                </Text>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  <EatPill eat={"eatyet"} handleClick={isClickPill} />
-                  <EatPill eat={"eatalready"} handleClick={isClickPill} />
-                </View>
-              </View>
-            </View>
-            <View
-              style={[
-                styles.modalBox,
-                { flexDirection: "row", justifyContent: "space-between" },
-              ]}
-            >
-              <Text style={styles.modalText}>
-                하루 동안 유의미한 감정 기복이 있었어?
-              </Text>
-              <Switch
-                trackColor={{ false: "#767577", true: "#1B4B66" }}
-                onValueChange={toggleSwitch}
-                value={isChangeMood}
-                style={{ margin: 5 }}
+              <EmotionButton
+                emotion={"joy"}
+                emotionIdx={"0"}
+                isSelected={isPressEmotion[0]}
+                handleClick={handlePressEmotion}
+              />
+              <EmotionButton
+                emotion={"calm"}
+                emotionIdx={"1"}
+                isSelected={isPressEmotion[1]}
+                handleClick={handlePressEmotion}
+              />
+              <EmotionButton
+                emotion={"hard"}
+                emotionIdx={"2"}
+                isSelected={isPressEmotion[2]}
+                handleClick={handlePressEmotion}
+              />
+              <EmotionButton
+                emotion={"sad"}
+                emotionIdx={"3"}
+                isSelected={isPressEmotion[3]}
+                handleClick={handlePressEmotion}
+              />
+              <EmotionButton
+                emotion={"tired"}
+                emotionIdx={"4"}
+                isSelected={isPressEmotion[4]}
+                handleClick={handlePressEmotion}
+              />
+              <EmotionButton
+                emotion={"angry"}
+                emotionIdx={"5"}
+                isSelected={isPressEmotion[5]}
+                handleClick={handlePressEmotion}
               />
             </View>
-            <View>
-              <Text style={{ fontSize: 20, fontWeight: "bold", margin: 10 }}>
-                오늘의 질문
-              </Text>
-              <InputText
-                data={todayFirstQuestion}
-                onChanged={handleFirstChanged}
-                value={firstChangeText}
-                questionIdx={"0"}
-              />
-              <InputText
-                data={todaySecondQuestion}
-                onChanged={handleSecondChanged}
-                value={secondChangeText}
-                questionIdx={"1"}
-              />
-              <StateSelector
-                isChanged={handleThirdChanged}
-                data={todayThirdQuestion}
-              />
-            </View>
-          </ScrollView>
-          <TouchableOpacity
-            style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
-            onPress={storeAndCloseModal}
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginBottom: 0,
+            }}
           >
-            <Text style={styles.textStyle}>저장</Text>
-          </TouchableOpacity>
-        </View>
+            <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
+              <Text style={styles.modalText}>어제 수면 시간</Text>
+            </View>
+            <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
+              <Text style={[styles.modalText, { marginBottom: 0 }]}>
+                약 복용
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <EatPill eat={"eatyet"} handleClick={isClickPill} />
+                <EatPill eat={"eatalready"} handleClick={isClickPill} />
+              </View>
+            </View>
+          </View>
+          <View
+            style={[
+              styles.modalBox,
+              { flexDirection: "row", justifyContent: "space-between" },
+            ]}
+          >
+            <Text style={styles.modalText}>
+              하루 동안 유의미한 감정 기복이 있었어?
+            </Text>
+            <Switch
+              trackColor={{ false: "#767577", true: "#1B4B66" }}
+              onValueChange={toggleSwitch}
+              value={isChangeMood}
+              style={{ margin: 5 }}
+            />
+          </View>
+          <View>
+            <Text style={{ fontSize: 20, fontWeight: "bold", margin: 10 }}>
+              오늘의 질문
+            </Text>
+            <InputText
+              data={todayFirstQuestion}
+              onChanged={handleFirstChanged}
+              value={firstChangeText}
+              questionIdx={"0"}
+            />
+            <InputText
+              data={todaySecondQuestion}
+              onChanged={handleSecondChanged}
+              value={secondChangeText}
+              questionIdx={"1"}
+            />
+            <StateSelector
+              isChanged={handleThirdChanged}
+              data={todayThirdQuestion}
+            />
+          </View>
+        </ScrollView>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
+          onPress={storeAndCloseModal}
+        >
+          <Text style={styles.textStyle}>저장</Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    marginTop: 22,
+  modalOutside: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
   },
   modalView: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
     width: "100%",
     backgroundColor: "white",
     borderTopLeftRadius: 20,
