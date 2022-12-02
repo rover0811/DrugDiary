@@ -20,45 +20,48 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
         closePlusModal;
       }}
     >
-      <View style={styles.centeredView}>
-        <View style={[styles.modalView, { height: "30%" }]}>
-          <View>
-            <Text style={styles.modalTitle}>등록 방법을 선택해 주세요.</Text>
-          </View>
-          <TouchableOpacity
-            style={[
-              styles.button,
-              styles.selectButtonInPlus,
-              { marginTop: 20, marginBottom: 10 },
-            ]}
-            onPress={() => {
-              setDayModalVisible(!dayModalVisible);
-            }}
-          >
-            <Text style={styles.textStyleInPlus}>
-              오늘 하루를 기록해주세요.
-            </Text>
-          </TouchableOpacity>
-          <DayModal
-            openDayModal={dayModalVisible}
-            closeDayModal={closeDayModalVisible}
-            selectedDate={format(new Date(), "yyyy-MM-dd")}
-          />
-          <TouchableOpacity
-            style={[styles.button, styles.selectButtonInPlus]}
-            onPress={closePlusModal}
-          >
-            <Text style={styles.textStyleInPlus}>
-              복약 정보를 확인해주세요.
-            </Text>
-          </TouchableOpacity>
-        </View>
+      <TouchableOpacity style={styles.modalOutside} onPress={closePlusModal} />
+      <View style={[styles.modalView, { height: "30%" }]}>
+        <Text style={styles.modalTitle}>등록 방법을 선택해 주세요.</Text>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            styles.selectButtonInPlus,
+            { marginTop: 20, marginBottom: 10 },
+          ]}
+          onPress={() => {
+            setDayModalVisible(!dayModalVisible);
+          }}
+        >
+          <Text style={styles.textStyleInPlus}>오늘 하루를 기록해주세요.</Text>
+        </TouchableOpacity>
+        <DayModal
+          openDayModal={dayModalVisible}
+          closeDayModal={closeDayModalVisible}
+          selectedDate={format(new Date(), "yyyy-MM-dd")}
+        />
+        <TouchableOpacity
+          style={[styles.button, styles.selectButtonInPlus]}
+          onPress={closePlusModal}
+        >
+          <Text style={styles.textStyleInPlus}>복약 정보를 확인해주세요.</Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
+  modalOutside: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   centeredView: {
     flex: 1,
     justifyContent: "flex-end",
@@ -66,6 +69,10 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
     width: "100%",
     backgroundColor: "white",
     borderTopLeftRadius: 20,
