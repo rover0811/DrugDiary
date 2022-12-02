@@ -30,22 +30,13 @@ export default function AddView() {
       return null;
     }
     const imageUri = result.uri;
-    // const response = await fetch(result.uri);
-    // const imageBlob = await response.blob(); // 이미지 올리는 부분
     const filename = imageUri.split("/").pop();
     const match = /\.(\w+)$/.exec(filename ?? "");
     const type = match ? `image/${match[1]}` : `image`;
     const formData = new FormData();
     formData.append("image", { uri: imageUri, name: filename, type });
-    console.log(formData);
-    // const resizedPhoto = await ImageManipulator.manipulateAsync(
-    //   formData,
-    //   [{ resize: { width: 300 } }], // resize to width of 300 and preserve aspect ratio
-    //   { compress: 0.7, format: "jpeg" }
-    // );
     try {
       console.log("trytrytry");
-      // resizedPhoto();
       await axios({
         method: "post",
         url: "http://52.78.57.119/pill/input_image",
@@ -53,24 +44,17 @@ export default function AddView() {
         data: formData,
       })
         .then((res) => {
-          console.log(res.data.items);
-          if (res.data.items.length !== 0) pills.push(res.data.items[0]);
-          else alert("약 정보가 없습니다.\n 다시 한번 찍어주세요");
+          if (res.data.items.length !== 0) {
+            res.data.items.map((value, index) => {
+              pills.push(res.data.items[index]);
+            });
+            // pills.push(res.data.items);
+          } else alert("약 정보가 없습니다.\n 다시 한번 찍어주세요");
         })
         .catch((e) => {
           console.log(e);
         });
       console.log("fin");
-      // await api
-      //   .post("/pill/input_image", {
-      //     image: formData,
-      //   })
-      //   .then((res) => {
-      //     pills.push(res.data.items[0]);
-      //   })
-      //   .catch((e) => {
-      //     console.log(e);
-      //   });
     } catch {
       console.log("errrrr");
     }
@@ -87,15 +71,15 @@ export default function AddView() {
   };
 
   const [pills, setPills] = useState([]);
-  useState(() => {
-    getData("pillsList")
-      .then((res) => {
-        setPills(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [openModal]);
+  // useState(() => {
+  //   getData("pillsList")
+  //     .then((res) => {
+  //       setPills(res);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }, [openModal]);
 
   return (
     <View style={{ height: "100%", backgroundColor: "white", padding: 18 }}>
@@ -134,30 +118,10 @@ export default function AddView() {
         />
       </SpeedDial>
       <SearchModal
-        openDayModal={openModal}
-        closeDayModal={handleCloseModal}
+        openSearchModal={openModal}
+        closeSearchModal={handleCloseModal}
         pills={pills}
       />
-      {/* <View style={styles.buttonView}>
-        <TouchableOpacity
-          style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
-          onPress={uploadImage}
-        >
-          <Text style={styles.textStyle}>촬영하여 약 저장</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
-          // onPress={storeAndCloseModal}
-        >
-          <Text style={styles.textStyle}>약 직접 입력</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, styles.buttonClose, { marginBottom: 20 }]}
-          // onPress={storeAndCloseModal}
-        >
-          <Text style={styles.textStyle}>약 바구니로 가기</Text>
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 }
