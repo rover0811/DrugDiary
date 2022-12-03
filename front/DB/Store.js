@@ -56,3 +56,19 @@ export const getAllKeys = async () => {
   // example console.log result:
   // ['@MyApp_user', '@MyApp_key']
 };
+
+export const deletePill= async (input)=>{
+  try {
+    getData("pillsList")
+      .then((res) => {
+        afterDelete=res.filter(value=>value.itemName!==input)
+        // console.log(afterDelete)
+        storeData("pillsList",afterDelete)
+      })
+      .catch((e) => {
+        console.log(e);
+      }); 
+  } catch (error) {
+    console.log()
+  }
+}
