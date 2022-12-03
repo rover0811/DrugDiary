@@ -1,18 +1,25 @@
 import { React, useEffect, useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { SpeedDial } from "@rneui/themed";
 import PillCard from "./PillCard";
 import PillDetail from "./PillDetail";
 import axios from "axios";
 import SearchModal from "./SearchModal";
-import { getAllKeys, getData, storeData } from "../../DB/Store";
+import { getData, setAsyncPills } from "../../DB/Store";
 
 export default function AddView() {
   const [status, requestPermission] = ImagePicker.useCameraPermissions();
   const [imageUrl, setImageUrl] = useState("");
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [pills, setPills] = useState([]);
+  const handleSetPills = (pills) => {
+    if (typeof pills === "undefined") setPills([]);
+    else setPills([...pills]);
+  };
 
   const uploadImage = async () => {
     if (!status?.granted) {
@@ -24,9 +31,11 @@ export default function AddView() {
     const result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      quality: 1,
+      quality: 0.6,
     });
+    setLoading(true);
     if (result.cancelled) {
+      setLoading(false);
       return null;
     }
     const imageUri = result.uri;
@@ -45,17 +54,22 @@ export default function AddView() {
       })
         .then((res) => {
           if (res.data.items.length !== 0) {
-            res.data.items.map((value, index) => {
-              pills.push(res.data.items[index]);
+            res.data.items.map((value) => {
+              pills.push(value);
             });
-            // pills.push(res.data.items);
+            setAsyncPills(res.data.items);
+            setOpen(false);
           } else alert("약 정보가 없습니다.\n 다시 한번 찍어주세요");
+          setLoading(false);
         })
         .catch((e) => {
           console.log(e);
+          setLoading(false);
+          alert("다시 한 번 찍어주세요");
         });
       console.log("fin");
     } catch {
+      setLoading(false);
       console.log("errrrr");
     }
   };
@@ -70,24 +84,36 @@ export default function AddView() {
     setOpenModal(false);
   };
 
-  const [pills, setPills] = useState([]);
-  // useState(() => {
-  //   getData("pillsList")
-  //     .then((res) => {
-  //       setPills(res);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // }, [openModal]);
+  useState(() => {
+    getData("pillsList")
+      .then((res) => {
+        setPills(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [pills]);
 
   return (
-    <View style={{ height: "100%", backgroundColor: "white", padding: 18 }}>
-      <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-        현재 최지우님이 복용하고 있는 약입니다
-      </Text>
-      <PillCard pills={pills} onPress={handleClickPill} />
-      <PillDetail pills={pills} index={clickPill} />
+    <View style={{ width: "100%", height: "100%" }}>
+      {loading ? (
+        <ActivityIndicator
+          size={300}
+          color="#1B4B66"
+          style={styles.ActivityIndicator}
+        />
+      ) : null}
+      <View style={{ height: "100%", backgroundColor: "white", padding: 18 }}>
+        <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+          현재 최지우님이 복용하고 있는 약입니다
+        </Text>
+        <PillCard pills={pills} onPress={handleClickPill} />
+        <PillDetail
+          pills={pills}
+          index={clickPill}
+          handleSetPills={handleSetPills}
+        />
+      </View>
       <SpeedDial
         isOpen={open}
         icon={
@@ -97,7 +123,7 @@ export default function AddView() {
           <MaterialCommunityIcons name={"pill"} size={20} color={"white"} />
         }
         onOpen={() => setOpen(!open)}
-        onClose={() => setOpen(!open)}
+        onClose={() => (!loading ? setOpen(!open) : null)}
         color="#1B4B66"
       >
         <SpeedDial.Action
@@ -127,6 +153,12 @@ export default function AddView() {
 }
 
 const styles = StyleSheet.create({
+  ActivityIndicator: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   button: {
     borderRadius: 20,
     padding: 10,
@@ -144,7 +176,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonView: {
-    // height: "100%",
     position: "absolute",
     left: 0,
     right: 0,
