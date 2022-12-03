@@ -16,12 +16,12 @@ export const getData = async (key) => {
       const data = JSON.parse(value);
       return data;
     } else {
-      console.log("is null!!");
+      // console.log("is null!!");
     }
   } catch (e) {
     console.log("getitem err");
   }
-  console.log("Done");
+  // console.log("Done");
 };
 
 export const setPills = async (pills) => {
@@ -41,7 +41,7 @@ export const setPills = async (pills) => {
   } catch (e) {
     console.log(e);
   }
-  console.log("Done");
+  // console.log("Done");
 };
 
 export const getAllKeys = async () => {
