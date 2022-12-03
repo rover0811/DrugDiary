@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import axios from "axios";
 import PillCard from "../addview/PillCard";
-import { getAllKeys, getData, setPills } from "../../DB/Store";
+import { getAllKeys, getData, setAsyncPills } from "../../DB/Store";
 
 export default function SearchText({ pills }) {
   const [searchPillsList, setSearchPillsList] = useState([]);
@@ -21,7 +21,7 @@ export default function SearchText({ pills }) {
         })
         .then((res) => {
           if (res.data.items) {
-            res.data.items.map((value, index) => {
+            res.data.items.map((value) => {
               searchPillsList.push(value);
             });
             setSearchPill(false);
@@ -32,9 +32,11 @@ export default function SearchText({ pills }) {
         })
         .catch((e) => {
           console.log(e);
+          alert("다시 입력해주세요");
           setSearchPill(false);
         });
     } catch (e) {
+      alert("다시 입력해주세요");
       setSearchPill(false);
     }
   };
@@ -42,7 +44,7 @@ export default function SearchText({ pills }) {
 
   const handleClickPillIndex = (pillIndex) => {
     pills.push(searchPillsList[pillIndex]);
-    setPills(searchPillsList[pillIndex]);
+    setAsyncPills(searchPillsList[pillIndex]);
     setSearchPillsList();
     setSearchPill(false);
   };
@@ -58,6 +60,11 @@ export default function SearchText({ pills }) {
             setChangeText(text);
             setSearchPill(false);
           }}
+          onSubmitEditing={() => {
+            getPills();
+            setSearchPill(true);
+          }}
+          returnKeyType="search"
           placeholderTextColor="rgba(0, 0, 0, 0.2)"
           editable
         />

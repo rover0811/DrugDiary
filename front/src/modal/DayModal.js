@@ -250,13 +250,11 @@ export default function DayModal({
             <InputText
               data={todayFirstQuestion}
               onChanged={handleFirstChanged}
-              value={firstChangeText}
               questionIdx={"0"}
             />
             <InputText
               data={todaySecondQuestion}
               onChanged={handleSecondChanged}
-              value={secondChangeText}
               questionIdx={"1"}
             />
             <StateSelector
@@ -283,7 +281,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    // backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "center",
   },
   modalView: {

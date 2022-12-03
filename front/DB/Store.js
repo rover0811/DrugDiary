@@ -16,15 +16,15 @@ export const getData = async (key) => {
       const data = JSON.parse(value);
       return data;
     } else {
-      console.log("is null!!");
+      // console.log("is null!!");
     }
   } catch (e) {
     console.log("getitem err");
   }
-  console.log("Done");
+  // console.log("Done");
 };
 
-export const setPills = async (pills) => {
+export const setAsyncPills = async (pills) => {
   try {
     getData("pillsList")
       .then((res) => {
@@ -41,7 +41,7 @@ export const setPills = async (pills) => {
   } catch (e) {
     console.log(e);
   }
-  console.log("Done");
+  // console.log("Done");
 };
 
 export const getAllKeys = async () => {
@@ -57,18 +57,21 @@ export const getAllKeys = async () => {
   // ['@MyApp_user', '@MyApp_key']
 };
 
-export const deletePill= async (input)=>{
+export const deletePill = async (deletePill) => {
   try {
     getData("pillsList")
       .then((res) => {
-        afterDelete=res.filter(value=>value.itemName!==input)
+        const afterDelete = res.filter(
+          (value) => value.itemName !== deletePill
+        );
+        // pills.push(...afterDelete);
         // console.log(afterDelete)
-        storeData("pillsList",afterDelete)
+        storeData("pillsList", afterDelete);
       })
       .catch((e) => {
         console.log(e);
-      }); 
+      });
   } catch (error) {
-    console.log()
+    console.log();
   }
-}
+};

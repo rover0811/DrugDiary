@@ -48,8 +48,9 @@ const TabNavigation = () => {
       /> */}
       <Tab.Screen
         name={" "}
-        component={EmptyScreen}
+        component={Home}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View>
               <TouchableOpacity onPress={() => setModalVisible(true)}>

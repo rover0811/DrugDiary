@@ -1,15 +1,56 @@
-import { ScrollView, Text, StyleSheet } from "react-native";
+import {
+  ScrollView,
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+} from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { deletePill } from "../../DB/Store";
+import { useState } from "react";
+import DeleteModal from "./DeleteModal";
 
-export default function PillDetail({ pills, index }) {
+export default function PillDetail({ pills, index, handleSetPills }) {
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const closeDeleteModal = () => {
+    setDeleteModalVisible(false);
+  };
   return (
     <>
-      {pills.length === 0 && (
+      {(typeof pills === "undefined" || pills?.length === 0) && (
         <Text style={{ fontSize: 20 }}>복용하고 있는 약을 추가해주세요</Text>
       )}
-      {!(pills.length === 0) && (
+      {typeof pills !== "undefined" && pills?.length !== 0 && (
         <>
           <ScrollView>
-            <Text style={styles.pillName}>{pills[index]?.itemName}</Text>
+            <View
+              style={{
+                width: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text style={styles.pillName}>{pills[index]?.itemName}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setDeleteModalVisible(true);
+                }}
+              >
+                <MaterialCommunityIcons
+                  name={"delete"}
+                  size={50}
+                  color={"#1B4B66"}
+                />
+              </TouchableOpacity>
+              <DeleteModal
+                itemName={pills[index]?.itemName}
+                deleteModalVisible={deleteModalVisible}
+                closeDeleteModal={closeDeleteModal}
+                pills={pills}
+                handleSetPills={handleSetPills}
+              />
+            </View>
             <Text style={styles.datailHeader}>효능효과</Text>
             <Text>{pills[index]?.efcyQesitm}</Text>
             <Text style={styles.datailHeader}>{"\n"}용법 및 용량</Text>
@@ -41,6 +82,7 @@ export default function PillDetail({ pills, index }) {
 
 const styles = StyleSheet.create({
   pillName: {
+    width: "80%",
     fontSize: 25,
     fontWeight: "bold",
   },
