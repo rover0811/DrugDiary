@@ -85,7 +85,7 @@ const TabNavigation = () => {
         }}
       ></Tab.Screen>
       <Tab.Screen
-        name="Add"
+        name="Pill"
         component={Add}
         options={{
           tabBarIcon: (props) => TabIcon({ ...props, name: "pill" }),
