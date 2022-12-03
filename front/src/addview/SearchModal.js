@@ -28,7 +28,7 @@ export default function SearchModal({
         activeOpacity={1}
         onPressOut={() => closeSearchModal(false)}
       ></TouchableOpacity>
-      <View style={[styles.modalView, { height: "60%" }]}>
+      <View style={styles.modalView}>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
             onPress={() => {
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "100%",
+    height: 560,
     backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
