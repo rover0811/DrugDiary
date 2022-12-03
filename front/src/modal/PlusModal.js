@@ -21,7 +21,7 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
       }}
     >
       <TouchableOpacity style={styles.modalOutside} onPress={closePlusModal} />
-      <View style={[styles.modalView, { height: "30%" }]}>
+      <View style={styles.modalView}>
         <Text style={styles.modalTitle}>등록 방법을 선택해 주세요.</Text>
         <TouchableOpacity
           style={[
@@ -58,15 +58,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    // backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "center",
     alignItems: "center",
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    marginTop: 22,
   },
   modalView: {
     position: "absolute",
@@ -74,6 +68,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     width: "100%",
+    height: 300,
     backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -95,7 +90,7 @@ const styles = StyleSheet.create({
   selectButtonInPlus: {
     backgroundColor: "#1B4B66",
     width: "90%",
-    height: "25%",
+    height: 65,
   },
   textStyleInPlus: {
     color: "white",
