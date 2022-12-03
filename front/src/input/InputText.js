@@ -6,8 +6,9 @@ export default function InputText({ onChanged, questionIdx, data }) {
     "1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘",
     "2. 특별한 생활 사건들에 대해 자세히 알려줘",
   ];
-  const [changeText, setChangeText] = useState();
+  const [changeText, setChangeText] = useState(data);
   useEffect(() => {
+    setChangeText(changeText);
     onChanged(changeText);
     // console.log(changeText);
   });
@@ -31,8 +32,8 @@ export default function InputText({ onChanged, questionIdx, data }) {
             style={styles.input}
             onChangeText={(text) => setChangeText(text)}
             editablex
-            // value={changeText}
-            placeholder={data}
+            value={changeText}
+            // placeholder={data}
           />
         )}
       </View>
