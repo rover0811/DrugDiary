@@ -8,7 +8,6 @@ export default function InputText({ onChanged, questionIdx, data }) {
   ];
   const [changeText, setChangeText] = useState(data);
   useEffect(() => {
-    setChangeText(changeText);
     onChanged(changeText);
     // console.log(changeText);
   });
