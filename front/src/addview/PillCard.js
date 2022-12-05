@@ -43,12 +43,6 @@ const PillCard = ({ pills, onPress }) => {
       outputRange: [0.8, 1, 0.8],
     });
 
-    let imageURI;
-
-    //from module
-    if (pills?.itemImage !== null) {
-      imageURI = Asset.fromModule(pills?.itemImage).downloadAsync();
-    }
     return (
       <TouchableOpacity
         // disabled={activeCardIndex != index}
@@ -59,8 +53,12 @@ const PillCard = ({ pills, onPress }) => {
       >
         <Animated.View style={{ ...style.card, transform: [{ scale }] }}>
           <Animated.View style={{ ...style.cardOverLay, opacity }} />
-          {imageURI ? (
-            <Image source={{ uri: pills?.itemImage }} style={style.cardImage} />
+          {pills?.itemImage !== null ? (
+            <Image
+              // source={require("'" + imageURI?._z?.localUri + "'")}
+              source={{ uri: pills?.itemImage, cache: "only-if-cached" }}
+              style={style.cardImage}
+            />
           ) : (
             <MaterialCommunityIcons
               name="pill"
