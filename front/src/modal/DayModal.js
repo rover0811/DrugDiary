@@ -77,13 +77,13 @@ export default function DayModal({
   };
 
   // input부분 state
-  const [firstChangeText, setFirstChangeText] = useState(todayFirstQuestion);
+  const [firstChangeText, setFirstChangeText] = useState("");
   const handleFirstChanged = (text) => {
     console.log(firstChangeText);
     text ? setFirstChangeText(text) : setFirstChangeText(todayFirstQuestion);
   };
 
-  const [secondChangeText, setSecondChangeText] = useState(todaySecondQuestion);
+  const [secondChangeText, setSecondChangeText] = useState("");
   const handleSecondChanged = (text) => {
     console.log(secondChangeText);
     text ? setSecondChangeText(text) : setSecondChangeText(todaySecondQuestion);
@@ -253,12 +253,12 @@ export default function DayModal({
               오늘의 질문
             </Text>
             <InputText
-              data={todayFirstQuestion}
+              data={getDayData}
               onChanged={handleFirstChanged}
               questionIdx={"0"}
             />
             <InputText
-              data={todaySecondQuestion}
+              data={getDayData}
               onChanged={handleSecondChanged}
               questionIdx={"1"}
             />

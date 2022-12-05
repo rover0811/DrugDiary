@@ -1,36 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Octicons } from "@expo/vector-icons";
 
 export default function InputText({ onChanged, questionIdx, data }) {
   const questionText = [
     "1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘",
     "2. 특별한 생활 사건들에 대해 자세히 알려줘",
   ];
-  const [changeText, setChangeText] = useState(data);
-  useEffect(() => {
-    // if (canEdit) {
-    //   onChanged(changeText);
-    // } else if (!canEdit && !data) {
-    //   onChanged(changeText);
-    // }
-    if (data === changeText) {
-      onChanged(null);
-    } else {
-      onChanged(changeText);
-    }
-  }, [changeText]);
+  let newData;
 
-  useEffect(() => console.log(data), []);
+  if (questionIdx === "0") {
+    newData = data?.firstQuestion;
+  } else {
+    newData = data?.secondQuestion;
+  }
+  const [changeText, setChangeText] = useState(newData);
+
+  useEffect(() => {
+    onChanged(changeText);
+  }, [changeText]);
 
   const handleChangeText = (text) => {
     setChangeText(text);
-  };
-
-  const [canEdit, setCanEdit] = useState(false);
-  const handleEdit = (bool) => {
-    setCanEdit(bool);
   };
 
   return (
@@ -45,46 +35,17 @@ export default function InputText({ onChanged, questionIdx, data }) {
         <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
           {questionText[questionIdx]}
         </Text>
-        {data && !canEdit ? (
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#1B4B66",
-              width: 25,
-              height: 25,
-              marginRight: 10,
-              borderRadius: 7,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            onPress={() => {
-              handleChangeText(data);
-              handleEdit(true);
-            }}
-          >
-            <Octicons name="pencil" color={"white"} />
-          </TouchableOpacity>
-        ) : null}
       </View>
       <View style={{ alignContent: "center" }}>
-        {data === null ? (
-          <TextInput
-            multiline
-            style={styles.input}
-            onChangeText={(text) => handleChangeText(text)}
-            editablex
-          />
-        ) : (
-          <TextInput
-            multiline
-            style={styles.input}
-            onChangeText={(text) => {
-              handleChangeText(text);
-            }}
-            editablex
-            value={canEdit ? changeText : data}
-            // placeholder={data}
-          />
-        )}
+        <TextInput
+          multiline
+          style={styles.input}
+          onChangeText={(text) => {
+            handleChangeText(text);
+          }}
+          editablex
+          value={changeText}
+        />
       </View>
     </>
   );
