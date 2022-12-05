@@ -48,7 +48,7 @@ const TabNavigation = () => {
       /> */}
       <Tab.Screen
         name={" "}
-        component={Home}
+        component={MonthlyCalendar}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
@@ -90,6 +90,8 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: (props) => TabIcon({ ...props, name: "pill" }),
           tabBarActiveTintColor: "#1B4B66",
+          headerShown: false,
+
         }}
       />
       {/* <Tab.Screen
