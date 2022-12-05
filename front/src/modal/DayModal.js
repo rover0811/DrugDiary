@@ -79,14 +79,16 @@ export default function DayModal({
   // input부분 state
   const [firstChangeText, setFirstChangeText] = useState("");
   const handleFirstChanged = (text) => {
-    console.log(firstChangeText);
-    text ? setFirstChangeText(text) : setFirstChangeText(todayFirstQuestion);
+    // console.log(firstChangeText);
+    // text ? setFirstChangeText(text) : setFirstChangeText(todayFirstQuestion);
+    setFirstChangeText(text);
   };
 
   const [secondChangeText, setSecondChangeText] = useState("");
   const handleSecondChanged = (text) => {
-    console.log(secondChangeText);
+    // console.log(secondChangeText);
     text ? setSecondChangeText(text) : setSecondChangeText(todaySecondQuestion);
+    setSecondChangeText(text);
   };
 
   const [thirdChangeText, setThirdChangeText] = useState(0);
@@ -256,11 +258,13 @@ export default function DayModal({
               data={getDayData}
               onChanged={handleFirstChanged}
               questionIdx={"0"}
+              selectedDate={selectedDate}
             />
             <InputText
               data={getDayData}
               onChanged={handleSecondChanged}
               questionIdx={"1"}
+              selectedDate={selectedDate}
             />
             <StateSelector
               isChanged={handleThirdChanged}
