@@ -18,10 +18,14 @@ export default function StateSelector({ isChanged, data }) {
     "극도로 우울하거나 쳐진다. 자신을 돌보지 못하여 입원을 요하는 상태",
     "극도로 심한 불안, 초조, 자살사고, 식물인간 상태",
   ];
-  const [text, setText] = useState("");
-  const placeholder = data ? item[6 - Number(data)] : "기분을 골라보세요";
-  // const placeholder = "기분을 골라보세요";
-  const [changeValue, setChangeValue] = useState("");
+
+  let newData = data?.thirdQuestion;
+
+  const [text, setText] = useState(newData);
+
+  // const placeholder = newData ? item[6 - Number(data)] : "기분을 골라보세요";
+  const placeholder = "기분을 골라보세요";
+  const [changeValue, setChangeValue] = useState(newData);
   useEffect(() => {
     isChanged(changeValue);
     setText(changeValue);
