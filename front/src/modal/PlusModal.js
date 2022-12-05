@@ -17,7 +17,7 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
       transparent={true}
       visible={openPlusModal}
       onRequestClose={() => {
-        closePlusModal;
+        closePlusModal();
       }}
     >
       <TouchableOpacity style={styles.modalOutside} onPress={closePlusModal} />

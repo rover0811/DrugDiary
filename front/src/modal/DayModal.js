@@ -142,9 +142,12 @@ export default function DayModal({
       animationType="slide"
       transparent={true}
       visible={openDayModal}
-      onRequestClose={() => {
-        setDayModalVisible(!dayModalVisible);
-      }}
+      onRequestClose={() => 
+      //   {
+      //   setDayModalVisible(!dayModalVisible);
+      // }
+      closeDayModal()
+    }
     >
       <TouchableOpacity style={styles.modalOutside} onPress={closeDayModal} />
       <View style={[styles.modalView, { height: "92%" }]}>
@@ -209,7 +212,7 @@ export default function DayModal({
               marginBottom: 0,
             }}
           >
-            <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
+            {/* <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
               <Text style={styles.modalText}>어제 수면 시간</Text>
             </View>
             <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
@@ -225,7 +228,7 @@ export default function DayModal({
                 <EatPill eat={"eatyet"} handleClick={isClickPill} />
                 <EatPill eat={"eatalready"} handleClick={isClickPill} />
               </View>
-            </View>
+            </View> */}
           </View>
           <View
             style={[
