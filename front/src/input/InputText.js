@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
 
-export default function InputText({
-  onChanged,
-  questionIdx,
-  data,
-  selectedDate,
-}) {
+export default function InputText({ onChanged, questionIdx, data }) {
   const questionText = [
     "1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘",
     "2. 특별한 생활 사건들에 대해 자세히 알려줘",
   ];
   let newData = "";
 
-  if (selectedDate === data?.createdDate) {
-    if (questionIdx === "0" && changeText !== "") {
-      newData = data?.firstQuestion;
-    } else if (questionIdx === "1" && changeText !== "") {
-      newData = data?.secondQuestion;
-    } else {
-      null;
-    }
+  if (questionIdx === "0") {
+    newData = data?.firstQuestion;
+  } else {
+    newData = data?.secondQuestion;
   }
 
   const [changeText, setChangeText] = useState(newData);
