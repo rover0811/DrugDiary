@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -8,6 +8,8 @@ import {
   Image,
   Animated,
 } from "react-native";
+import { Asset } from "expo-asset";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 1.8;
@@ -40,6 +42,13 @@ const PillCard = ({ pills, onPress }) => {
       inputRange,
       outputRange: [0.8, 1, 0.8],
     });
+
+    let imageURI;
+
+    //from module
+    if (pills?.itemImage !== null) {
+      imageURI = Asset.fromModule(pills?.itemImage).downloadAsync();
+    }
     return (
       <TouchableOpacity
         // disabled={activeCardIndex != index}
@@ -50,7 +59,16 @@ const PillCard = ({ pills, onPress }) => {
       >
         <Animated.View style={{ ...style.card, transform: [{ scale }] }}>
           <Animated.View style={{ ...style.cardOverLay, opacity }} />
-          <Image source={{ uri: pills?.itemImage }} style={style.cardImage} />
+          {imageURI ? (
+            <Image source={{ uri: pills?.itemImage }} style={style.cardImage} />
+          ) : (
+            <MaterialCommunityIcons
+              name="pill"
+              size={100}
+              color={"#1B4B66"}
+              style={{ margin: 50 }}
+            />
+          )}
           <View style={style.cardDetails}>
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
@@ -108,6 +126,7 @@ const style = StyleSheet.create({
     marginRight: 20,
     borderRadius: 15,
     backgroundColor: COLORS.white,
+    alignItems: "center",
   },
   cardImage: {
     height: 200,
