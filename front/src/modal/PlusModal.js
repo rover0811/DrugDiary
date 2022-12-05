@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Modal, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import DayModal from "../modal/DayModal";
 import { format } from "date-fns";
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function PlusModal({ openPlusModal, closePlusModal }) {
   const [dayModalVisible, setDayModalVisible] = useState(false);
@@ -10,6 +12,7 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
     setDayModalVisible(false);
     closePlusModal();
   };
+  const navigation = useNavigation();
 
   return (
     <Modal
@@ -42,7 +45,8 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
         />
         <TouchableOpacity
           style={[styles.button, styles.selectButtonInPlus]}
-          onPress={closePlusModal}
+          onPress={()=>{closePlusModal();navigation.navigate("Pill");}}
+          navigation
         >
           <Text style={styles.textStyleInPlus}>복약 정보를 확인해주세요.</Text>
         </TouchableOpacity>

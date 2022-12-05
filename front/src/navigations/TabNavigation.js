@@ -86,7 +86,7 @@ const TabNavigation = () => {
       ></Tab.Screen>
       <Tab.Screen
         name="Pill"
-        component={Add}
+        component={AddView}
         options={{
           tabBarIcon: (props) => TabIcon({ ...props, name: "pill" }),
           tabBarActiveTintColor: "#1B4B66",
@@ -113,9 +113,9 @@ function EmptyScreen() {
     </View>
   );
 }
-function Add() {
-  return <AddView />;
-}
+// function Add() {
+//   return <AddView />;
+// }
 function Home() {
   return (
     <View>
