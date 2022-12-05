@@ -79,14 +79,12 @@ export default function DayModal({
   // input부분 state
   const [firstChangeText, setFirstChangeText] = useState("");
   const handleFirstChanged = (text) => {
-    console.log(firstChangeText);
-    text ? setFirstChangeText(text) : setFirstChangeText(todayFirstQuestion);
+    setFirstChangeText(text);
   };
 
   const [secondChangeText, setSecondChangeText] = useState("");
   const handleSecondChanged = (text) => {
-    console.log(secondChangeText);
-    text ? setSecondChangeText(text) : setSecondChangeText(todaySecondQuestion);
+    setSecondChangeText(text);
   };
 
   const [thirdChangeText, setThirdChangeText] = useState(0);
@@ -125,8 +123,6 @@ export default function DayModal({
   const closeModal = () => {
     closeDayModal();
   };
-  // const [dayModalVisible, setDayModalVisible] = useState(props.dayModal);
-  // getData(selectedDate);
 
   useEffect(() => {
     const init = () => {
@@ -262,10 +258,7 @@ export default function DayModal({
               onChanged={handleSecondChanged}
               questionIdx={"1"}
             />
-            <StateSelector
-              isChanged={handleThirdChanged}
-              data={todayThirdQuestion}
-            />
+            <StateSelector isChanged={handleThirdChanged} data={getDayData} />
           </View>
         </ScrollView>
         <TouchableOpacity

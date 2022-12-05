@@ -6,17 +6,22 @@ export default function InputText({ onChanged, questionIdx, data }) {
     "1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘",
     "2. 특별한 생활 사건들에 대해 자세히 알려줘",
   ];
-  let newData;
+  let newData = "";
 
   if (questionIdx === "0") {
     newData = data?.firstQuestion;
   } else {
     newData = data?.secondQuestion;
   }
+
   const [changeText, setChangeText] = useState(newData);
 
   useEffect(() => {
-    onChanged(changeText);
+    if (String(changeText).length === 0) {
+      onChanged("");
+    } else {
+      onChanged(changeText);
+    }
   }, [changeText]);
 
   const handleChangeText = (text) => {
