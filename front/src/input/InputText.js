@@ -6,35 +6,46 @@ export default function InputText({ onChanged, questionIdx, data }) {
     "1. 약을 먹고 불편한 점이 있었다면 자세히 알려줘",
     "2. 특별한 생활 사건들에 대해 자세히 알려줘",
   ];
-  const [changeText, setChangeText] = useState(data);
+  let newData;
+
+  if (questionIdx === "0") {
+    newData = data?.firstQuestion;
+  } else {
+    newData = data?.secondQuestion;
+  }
+  const [changeText, setChangeText] = useState(newData);
+
   useEffect(() => {
     onChanged(changeText);
-    // console.log(changeText);
-  });
+  }, [changeText]);
+
+  const handleChangeText = (text) => {
+    setChangeText(text);
+  };
 
   return (
     <>
-      <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
-        {questionText[questionIdx]}
-      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
+          {questionText[questionIdx]}
+        </Text>
+      </View>
       <View style={{ alignContent: "center" }}>
-        {data === null ? (
-          <TextInput
-            multiline
-            style={styles.input}
-            onChangeText={(text) => setChangeText(text)}
-            editablex
-          />
-        ) : (
-          <TextInput
-            multiline
-            style={styles.input}
-            onChangeText={(text) => setChangeText(text)}
-            editablex
-            value={changeText}
-            // placeholder={data}
-          />
-        )}
+        <TextInput
+          multiline
+          style={styles.input}
+          onChangeText={(text) => {
+            handleChangeText(text);
+          }}
+          editablex
+          value={changeText}
+        />
       </View>
     </>
   );
