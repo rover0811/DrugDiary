@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   StyleSheet,
@@ -60,17 +60,20 @@ export default function DayModal({
 
   const [todayFirstQuestion, setTodayFirstQuestion] = useState();
   const handleSetFirstQuestion = (res) => {
-    setTodayFirstQuestion(res);
+    const newData = res;
+    setTodayFirstQuestion(newData);
   };
 
   const [todaySecondQuestion, setTodaySecondQuestion] = useState();
   const handleSetSecondQuestion = (res) => {
-    setTodaySecondQuestion(res);
+    const newData = res;
+    setTodaySecondQuestion(newData);
   };
 
   const [todayThirdQuestion, setTodayThirdQuestion] = useState();
   const handleSetThirdQuestion = (res) => {
-    setTodayThirdQuestion(res);
+    const newData = res;
+    setTodayThirdQuestion(newData);
   };
 
   // input부분 state
@@ -120,8 +123,6 @@ export default function DayModal({
   const closeModal = () => {
     closeDayModal();
   };
-  // const [dayModalVisible, setDayModalVisible] = useState(props.dayModal);
-  // getData(selectedDate);
 
   useEffect(() => {
     const init = () => {
@@ -251,19 +252,16 @@ export default function DayModal({
               오늘의 질문
             </Text>
             <InputText
-              data={todayFirstQuestion}
+              data={getDayData}
               onChanged={handleFirstChanged}
               questionIdx={"0"}
             />
             <InputText
-              data={todaySecondQuestion}
+              data={getDayData}
               onChanged={handleSecondChanged}
               questionIdx={"1"}
             />
-            <StateSelector
-              isChanged={handleThirdChanged}
-              data={todayThirdQuestion}
-            />
+            <StateSelector isChanged={handleThirdChanged} data={getDayData} />
           </View>
         </ScrollView>
         <TouchableOpacity
