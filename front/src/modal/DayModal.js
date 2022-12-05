@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   StyleSheet,
@@ -60,28 +60,33 @@ export default function DayModal({
 
   const [todayFirstQuestion, setTodayFirstQuestion] = useState();
   const handleSetFirstQuestion = (res) => {
-    setTodayFirstQuestion(res);
+    const newData = res;
+    setTodayFirstQuestion(newData);
   };
 
   const [todaySecondQuestion, setTodaySecondQuestion] = useState();
   const handleSetSecondQuestion = (res) => {
-    setTodaySecondQuestion(res);
+    const newData = res;
+    setTodaySecondQuestion(newData);
   };
 
   const [todayThirdQuestion, setTodayThirdQuestion] = useState();
   const handleSetThirdQuestion = (res) => {
-    setTodayThirdQuestion(res);
+    const newData = res;
+    setTodayThirdQuestion(newData);
   };
 
   // input부분 state
-  const [firstChangeText, setFirstChangeText] = useState("");
+  const [firstChangeText, setFirstChangeText] = useState(todayFirstQuestion);
   const handleFirstChanged = (text) => {
-    setFirstChangeText(text);
+    console.log(firstChangeText);
+    text ? setFirstChangeText(text) : setFirstChangeText(todayFirstQuestion);
   };
 
-  const [secondChangeText, setSecondChangeText] = useState("");
+  const [secondChangeText, setSecondChangeText] = useState(todaySecondQuestion);
   const handleSecondChanged = (text) => {
-    setSecondChangeText(text);
+    console.log(secondChangeText);
+    text ? setSecondChangeText(text) : setSecondChangeText(todaySecondQuestion);
   };
 
   const [thirdChangeText, setThirdChangeText] = useState(0);

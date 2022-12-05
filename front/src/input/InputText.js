@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Octicons } from "@expo/vector-icons";
 
 export default function InputText({ onChanged, questionIdx, data }) {
   const questionText = [
@@ -8,30 +10,78 @@ export default function InputText({ onChanged, questionIdx, data }) {
   ];
   const [changeText, setChangeText] = useState(data);
   useEffect(() => {
-    onChanged(changeText);
-    // console.log(changeText);
-  });
+    // if (canEdit) {
+    //   onChanged(changeText);
+    // } else if (!canEdit && !data) {
+    //   onChanged(changeText);
+    // }
+    if (data === changeText) {
+      onChanged(null);
+    } else {
+      onChanged(changeText);
+    }
+  }, [changeText]);
+
+  useEffect(() => console.log(data), []);
+
+  const handleChangeText = (text) => {
+    setChangeText(text);
+  };
+
+  const [canEdit, setCanEdit] = useState(false);
+  const handleEdit = (bool) => {
+    setCanEdit(bool);
+  };
 
   return (
     <>
-      <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
-        {questionText[questionIdx]}
-      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Text style={{ fontSize: 13, fontWeight: "bold", margin: 10 }}>
+          {questionText[questionIdx]}
+        </Text>
+        {data && !canEdit ? (
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#1B4B66",
+              width: 25,
+              height: 25,
+              marginRight: 10,
+              borderRadius: 7,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onPress={() => {
+              handleChangeText(data);
+              handleEdit(true);
+            }}
+          >
+            <Octicons name="pencil" color={"white"} />
+          </TouchableOpacity>
+        ) : null}
+      </View>
       <View style={{ alignContent: "center" }}>
         {data === null ? (
           <TextInput
             multiline
             style={styles.input}
-            onChangeText={(text) => setChangeText(text)}
+            onChangeText={(text) => handleChangeText(text)}
             editablex
           />
         ) : (
           <TextInput
             multiline
             style={styles.input}
-            onChangeText={(text) => setChangeText(text)}
+            onChangeText={(text) => {
+              handleChangeText(text);
+            }}
             editablex
-            value={changeText}
+            value={canEdit ? changeText : data}
             // placeholder={data}
           />
         )}
