@@ -69,5 +69,3 @@ def get_texts(response): # ocr 결과를 필요한 정보만 파싱
         break
   result = list(set(result))
   return result
-
-# if __name__ == "__main__":

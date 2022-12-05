@@ -37,7 +37,13 @@ async def input_image(image: UploadFile):
     items = []
     
     for text in text_list:
-        pill_list = pill.call_api(text)
+        if "mg" in text:
+            if pill.call_api(text): pill_list = pill.call_api(text)
+            elif pill.call_api(text.replace("mg", "밀리그램")): pill_list = pill.call_api(text.replace("mg", "밀리그램"))
+            elif pill.call_api(text.replace("mg", "밀리그람")): pill_list = pill.call_api(text.replace("mg", "밀리그람"))
+        else:
+            pill_list = pill.call_api(text)
+            
         if pill_list:
             items += pill_list
             
