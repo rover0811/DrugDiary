@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView,KeyboardAvoidingView, Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SearchText from "../input/SearchText";
 
@@ -12,6 +12,7 @@ export default function SearchModal({
   // getData(selectedDate);
 
   return (
+    <SafeAreaView>
     <Modal
       animationType="slide"
       transparent={true}
@@ -19,6 +20,7 @@ export default function SearchModal({
       onRequestClose={() => {
         closeSearchModal(false);
       }}
+      statusBarTranslucent={true}
     >
       <TouchableOpacity
         style={styles.modalOutside}
@@ -42,6 +44,7 @@ export default function SearchModal({
         <SearchText pills={pills} />
       </View>
     </Modal>
+    </SafeAreaView>
   );
 }
 

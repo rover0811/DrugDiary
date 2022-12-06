@@ -108,7 +108,7 @@ export default function AddView() {
       <View style={{ width: "100%", height: "100%" }}>
         {loading ? (
           <ActivityIndicator
-            size={300}
+            size={30}
             color="#1B4B66"
             style={styles.ActivityIndicator}
           />

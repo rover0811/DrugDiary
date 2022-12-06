@@ -75,3 +75,23 @@ export const deletePill = async (deletePill) => {
     console.log();
   }
 };
+
+export const initPillsList=async()=>{
+  try{
+    getAllKeys().then((res)=>{
+      if (res===undefined){
+        storeData("pillsList",[]);
+        console.log("initailize the pillsList")
+      }else{
+        if (res.includes("pillsList")){//pass
+        }
+        else{
+          storeData("pillsList",[]);
+        }
+      }
+    })
+    
+  }catch (error){
+    console.log(error)
+  }
+}
