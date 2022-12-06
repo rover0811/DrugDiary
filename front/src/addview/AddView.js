@@ -90,7 +90,7 @@ export default function AddView() {
     setOpenModal(false);
   };
 
-  useState(() => {
+  useEffect(() => {
     getData("pillsList")
       .then((res) => {
         setPills(res);
@@ -98,7 +98,7 @@ export default function AddView() {
       .catch((e) => {
         console.log(e);
       });
-  }, [pills]);
+  }, []);
 
   return (
     <SafeAreaView>

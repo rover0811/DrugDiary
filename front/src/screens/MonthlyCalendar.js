@@ -1,11 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { LocaleConfig, Calendar } from "react-native-calendars";
 import DayModal from "../modal/DayModal";
 import Chart from "../chart/Chart";
-import { ScrollView } from "react-native-gesture-handler";
 import { getData } from "../../DB/Store";
 
 LocaleConfig.locales["fr"] = {
@@ -62,7 +61,7 @@ export function CalendarView() {
   };
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [dayData,setdayData]=useState();
+  const [dayData, setdayData] = useState();
   const closeDayModal = () => {
     setModalVisible(false);
   };
