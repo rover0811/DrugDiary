@@ -55,8 +55,7 @@ const PillCard = ({ pills, onPress }) => {
           <Animated.View style={{ ...style.cardOverLay, opacity }} />
           {pills?.itemImage !== null ? (
             <Image
-              // source={require("'" + imageURI?._z?.localUri + "'")}
-              source={{ uri: pills?.itemImage, cache: "only-if-cached" }}
+              source={{ uri: pills?.itemImage, cache: "force-cache" }}
               style={style.cardImage}
             />
           ) : (
