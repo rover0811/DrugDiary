@@ -4,7 +4,7 @@ import { Modal, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import DayModal from "../modal/DayModal";
 import { format } from "date-fns";
 import { useNavigation } from "@react-navigation/native";
-
+import { getData } from "../../DB/Store";
 
 export default function PlusModal({ openPlusModal, closePlusModal }) {
   const [dayModalVisible, setDayModalVisible] = useState(false);
@@ -13,6 +13,8 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
     closePlusModal();
   };
   const navigation = useNavigation();
+
+  const [getDayData, setGetDayData] = useState();
 
   return (
     <Modal
@@ -33,7 +35,14 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
             { marginTop: 20, marginBottom: 10 },
           ]}
           onPress={() => {
-            setDayModalVisible(!dayModalVisible);
+            getData(format(new Date(), "yyyy-MM-dd"))
+              .then((res) => {
+                setGetDayData(res);
+                setDayModalVisible(true);
+              })
+              .catch((e) => {
+                console.log(e);
+              });
           }}
         >
           <Text style={styles.textStyleInPlus}>오늘 하루를 기록해주세요.</Text>
@@ -42,10 +51,14 @@ export default function PlusModal({ openPlusModal, closePlusModal }) {
           openDayModal={dayModalVisible}
           closeDayModal={closeDayModalVisible}
           selectedDate={format(new Date(), "yyyy-MM-dd")}
+          getDayData={getDayData}
         />
         <TouchableOpacity
           style={[styles.button, styles.selectButtonInPlus]}
-          onPress={()=>{closePlusModal();navigation.navigate("Pill");}}
+          onPress={() => {
+            closePlusModal();
+            navigation.navigate("Pill");
+          }}
           navigation
         >
           <Text style={styles.textStyleInPlus}>복약 정보를 확인해주세요.</Text>
