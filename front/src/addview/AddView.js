@@ -1,6 +1,12 @@
 import { React, useEffect, useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  SafeAreaView,
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { SpeedDial } from "@rneui/themed";
 import PillCard from "./PillCard";
@@ -95,60 +101,62 @@ export default function AddView() {
   }, [pills]);
 
   return (
-    <View style={{ width: "100%", height: "100%" }}>
-      {loading ? (
-        <ActivityIndicator
-          size={300}
+    <SafeAreaView>
+      <View style={{ width: "100%", height: "100%" }}>
+        {loading ? (
+          <ActivityIndicator
+            size={300}
+            color="#1B4B66"
+            style={styles.ActivityIndicator}
+          />
+        ) : null}
+        <View style={{ height: "100%", backgroundColor: "white", padding: 18 }}>
+          <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+            현재 최지우님이 복용하고 있는 약입니다
+          </Text>
+          <PillCard pills={pills} onPress={handleClickPill} />
+          <PillDetail
+            pills={pills}
+            index={clickPill}
+            handleSetPills={handleSetPills}
+          />
+        </View>
+        <SpeedDial
+          isOpen={open}
+          icon={
+            <MaterialCommunityIcons name={"pill"} size={20} color={"white"} />
+          }
+          openIcon={
+            <MaterialCommunityIcons name={"pill"} size={20} color={"white"} />
+          }
+          onOpen={() => setOpen(!open)}
+          onClose={() => (!loading ? setOpen(!open) : null)}
           color="#1B4B66"
-          style={styles.ActivityIndicator}
-        />
-      ) : null}
-      <View style={{ height: "100%", backgroundColor: "white", padding: 18 }}>
-        <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-          현재 최지우님이 복용하고 있는 약입니다
-        </Text>
-        <PillCard pills={pills} onPress={handleClickPill} />
-        <PillDetail
+        >
+          <SpeedDial.Action
+            icon={{ name: "camera", color: "#fff" }}
+            title="사진을 찍어서 약 추가하기"
+            onPress={uploadImage}
+            color="#1B4B66"
+            titleStyle={{ backgroundColor: "rgba(0,0,0,0)", color: "white" }}
+          />
+          <SpeedDial.Action
+            icon={{ name: "search", color: "#fff" }}
+            title="검색해서 약 추가하기"
+            onPress={() => {
+              setOpenModal(true);
+            }}
+            color="#1B4B66"
+            titleStyle={{ backgroundColor: "rgba(0,0,0,0)", color: "white" }}
+          />
+        </SpeedDial>
+        <SearchModal
+          openSearchModal={openModal}
+          closeSearchModal={handleCloseModal}
           pills={pills}
-          index={clickPill}
-          handleSetPills={handleSetPills}
         />
       </View>
-      <SpeedDial
-        isOpen={open}
-        icon={
-          <MaterialCommunityIcons name={"pill"} size={20} color={"white"} />
-        }
-        openIcon={
-          <MaterialCommunityIcons name={"pill"} size={20} color={"white"} />
-        }
-        onOpen={() => setOpen(!open)}
-        onClose={() => (!loading ? setOpen(!open) : null)}
-        color="#1B4B66"
-      >
-        <SpeedDial.Action
-          icon={{ name: "camera", color: "#fff" }}
-          title="사진을 찍어서 약 추가하기"
-          onPress={uploadImage}
-          color="#1B4B66"
-          titleStyle={{ backgroundColor: "rgba(0,0,0,0)", color: "white" }}
-        />
-        <SpeedDial.Action
-          icon={{ name: "search", color: "#fff" }}
-          title="검색해서 약 추가하기"
-          onPress={() => {
-            setOpenModal(true);
-          }}
-          color="#1B4B66"
-          titleStyle={{ backgroundColor: "rgba(0,0,0,0)", color: "white" }}
-        />
-      </SpeedDial>
-      <SearchModal
-        openSearchModal={openModal}
-        closeSearchModal={handleCloseModal}
-        pills={pills}
-      />
-    </View>
+    </SafeAreaView>
   );
 }
 
