@@ -10,6 +10,7 @@ import AddView from "../addview/AddView";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import Chart from "../chart/Chart";
+import { initPillsList } from "../../DB/Store";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -25,7 +26,7 @@ const TabNavigation = () => {
     setModalVisible(false);
   };
   const navigation = useNavigation();
-
+  initPillsList();
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
     <Tab.Navigator>
