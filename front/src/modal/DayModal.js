@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
   View,
   Switch,
+  ScrollView,
 } from "react-native";
 import StateSelector from "../selector/StateSelector";
-import { ScrollView } from "react-native-gesture-handler";
 import InputText from "../input/InputText.js";
 import EmotionButton from "../imagebutton/EmotionButton";
 import EatPill from "../imagebutton/PillButton";
@@ -143,15 +143,15 @@ export default function DayModal({
       animationType="slide"
       transparent={true}
       visible={openDayModal}
-      onRequestClose={() => 
-      //   {
-      //   setDayModalVisible(!dayModalVisible);
-      // }
-      closeDayModal()
-    }
+      onRequestClose={() =>
+        //   {
+        //   setDayModalVisible(!dayModalVisible);
+        // }
+        closeDayModal()
+      }
     >
       <TouchableOpacity style={styles.modalOutside} onPress={closeDayModal} />
-      <View style={[styles.modalView, { height: "92%" }]}>
+      <View style={[styles.modalView, { height: "85%" }]}>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity onPress={closeModal} style={{}}>
             <MaterialCommunityIcons name="chevron-left" size={30} />
@@ -206,14 +206,14 @@ export default function DayModal({
               />
             </View>
           </View>
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               justifyContent: "space-around",
               marginBottom: 0,
             }}
           >
-            {/* <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
+            <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
               <Text style={styles.modalText}>어제 수면 시간</Text>
             </View>
             <View style={[styles.modalHalfBox, { marginBottom: 0 }]}>
@@ -229,8 +229,8 @@ export default function DayModal({
                 <EatPill eat={"eatyet"} handleClick={isClickPill} />
                 <EatPill eat={"eatalready"} handleClick={isClickPill} />
               </View>
-            </View> */}
-          </View>
+            </View>
+          </View> */}
           <View
             style={[
               styles.modalBox,

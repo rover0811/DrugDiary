@@ -37,7 +37,10 @@ export default function StateSelector({ isChanged, data }) {
         3. 오늘 하루를 떠올리고 아래 표에서 어울리는 나의 상태를 골라줘
       </Text>
       <RNPickerSelect
-        textInputProps={{ underlineColorAndroid: "transparent" }}
+        textInputProps={{
+          underlineColorAndroid: "transparent",
+          multiline: true,
+        }}
         placeholder={{
           label: placeholder,
         }}
@@ -119,7 +122,7 @@ const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
     color: "#000",
-    height: 30,
+    height: 50,
     width: "90%",
     borderRadius: 9,
     padding: 10,
@@ -130,7 +133,7 @@ const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
     fontSize: 16,
     color: "#000",
-    height: 30,
+    height: 50,
     width: "90%",
     borderRadius: 9,
     padding: 10,

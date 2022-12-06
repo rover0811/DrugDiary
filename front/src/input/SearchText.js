@@ -1,5 +1,10 @@
-import { View, TextInput, StyleSheet, ActivityIndicator } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  ActivityIndicator,
+  TouchableOpacity,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import axios from "axios";
