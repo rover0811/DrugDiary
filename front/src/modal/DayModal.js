@@ -25,27 +25,19 @@ export default function DayModal({
     constructor(
       selectedDate,
       iconFeeling,
-      sleepTime,
       didFeelingChange,
-      didTakeMedicine,
       firstQuestion,
       secondQuestion,
       thirdQuestion
     ) {
       this.createdDate = selectedDate;
       this.iconFeeling = iconFeeling;
-      this.sleepTime = sleepTime;
       this.didFeelingChange = didFeelingChange;
-      this.didTakeMedicine = didTakeMedicine;
       this.firstQuestion = firstQuestion;
       this.secondQuestion = secondQuestion;
       this.thirdQuestion = thirdQuestion;
     }
   }
-
-  // switch 부분 state
-  const [isChangeMood, setIsChangeMood] = useState(false);
-  const toggleSwitch = () => setIsChangeMood((previousState) => !previousState);
 
   // emotion 버튼 부분 state
   const [isPressEmotion, setIsPressEmotion] = useState(false);
@@ -58,23 +50,30 @@ export default function DayModal({
     setTodayEmotion(emotionList[emotionIdx]);
   };
 
-  const [todayFirstQuestion, setTodayFirstQuestion] = useState();
-  const handleSetFirstQuestion = (res) => {
-    const newData = res;
-    setTodayFirstQuestion(newData);
+  // switch 부분 state
+  const [isChangeMood, setIsChangeMood] = useState(false);
+  const toggleSwitch = () => setIsChangeMood((previousState) => !previousState);
+  const handleIsChangeMood = (res) => {
+    setIsChangeMood(res);
   };
+
+  const [todayFirstQuestion, setTodayFirstQuestion] = useState();
+  // const handleSetFirstQuestion = (res) => {
+  //   const newData = res;
+  //   setTodayFirstQuestion(newData);
+  // };
 
   const [todaySecondQuestion, setTodaySecondQuestion] = useState();
-  const handleSetSecondQuestion = (res) => {
-    const newData = res;
-    setTodaySecondQuestion(newData);
-  };
+  // const handleSetSecondQuestion = (res) => {
+  //   const newData = res;
+  //   setTodaySecondQuestion(newData);
+  // };
 
   const [todayThirdQuestion, setTodayThirdQuestion] = useState();
-  const handleSetThirdQuestion = (res) => {
-    const newData = res;
-    setTodayThirdQuestion(newData);
-  };
+  // const handleSetThirdQuestion = (res) => {
+  //   const newData = res;
+  //   setTodayThirdQuestion(newData);
+  // };
 
   // input부분 state
   const [firstChangeText, setFirstChangeText] = useState("");
@@ -110,9 +109,7 @@ export default function DayModal({
       new DateObj(
         selectedDate,
         todayEmotion,
-        "안녕",
         isChangeMood,
-        isPill,
         firstChangeText,
         secondChangeText,
         thirdChangeText
@@ -128,9 +125,10 @@ export default function DayModal({
     const init = () => {
       try {
         handlePressEmotion(emotionList.indexOf(getDayData?.iconFeeling));
-        handleSetFirstQuestion(getDayData?.firstQuestion);
-        handleSetSecondQuestion(getDayData?.secondQuestion);
-        handleSetThirdQuestion(getDayData?.thirdQuestion);
+        handleIsChangeMood(getDayData?.didFeelingChange);
+        // handleSetFirstQuestion(getDayData?.firstQuestion);
+        // handleSetSecondQuestion(getDayData?.secondQuestion);
+        // handleSetThirdQuestion(getDayData?.thirdQuestion);
       } catch (e) {
         console.log("error");
       }
