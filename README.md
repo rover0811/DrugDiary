@@ -12,7 +12,7 @@ AI를 활용한 복약관리 캘린더 앱
 ### 어플리케이션(Android) 다운로드 
 [다운로드 링크](https://drive.google.com/file/d/1vocKmUKAC1z6S8AuEFc4IsTZj_kUTALD/view?usp=share_link)
 
-### Installation (React NAtive)
+### Installation (React Native)
 
 - 리액트네이티브 모듈 설치
     1. git clone https://github.com/rover0811/DrugDiary
