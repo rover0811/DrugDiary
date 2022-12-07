@@ -9,6 +9,10 @@ AI를 활용한 복약관리 캘린더 앱
 | 조하운 |    johaun12@naver.com    |
 | 김예훈 |   rladpgns99@gmail.com   |
 
+### 어플리케이션(Android) 다운로드 
+[다운로드 링크](https://drive.google.com/file/d/1vocKmUKAC1z6S8AuEFc4IsTZj_kUTALD/view?usp=share_link)
+
+
 ### Commit Message
 
 - [feat] 새로운 기능 추가
