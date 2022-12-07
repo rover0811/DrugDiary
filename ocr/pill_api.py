@@ -11,11 +11,6 @@ def clean(string):
     return cleantext
 
 def call_api(name): # 공공데이터포털 api 호출
-    # if "mg" in name:
-    #         if pill.call_api(text): pill_list = pill.call_api(text)
-    #         elif pill.call_api(text.replace("mg", "밀리그램")): pill_list = pill.call_api(text.replace("mg", "밀리그램"))
-    #         elif pill.call_api(text.replace("mg", "밀리그람")): pill_list = pill.call_api(text.replace("mg", "밀리그람"))
-         
     url = 'http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList'
     params ={'serviceKey' : 'PvrIUvAktOxd6AOTm2RPSs8ovw0vx517mITghrvn8+qD/IHJZQd4j+mjnD9nrT4/arMuTl44EGSvLLym15eBRQ==', 'itemName': name, 'type' : 'json' }
     
