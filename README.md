@@ -9,6 +9,25 @@ AI를 활용한 복약관리 캘린더 앱
 | 조하운 |    johaun12@naver.com    |
 | 김예훈 |   rladpgns99@gmail.com   |
 
+### 어플리케이션(Android) 다운로드 
+[다운로드 링크](https://drive.google.com/file/d/1vocKmUKAC1z6S8AuEFc4IsTZj_kUTALD/view?usp=share_link)
+
+### Installation (React Native)
+
+- 리액트네이티브 모듈 설치
+    1. git clone https://github.com/rover0811/DrugDiary
+    1. Node.js 설치 
+        - https://nodejs.org/ko/download/
+        - (Node.js 및 npm 버전 확인) $ node -v $ npm -v
+    2. npm 모듈 설치
+        - $ npm install -g react-native-cli yarn expo-cli
+        - expo login
+    3. 개인 핸드폰에 expo를 깔고 회원가입
+    4. 파일 다운로드한 컴퓨터 환경에서 $ expo login --username "아이디 이름"
+    5. 패스워드 입력
+    6. 실행
+        - expo start
+
 ### Commit Message
 
 - [feat] 새로운 기능 추가
@@ -29,19 +48,4 @@ AI를 활용한 복약관리 캘린더 앱
 - [fix] Fix typo in cleanup.sh file
 
 
-### Installation
 
-- 파이썬 모듈 설치
-$ pip install -r requirements.txt
-- 리액트네이티브 모듈 설치
-    1. Node.js 설치 
-        - https://nodejs.org/ko/download/
-        - (Node.js 및 npm 버전 확인) $ node -v $ npm -v
-    2. npm 모듈 설치
-        - $ npm install -g react-native-cli yarn expo-cli
-- expo login
-    1. 개인 핸드폰에 expo를 깔고 회원가입
-    2. 파일 다운로드한 컴퓨터 환경에서 $ expo login --username "아이디 이름"
-    3. 패스워드 입력
-- 실행
-$ expo start
