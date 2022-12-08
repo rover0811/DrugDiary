@@ -12,7 +12,7 @@
 | 김예훈 |   rladpgns99@gmail.com   |
 
 ### 어플리케이션(Android) 다운로드 
-[다운로드 링크](https://drive.google.com/file/d/1vocKmUKAC1z6S8AuEFc4IsTZj_kUTALD/view?usp=share_link)
+[다운로드 링크](https://drive.google.com/file/d/1PP9SWLX1wBdryvR1gKrz-iyTfDyveJFY/view?usp=sharing)
 
 ### Installation (React Native)
 
