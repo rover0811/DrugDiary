@@ -1,6 +1,5 @@
-# DrugDiary
+# DrugDiary (AI를 활용한 복약관리 캘린더 앱)
 
-AI를 활용한 복약관리 캘린더 앱
 ![오픈소스 9조 매뉴얼](https://user-images.githubusercontent.com/84193252/206340743-764b398f-3c31-42c1-8c75-8f2b206a65f4.jpg)
 
 
