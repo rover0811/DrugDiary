@@ -61,7 +61,6 @@ export function CalendarView() {
   };
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [dayData, setdayData] = useState();
   const closeDayModal = () => {
     setModalVisible(false);
   };
@@ -98,9 +97,7 @@ export function CalendarView() {
         selectedDate={selectedDate}
         getDayData={getDayData}
       />
-      <ScrollView style={{ height: "100%" }}>
-        <Chart selectedDate={modalVisible} />
-      </ScrollView>
+      <Chart selectedDate={modalVisible} />
     </>
   );
 }

@@ -2,38 +2,46 @@ from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import FileResponse
-from fastapi import UploadFile, File # image upload
+from fastapi.encoders import jsonable_encoder
+from fastapi import UploadFile, File  # image upload
+from tempfile import NamedTemporaryFile
+from typing import IO
 import uuid
 import json
-import sys, os
+import sys
+import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from ocr import clova_ocr_api as ocr
 from ocr import pill_api as pill
-app = FastAPI() # API 생성
+from ocr import clova_ocr_api as ocr
+app = FastAPI()  # API 생성
 
-@app.get('/input_name')
+@app.get('/pill/input_name')
 async def input_name(name: str):
-    response = {}
-    response["items"] = pill.call_api(name)
-    return response
+    pill_list = pill.call_api(name)
+    result = {}
+    result["items"] = pill_list
+    result = jsonable_encoder(result)
+    return result
 
-@app.post('/input_image')
-async def input_image(image: UploadFile):
-    UPLOAD_DIR = "./images"
-    content = await image.read()
-    filename = f"{str(uuid.uuid4())}.jpg"
-    with open(os.path.join(UPLOAD_DIR, filename), "wb") as fp:
-        fp.write(content)
-        
-    PATH = os.path.join(UPLOAD_DIR, filename)
-    ocr_response = ocr.call_api(PATH)
-    text_list = ocr.get_texts(ocr_response)
+
+async def temp_file(file: IO):
+    with NamedTemporaryFile("wb", delete=False) as tempfile:
+        tempfile.write(file.read())
+        return tempfile.name
     
+@app.post('/pill/input_image')
+async def input_image(image: UploadFile):
+    path = await temp_file(image.file)
+    ocr_response = ocr.call_api(path)
+    text_list = ocr.get_texts(ocr_response)
     items = []
+    
     for text in text_list:
         pill_list = pill.call_api(text)
         if pill_list:
             items += pill_list
-    response = {}
-    response['items'] = items
-    return response
+            
+    result = {}
+    result['items'] = items
+    result = jsonable_encoder(result)
+    return result

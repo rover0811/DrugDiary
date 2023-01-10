@@ -48,7 +48,7 @@ export default function SearchText({ pills }) {
   const [changeText, setChangeText] = useState();
 
   const handleClickPillIndex = (pillIndex) => {
-    pills.push(searchPillsList[pillIndex]);
+    pills?.push(searchPillsList[pillIndex]);
     setAsyncPills(searchPillsList[pillIndex]);
     setSearchPillsList();
     setSearchPill(false);

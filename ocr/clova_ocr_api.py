@@ -5,14 +5,18 @@ import requests
 import uuid
 import time
 import json
+import itertools
 import pandas as pd
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 # APIGW Invoke URL (yehun)
 # api_url = 'https://8vhb9to58j.apigw.ntruss.com/custom/v1/18483/a614b583ca0ed9d541b5609697d1de6cc3229dc2f7001e17ed228e6453e39dff/general'
 # Secret Key
 # secret_key = 'WllGYkRRb1VPTkN0Y3FhYkVLTVlMVlFFQXRXWWdjQWM='
 
-# # APIGW Invoke URL (haun)
+# APIGW Invoke URL (haun)
 api_url = 'https://htacxyxwab.apigw.ntruss.com/custom/v1/19265/3afa64b3fd5507804c03d8feb7f9cdd58d892e02857b9d55f392552c8e63c090/general' # haun
 # Secret Key
 secret_key = 'a0VwQWt2SHNGV0F6SmFreFpjcG9UWmNuWWRVS3RPank='
@@ -46,12 +50,22 @@ def call_api(image_file):
 def get_texts(response): # ocr 결과를 필요한 정보만 파싱
   response_json = json.loads(response)
   fields = response_json.get('images')[0].get('fields')
-
   text_list = []
   for element in fields:
     text = element.get('inferText')
     if text.find(" ") == -1:
       text_list.append(text)
-  return text_list
-
-# if __name__ == "__main__":
+  itemList = pd.read_csv("../ocr/itemName.csv")
+  itemList = list(itertools.chain(*itemList.values))
+  result = []
+  for text in text_list:
+    idx = text.find('[')
+    if idx != -1:
+      text = text[:idx]
+    for item in itemList:
+      matched = item.startswith(text)
+      if matched and (len(text) >= 2):
+        result.append(text)
+        break
+  result = list(set(result))
+  return result

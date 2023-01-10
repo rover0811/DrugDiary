@@ -91,13 +91,16 @@ export default function AddView() {
   };
 
   useEffect(() => {
-    getData("pillsList")
-      .then((res) => {
-        setPills(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    const init = async () => {
+      await getData("pillsList")
+        .then((res) => {
+          setPills(res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+    init();
   }, []);
 
   return (
